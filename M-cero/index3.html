@@ -11,7 +11,7 @@
     <!-- Google Font Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -481,188 +481,184 @@
         </div>
     </div>
 
-    <!-- Script de Interactividad y Base de Datos Completa -->
+    <!-- Script de Interactividad y Parseo dinámico de agenda.txt -->
     <script>
-        // BASE DE DATOS COMPLETA DE EVENTOS 2026 - 2027
-        const eventosAgendaCompleta = [
-            // OCTUBRE 2026
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Ninguén tira fotos nos enterros', lugar: 'Auditorio Xosé Casal, Vila de Cruces', fecha: 'Sábado 24 de octubre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Carlota e Compañía', fechaOrden: '2026-10-24' },
-            { seccion: 'musica', mes: 'Octubre 2026', titulo: 'Julio Iglesias Jr. – Experience Tour', lugar: 'Auditorio Mar de Vigo', fecha: 'Sábado 24 de octubre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-24' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Alpilpil en directo', lugar: 'Teatro Afundación, Vigo', fecha: 'Sábado 24 de octubre de 2026', hora: '18:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-24' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Commed(ia) – Versión extendida', lugar: 'Auditorio Municipal, Nigrán', fecha: 'Sábado 24 de octubre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Píscore', fechaOrden: '2026-10-24' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Corta el cable rojo', lugar: 'Vigo', fecha: 'Sábado 24 de octubre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-24' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Escándalo en redacción', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 24 de octubre de 2026', hora: '20:30 h', precio: '25,30 €', comp: '', fechaOrden: '2026-10-24' },
-            { seccion: 'musica', mes: 'Octubre 2026', titulo: 'Lontreira', lugar: 'La Fábrica de Chocolate, Vigo', fecha: 'Sábado 24 de octubre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-24' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Bichitos', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Domingo 25 de octubre de 2026', hora: '18:30 h', precio: 'Desde 4,50 €', comp: '', fechaOrden: '2026-10-25' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Falemos como galegas', lugar: 'Auditorio Lois Tobío, Gondomar', fecha: 'Domingo 25 de octubre de 2026', hora: '19:00 h', precio: '5,00 €', comp: 'Migallas Teatro', fechaOrden: '2026-10-25' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'James Rhodes – Manía', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 25 de octubre de 2026', hora: '20:00 h', precio: '22 €', comp: '', fechaOrden: '2026-10-25' },
-            { seccion: 'musica', mes: 'Octubre 2026', titulo: 'IM-PULSE – Tributo a Pink Floyd', lugar: 'Teatro Afundación, Vigo', fecha: 'Domingo 25 de octubre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-25' },
-            { seccion: 'fiestas', mes: 'Octubre 2026', titulo: 'Outubrofest', lugar: 'Pontevedra', fecha: 'Jueves 29 de octubre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-29' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Costureiriña bonita', lugar: 'CEIP Pío Cabanillas Gallas, Dozón', fecha: 'Jueves 29 de octubre de 2026', hora: '16:00 h', precio: 'GRATIS', comp: 'A Cova das Letras', fechaOrden: '2026-10-29' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'David Suárez y Cristina Galán – A nadie le importas', lugar: 'Auditorio Municipal, Vigo', fecha: 'Jueves 29 de octubre de 2026', hora: '19:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-29' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Danny Boy-Rivera – Stand Up!', lugar: 'Sala Supersonic, Vigo', fecha: 'Jueves 29 de octubre de 2026', hora: '21:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-29' },
-            { seccion: 'musica', mes: 'Octubre 2026', titulo: 'Belako', lugar: 'Sala Krazzy Kray, Cambados', fecha: 'Viernes 30 de octubre de 2026', hora: '22:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-30' },
-            { seccion: 'musica', mes: 'Octubre 2026', titulo: 'Exsonvaldes', lugar: 'Sala Supersonic, Vigo', fecha: 'Viernes 30 de octubre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-30' },
-            { seccion: 'musica', mes: 'Octubre 2026', titulo: 'Fito & Fitipaldis', lugar: 'Auditorio Mar de Vigo', fecha: 'Viernes 30 de octubre de 2026', hora: 'Por confirmar', precio: 'Desde 66 €', comp: '', fechaOrden: '2026-10-30' },
-            { seccion: 'fiestas', mes: 'Octubre 2026', titulo: 'Mercado de Flores de Todos os Santos', lugar: 'Pontevedra', fecha: 'Viernes 30 de octubre de 2026', hora: 'Todo el día', precio: 'Acceso libre', comp: '', fechaOrden: '2026-10-30' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Rogelio, un pallaso en recuperación', lugar: 'Auditorio Municipal, Salceda de Caselas', fecha: 'Viernes 30 de octubre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Assircópatas', fechaOrden: '2026-10-30' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'En Samaín toca... Maxia!', lugar: 'Igrexa da Pastoriza, Vilanova de Arousa', fecha: 'Sábado 31 de octubre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Magia en la Manga', fechaOrden: '2026-10-31' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Juanjo Albiñana – Cuéntate otra historia', lugar: 'Cine Teatro Salesianos, Vigo', fecha: 'Sábado 31 de octubre de 2026', hora: '18:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-31' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Kyoki', lugar: 'Auditorio Xosé Casal, Vila de Cruces', fecha: 'Sábado 31 de octubre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Elefante Elegante', fechaOrden: '2026-10-31' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Señores (unha comedia machirula de ste xeito)', lugar: 'Auditorio Municipal, Covelo', fecha: 'Sábado 31 de octubre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'De Ste Xeito Producións', fechaOrden: '2026-10-31' },
-            { seccion: 'teatro', mes: 'Octubre 2026', titulo: 'Contos na lareira', lugar: 'Praza do Mercado, Mondariz Balneario', fecha: 'Sábado 31 de octubre de 2026', hora: '21:00 h', precio: 'GRATIS', comp: 'Iván Davila', fechaOrden: '2026-10-31' },
-            { seccion: 'fiestas', mes: 'Octubre 2026', titulo: 'Curtas – Festival do Imaxinario', lugar: 'Vilagarcía de Arousa', fecha: 'Del 23 de octubre al 1 de noviembre de 2026', hora: 'Varios horarios', precio: 'Por confirmar', comp: '', fechaOrden: '2026-10-23' },
-
-            // NOVIEMBRE 2026
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Quen dixo medo? Os divertidos espíritos do Samaín', lugar: 'Auditorio Municipal, Catoira', fecha: 'Domingo 1 de noviembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Barafunda', fechaOrden: '2026-11-01' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Señores (unha comedia machirula de ste xeito)', lugar: 'Auditorio José Gil, As Neves', fecha: 'Domingo 1 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'De Ste Xeito Producións', fechaOrden: '2026-11-01' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Techno Pop', lugar: 'Auditorio Mar de Vigo', fecha: 'Viernes 6 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-06' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Erik Urano – Gira Stalker', lugar: 'Sala Mondo Club, Vigo', fecha: 'Viernes 6 de noviembre de 2026', hora: '20:30 h', precio: 'Desde 16,50 €', comp: '', fechaOrden: '2026-11-06' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Historias para escagharriñarse', lugar: 'Sala Celso Parada, Quintela, Moaña', fecha: 'Viernes 6 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Teatro Ghazafelhos', fechaOrden: '2026-11-06' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Daniel Fez – Estamos cucú de la cabeza', lugar: 'Teatro Afundación, Vigo', fecha: 'Viernes 6 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-06' },
-            { seccion: 'orquestas', mes: 'Noviembre 2026', titulo: 'Charanga FESTICULTORES TROUPE', lugar: 'San Martiño de Moaña, Moaña (Pontevedra)', fecha: 'Sábado 7 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-07' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Hevia – 25 aniversario', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Sábado 7 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-07' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'As aventuras de Nabiza Girl: O estraño caso da cultura minguante', lugar: 'Auditorio Municipal, A Illa de Arousa', fecha: 'Sábado 7 de noviembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Isa Risco', fechaOrden: '2026-11-07' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Moi Animal – Touriñán', lugar: 'O Grove (por verificar)', fecha: 'Sábado 7 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: 'Xosé A. Touriñán', fechaOrden: '2026-11-07' },
-            { seccion: 'fiestas', mes: 'Noviembre 2026', titulo: 'Magosto Popular de Seixo', lugar: 'Marín', fecha: 'Domingo 8 de noviembre de 2026', hora: 'Por confirmar', precio: 'Popular', comp: '', fechaOrden: '2026-11-08' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Go On!', lugar: 'Auditorio Municipal, O Rosal', fecha: 'Domingo 8 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: '42 Norte', fechaOrden: '2026-11-08' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Moi Animal – Touriñán', lugar: 'Teatro Afundación, Vigo', fecha: 'Domingo 8 de noviembre de 2026', hora: '18:00 h', precio: 'Por confirmar', comp: 'Xosé A. Touriñán', fechaOrden: '2026-11-08' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'O Libro da Selva', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Domingo 8 de noviembre de 2026', hora: '18:30 h', precio: 'Desde 4,50 €', comp: '', fechaOrden: '2026-11-08' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Gigante', lugar: 'Teatro Afundación, Vigo', fecha: 'Miércoles 11 de noviembre de 2026', hora: '20:30 h', precio: '25,27 €', comp: '', fechaOrden: '2026-11-11' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Uxía – Será por flores', lugar: 'Auditorio Municipal, Vilagarcía', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-13' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'María José Llergo', lugar: 'Teatro Afundación, Vigo', fecha: 'Viernes 13 de noviembre de 2026', hora: '21:00 h', precio: '13,60 €', comp: '', fechaOrden: '2026-11-13' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Sho-Hai – Gira 2026/2027', lugar: 'Sala Rouge, Vigo', fecha: 'Viernes 13 de noviembre de 2026', hora: '21:00 h', precio: '22 €', comp: '', fechaOrden: '2026-11-13' },
-            { seccion: 'fiestas', mes: 'Noviembre 2026', titulo: 'Noche de Cine – Fiesta temática', lugar: 'NH Collection, Vigo', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-13' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Enredada', lugar: 'Multiúsos de Arcade, Soutomaior', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:30 h', precio: 'GRATIS', comp: 'Leti da Taberna', fechaOrden: '2026-11-13' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Misery', lugar: 'Afundación, Pontevedra', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:30 h', precio: 'Desde 27,50 €', comp: '', fechaOrden: '2026-11-13' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Berto Romero – Lo Nunca Visto', lugar: 'Auditorio Mar de Vigo', fecha: '13, 14 y 15 de noviembre de 2026', hora: 'Varios horarios', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-13' },
-            { seccion: 'orquestas', mes: 'Noviembre 2026', titulo: 'Grupo LA BANDA DE AYER', lugar: 'San Martiño de Moaña, Moaña (Pontevedra)', fecha: 'Sábado 14 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-14' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Quique González & Toni Brunet – Acustiquísimos', lugar: 'Vigo', fecha: 'Sábado 14 de noviembre de 2026', hora: '21:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-14' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Sho-Hai – Gira 2026/2027', lugar: 'Sala Tebras, Lugo', fecha: 'Sábado 14 de noviembre de 2026', hora: '21:30 h', precio: '22 €', comp: '', fechaOrden: '2026-11-14' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'A verdadeira historia dos tres porquiños e o lobo feroz', lugar: 'Auditorio Emilia Pardo Bazán, Sanxenxo', fecha: 'Sábado 14 de noviembre de 2026', hora: '18:00 h', precio: '5,00 €', comp: 'Teatro del Andamio', fechaOrden: '2026-11-14' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Meigas, habelas hainas', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 14 de noviembre de 2026', hora: '20:00 h', precio: 'Desde 19,80 €', comp: '', fechaOrden: '2026-11-14' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Cotorras', lugar: 'Centro Cultural Manuel Lamazares, Rodeiro', fecha: 'Sábado 14 de noviembre de 2026', hora: '21:00 h', precio: 'GRATIS', comp: 'Malasombra', fechaOrden: '2026-11-14' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'ABBA The New Experience', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 15 de noviembre de 2026', hora: 'Por confirmar', precio: 'Desde 39,60 €', comp: '', fechaOrden: '2026-11-15' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'St. Paul & The Broken Bones – Underfest', lugar: 'Vigo', fecha: 'Domingo 15 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-15' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Cotorras', lugar: 'Auditorio Municipal, Mondariz', fecha: 'Domingo 15 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Malasombra', fechaOrden: '2026-11-15' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'O Monstro de Cores', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Domingo 15 de noviembre de 2026', hora: '18:30 h', precio: 'Desde 4,50 €', comp: '', fechaOrden: '2026-11-15' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Esas cousas marabillosas', lugar: 'Auditorio Municipal, O Rosal', fecha: 'Domingo 15 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Empatía Teatro', fechaOrden: '2026-11-15' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Molto Barroco', lugar: 'Auditorio Municipal do Mosteiro, Meis', fecha: 'Domingo 15 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore', fechaOrden: '2026-11-15' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Bulebule', lugar: 'Sala Celso Parada, Quintela, Moaña', fecha: 'Viernes 20 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Os Náufragos Teatro', fechaOrden: '2026-11-20' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Os contos de Violeta', lugar: 'Casa da Cultura, Valga', fecha: 'Viernes 20 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Bea Campos', fechaOrden: '2026-11-20' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'El otro lado de la cama', lugar: 'Vigo', fecha: 'Viernes 20 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-20' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Simply the Best – Tina Turner Tribute', lugar: 'Cine Teatro Salesianos, Vigo', fecha: 'Sábado 21 de noviembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-21' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Ángel Stanich Band', lugar: 'Teatro Principal, Pontevedra', fecha: 'Sábado 21 de noviembre de 2026', hora: '21:00 h', precio: 'Desde 24 €', comp: '', fechaOrden: '2026-11-21' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Malú', lugar: 'Vigo', fecha: 'Sábado 21 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-21' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Cabaré climático', lugar: 'Auditorio Municipal, A Cañiza', fecha: 'Sábado 21 de noviembre de 2026', hora: '20:30 h', precio: 'GRATIS', comp: 'Vas Rir', fechaOrden: '2026-11-21' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Coaches de choque', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 21 de noviembre de 2026', hora: '20:30 h', precio: '16,60 €', comp: '', fechaOrden: '2026-11-21' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Jeanette – 50 aniversario', lugar: 'Vigo', fecha: 'Domingo 22 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-22' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Costureiriña bonita', lugar: 'CEIP Pedro Antonio Cerviño, Campo Lameiro', fecha: 'Martes 24 de noviembre de 2026', hora: '12:00 h', precio: 'GRATIS', comp: 'A Cova das Letras', fechaOrden: '2026-11-24' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Vivaldi & Paganini – Dos maestros, un concierto', lugar: 'Vigo', fecha: 'Martes 24 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-24' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Belén Aguilera', lugar: 'Auditorio Mar de Vigo', fecha: 'Viernes 27 de noviembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-27' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Alleo', lugar: 'Centro Sociocultural de Tenorio, Cerdedo-Cotobade', fecha: 'Viernes 27 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Colectivo Globo (+danza)', fechaOrden: '2026-11-27' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Coa Cabeza nas nubes (versión de sala)', lugar: 'Auditorio, Valga', fecha: 'Viernes 27 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Cía. SÖA (+danza)', fechaOrden: '2026-11-27' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Novos lobos', lugar: 'Auditorio, Valga', fecha: 'Viernes 27 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Fantoches Baj', fechaOrden: '2026-11-27' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Bernarda', lugar: 'Afundación, Pontevedra', fecha: 'Viernes 27 de noviembre de 2026', hora: '20:30 h', precio: 'Desde 18,60 €', comp: '', fechaOrden: '2026-11-27' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Goyo Jiménez – América Forever', lugar: 'Vilagarcía (por verificar)', fecha: 'Viernes 27 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-27' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Copos de avena', lugar: 'Sala Krazzy Kray, Cambados', fecha: 'Sábado 28 de noviembre de 2026', hora: '19:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-28' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Goyo Jiménez – América Forever', lugar: 'Vigo', fecha: 'Sábado 28 de noviembre de 2026', hora: '19:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-28' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'La bella durmiente', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 28 de noviembre de 2026', hora: '19:00 h', precio: 'Desde 27,50 €', comp: '', fechaOrden: '2026-11-28' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Limpa limpa', lugar: 'Centro Sociocultural José Raído, Patelas, Cuntis', fecha: 'Sábado 28 de noviembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Expresión Producións', fechaOrden: '2026-11-28' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Galicia Ilusiona – Gran Gala de Magia', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 29 de noviembre de 2026', hora: '17:00 h', precio: 'Desde 18,80 €', comp: '', fechaOrden: '2026-11-29' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Paco Candela – Gira 30', lugar: 'Vigo', fecha: 'Domingo 29 de noviembre de 2026', hora: '19:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-11-29' },
-
-            // DICIEMBRE 2026
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Brincadeiras da lingua', lugar: 'Salón Confraría Pescadores, Vilanova de Arousa', fecha: 'Viernes 4 de diciembre de 2026', hora: '12:00 h', precio: 'GRATIS', comp: 'Migallas Teatro', fechaOrden: '2026-12-04' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'A cámara escura', lugar: 'CEIP Manuel Cordo Boullosa, Ponte Caldelas', fecha: 'Viernes 4 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Vórtice Escénico', fechaOrden: '2026-12-04' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'David Cepo en directo', lugar: 'Teatro Afundación, Vigo', fecha: '4 y 5 de diciembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-04' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'Vicente Amigo – 40 aniversario', lugar: 'Vigo', fecha: 'Sábado 5 de diciembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-05' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Ignatius Farray', lugar: 'Teatro Afundación, Vigo', fecha: 'Sábado 5 de diciembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-05' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Shado El Mago – Cleptomago', lugar: 'Vigo', fecha: 'Domingo 6 de diciembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-06' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: '4 monos', lugar: 'Salón de Actos Casa de Cultura, Meaño', fecha: 'Jueves 10 de diciembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Tropa de Trapo', fechaOrden: '2026-12-10' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'El Altar del Holocausto – Ecos Tour', lugar: 'Sala Masterclub, Vigo', fecha: 'Viernes 11 de diciembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-11' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Dulcinea – Paloma San Basilio', lugar: 'Afundación, Pontevedra', fecha: 'Viernes 11 de diciembre de 2026', hora: '20:30 h', precio: 'Desde 23,76 €', comp: '', fechaOrden: '2026-12-11' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'Depedro', lugar: 'Vigo', fecha: 'Sábado 12 de diciembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-12' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Carapuchiña Vermella', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 12 de diciembre de 2026', hora: '17:00 h', precio: 'Desde 13,60 €', comp: '', fechaOrden: '2026-12-12' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'El Farmafioso', lugar: 'Auditorio Municipal, Vigo', fecha: 'Sábado 12 de diciembre de 2026', hora: '18:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-12' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'De algo hai que morrer', lugar: 'Sala de Cultura, Mondariz Balneario', fecha: 'Sábado 12 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Malasombra', fechaOrden: '2026-12-12' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Máis saaabor!', lugar: 'Auditorio Municipal, Ribadumia', fecha: 'Domingo 13 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Culturactiva', fechaOrden: '2026-12-13' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'The Soul of Gospel – Black Heritage Choir', lugar: 'Vigo', fecha: 'Miércoles 16 de diciembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-16' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Neste Nadal, vida máis cultural', lugar: 'CEIP Pío Cabanillas Gallas, Dozón', fecha: 'Jueves 17 de diciembre de 2026', hora: '16:00 h', precio: 'GRATIS', comp: 'Martín Camiña', fechaOrden: '2026-12-17' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'A maxia do Nadal', lugar: 'Auditorio do Concello, Pazos de Borbén', fecha: 'Sábado 19 de diciembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'O Mago Paco', fechaOrden: '2026-12-19' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'O que non estaba escrito', lugar: 'Centro Social, Pontecesures', fecha: 'Sábado 19 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Tarabela Creativa', fechaOrden: '2026-12-19' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Barullo de Nadal!', lugar: 'Os Pendellos, Agolada', fecha: 'Domingo 20 de diciembre de 2026', hora: '15:00 h', precio: 'GRATIS', comp: 'Nelson Quinteiro', fechaOrden: '2026-12-20' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Molto Barroco', lugar: 'Auditorio da Azucreira, Portas', fecha: 'Domingo 20 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore', fechaOrden: '2026-12-20' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'X Galicia Magic Fest', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 20 de diciembre de 2026', hora: 'Por confirmar', precio: 'Desde 24,20 €', comp: '', fechaOrden: '2026-12-20' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Chegar e encher', lugar: 'Casa da Cultura, Vilaboa', fecha: 'Martes 22 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Inventi Teatro', fechaOrden: '2026-12-22' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Retrincos de Castelao', lugar: 'Pazo da Crega, Barro', fecha: 'Martes 22 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Artefeito', fechaOrden: '2026-12-22' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Cirkote', lugar: 'Praza do Siñor Afranio, Silleda', fecha: 'Miércoles 23 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Kote Malabar', fechaOrden: '2026-12-23' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Ándale, bon appétit!', lugar: 'Casa da Cultura Manuel Lueiro Rey, O Grove', fecha: 'Miércoles 23 de diciembre de 2026', hora: '17:30 h', precio: 'GRATIS', comp: 'Teatro Ghazafelhos', fechaOrden: '2026-12-23' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Pepiña Maruxiña quere voar', lugar: 'Centro Social, Forcarei', fecha: 'Sábado 26 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Barafunda', fechaOrden: '2026-12-26' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Conto danza de Nadal', lugar: 'A Seca, Poio', fecha: 'Sábado 26 de diciembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Nelson Quinteiro (+danza)', fechaOrden: '2026-12-26' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Molto Barroco', lugar: 'Auditorio Sobrino Buhígas, Campo Lameiro', fecha: 'Sábado 26 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore', fechaOrden: '2026-12-26' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'O Apalpador e as palabras perdidas', lugar: 'Centro Social, Pontecesures', fecha: 'Sábado 26 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'A Xanela do Maxín', fechaOrden: '2026-12-26' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Top Manta', lugar: 'Casa da Cultura, Vilaboa', fecha: 'Sábado 26 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Fulano, Mengano e Citano', fechaOrden: '2026-12-26' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'Abraham Cupeiro – Relatos a carón dun candil', lugar: 'Vigo', fecha: 'Domingo 27 de diciembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2026-12-27' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Conto de Nadal', lugar: 'Auditorio de Soutelo de Montes, Forcarei', fecha: 'Domingo 27 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Mago Richard', fechaOrden: '2026-12-27' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Neura, unha comedia neurótico-festiva', lugar: 'CS Mougás, Oia', fecha: 'Domingo 27 de diciembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'De Ste Xeito', fechaOrden: '2026-12-27' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Esfínter 6', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 27 de diciembre de 2026', hora: '18:30 h', precio: 'Desde 24,20 €', comp: '', fechaOrden: '2026-12-27' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Maxia, misterios e outras historias', lugar: 'Casa da Cultura Manuel Lueiro Rey, O Grove', fecha: 'Lunes 28 de diciembre de 2026', hora: '17:30 h', precio: 'GRATIS', comp: 'Magia en la Manga', fechaOrden: '2026-12-28' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Pum pum, quen hai?', lugar: 'Pazo da Crega, Barro', fecha: 'Lunes 28 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Ártika Cía.', fechaOrden: '2026-12-28' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Hamelin', lugar: 'Casa de Cultura Roberto Blanco Torres, Cuntis', fecha: 'Martes 29 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Fran Rei', fechaOrden: '2026-12-29' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Pequenas grandes maxias', lugar: 'Praza do Concello, Baiona', fecha: 'Martes 29 de diciembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Mago Teto', fechaOrden: '2026-12-29' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Dedín, dedín, dedal', lugar: 'Edificio Multiúsos, Moraña', fecha: 'Martes 29 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: '42 Norte', fechaOrden: '2026-12-29' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Tachán!', lugar: 'Casa da Cultura Manuel Lueiro Rey, O Grove', fecha: 'Miércoles 30 de diciembre de 2026', hora: '17:30 h', precio: 'GRATIS', comp: 'Inventi Teatro', fechaOrden: '2026-12-30' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Un Nadal chungo que te cagas', lugar: 'Praza do Concello, Baiona', fecha: 'Miércoles 30 de diciembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Peter Punk Pallaso', fechaOrden: '2026-12-30' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Gaiferos polo camiño a Compostela', lugar: 'Casa da Cultura, Vilaboa', fecha: 'Miércoles 30 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Títeres Cachirulo', fechaOrden: '2026-12-30' },
-
-            // ENERO 2027
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Dedín, dedín, dedal', lugar: 'Auditorio de Soutelo de Montes, Forcarei', fecha: 'Sábado 2 de enero de 2027', hora: '17:00 h', precio: 'GRATIS', comp: '42 Norte', fechaOrden: '2027-01-02' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Love está no aire – David Amor', lugar: 'Auditorio Municipal, Arbo', fecha: 'Sábado 2 de enero de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'David Amor', fechaOrden: '2027-01-02' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Memorias dun neno labrego', lugar: 'Auditorio Municipal, A Illa de Arousa', fecha: 'Domingo 3 de enero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Contraproducións', fechaOrden: '2027-01-03' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'O cego dos monifates', lugar: 'Os Pendellos, Agolada', fecha: 'Martes 5 de enero de 2027', hora: '18:30 h', precio: 'GRATIS', comp: 'Seisdedos', fechaOrden: '2027-01-05' },
-            { seccion: 'musica', mes: 'Enero 2027', titulo: 'Conductores Suicidas – Tributo a Sabina', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 9 de enero de 2027', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2027-01-09' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Daniel Fez – Estamos cucú de la cabeza', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 10 de enero de 2027', hora: '18:00 h', precio: 'Desde 19,80 €', comp: '', fechaOrden: '2027-01-10' },
-            { seccion: 'musica', mes: 'Enero 2027', titulo: 'Kase.O', lugar: 'Coliseum, A Coruña', fecha: 'Sábado 16 de enero de 2027', hora: 'Por confirmar', precio: 'Desde 34 €', comp: '', fechaOrden: '2027-01-16' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'In tempore… por dicir algo', lugar: 'Auditorio José Gil, As Neves', fecha: 'Sábado 23 de enero de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Juan Luis Lage', fechaOrden: '2027-01-23' },
-            { seccion: 'musica', mes: 'Enero 2027', titulo: 'Maldita Nerea – Origen Solo', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Sábado 30 de enero de 2027', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2027-01-30' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Dedín, dedín, dedal', lugar: 'Centro Cultural, A Guarda', fecha: 'Sábado 30 de enero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: '42 Norte', fechaOrden: '2027-01-30' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Lamine Thior – Más que palabras', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 30 de enero de 2027', hora: 'Por confirmar', precio: 'Por confirmar', comp: '', fechaOrden: '2027-01-30' },
-
-            // FEBRERO 2027
-            { seccion: 'musica', mes: 'Febrero 2027', titulo: 'Aurum – Bandas sonoras a la luz de las velas', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 13 de febrero de 2027', hora: '20:30 h', precio: 'Desde 33 €', comp: '', fechaOrden: '2027-02-13' },
-            { seccion: 'teatro', mes: 'Febrero 2027', titulo: 'Peque Disco Moc Moc and Remember Temazos 90-2000', lugar: 'Auditorio, Valga', fecha: 'Domingo 14 de febrero de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Mere Clown', fechaOrden: '2027-02-14' },
-            { seccion: 'teatro', mes: 'Febrero 2027', titulo: 'Jastac Japi Jolídais', lugar: 'Auditorio Municipal do Mosteiro, Meis', fecha: 'Domingo 21 de febrero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Leti da Taberna', fechaOrden: '2027-02-21' },
-            { seccion: 'teatro', mes: 'Febrero 2027', titulo: 'Nanai da China', lugar: 'Centro Cultural, A Guarda', fecha: 'Sábado 27 de febrero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Pérez & Fernández', fechaOrden: '2027-02-27' },
-
-            // MARZO 2027
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Un tal Romeo', lugar: 'Auditorio Manuel Dopazo, Silleda', fecha: 'Domingo 7 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'A Ramboia', fechaOrden: '2027-03-07' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Cotorras', lugar: 'Edificio Multiúsos, Moraña', fecha: 'Domingo 7 de marzo de 2027', hora: '20:00 h', precio: 'GRATIS', comp: 'Malasombra', fechaOrden: '2027-03-07' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Travesía Unicornio', lugar: 'Auditorio, Valga', fecha: 'Viernes 12 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Teatro Ghazafelhos', fechaOrden: '2027-03-12' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Contos para contar cartos', lugar: 'Salón Santa Eulalia, Silleda', fecha: 'Sábado 13 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Avelino González', fechaOrden: '2027-03-13' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Bernarda', lugar: 'Pavillón, Meaño', fecha: 'Domingo 14 de marzo de 2027', hora: '18:30 h', precio: 'GRATIS', comp: 'Malasombra', fechaOrden: '2027-03-14' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Commed(ia) – Versión extendida', lugar: 'Auditorio Municipal, Caldas de Reis', fecha: 'Domingo 14 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore', fechaOrden: '2027-03-14' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Mesura', lugar: 'Auditorio Municipal, Ribadumia', fecha: 'Domingo 14 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Raquel Ferradás (+danza)', fechaOrden: '2027-03-14' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Tin', lugar: 'Centro Cultural, A Guarda', fecha: 'Sábado 20 de marzo de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Dani García', fechaOrden: '2027-03-20' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Cotorras', lugar: 'Auditorio Municipal, Caldas de Reis', fecha: 'Domingo 28 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Malasombra', fechaOrden: '2027-03-28' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Uxía apaga lumes', lugar: 'Xardín Umbrío, Vilanova de Arousa', fecha: 'Domingo 28 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Teatro Escena', fechaOrden: '2027-03-28' }
-        ];
-
+        let eventosAgendaCompleta = [];
         let seccionFiltro = 'todas';
         let mesFiltro = 'todos';
         let ocultarPasados = true;
 
-        // Ordenar la base de datos de manera cronológica inicial por la fechaOrden
-        eventosAgendaCompleta.sort((a, b) => new Date(a.fechaOrden) - new Date(b.fechaOrden));
+        const mesesEsp = {
+            enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5,
+            julio: 6, agosto: 7, septiembre: 8, octubre: 9, noviembre: 10, diciembre: 11,
+            ene: 0, feb: 1, mar: 2, abr: 3, may: 4, jun: 5, jul: 6, ago: 7, sep: 8, oct: 9, nov: 10, dic: 11
+        };
 
-        // Obtener la fecha actual con la hora puesta a las 00:00:00 para comparar sólo los días
+        const mesesLabel = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
         function obtenerFechaHoy() {
             const hoy = new Date();
             hoy.setHours(0, 0, 0, 0);
             return hoy;
         }
 
-        // Renderizar los eventos con los filtros aplicados (manteniendo siempre el orden por fechaOrden)
+        // Intenta parsear la fecha del evento
+        function intentarParsearFecha(texto) {
+            try {
+                const txtLower = texto.toLowerCase().trim();
+                const matchAño = txtLower.match(/\b(2026|2027|2028)\b/);
+                const año = matchAño ? parseInt(matchAño[0]) : obtenerFechaHoy().getFullYear();
+                
+                if (txtLower.includes('del') && txtLower.includes('al')) {
+                    const matchRango = txtLower.match(/del\s+(\d+)\s+de\s+(\w+)\.?(?:\s+(\d{4}))?\s+al/);
+                    if (matchRango) {
+                        const diaRango = parseInt(matchRango[1]);
+                        const mesRango = mesesEsp[matchRango[2].replace('.', '')] || 0;
+                        const añoRango = matchRango[3] ? parseInt(matchRango[3]) : año;
+                        return new Date(añoRango, mesRango, diaRango);
+                    }
+                }
+
+                const matchDia = txtLower.match(/\b(\d{1,2})\b/);
+                const dia = matchDia ? parseInt(matchDia[1]) : 1;
+
+                let mes = 0;
+                for (const [key, value] of Object.entries(mesesEsp)) {
+                    if (txtLower.includes(key)) {
+                        mes = value;
+                        break;
+                    }
+                }
+
+                return new Date(año, mes, dia);
+            } catch (e) {
+                return obtenerFechaHoy();
+            }
+        }
+
+        // Extrae el mes con formato ej. "Noviembre 2026"
+        function extraerMesAnioLabel(fechaObj) {
+            return `${mesesLabel[fechaObj.getMonth()]} ${fechaObj.getFullYear()}`;
+        }
+
+        function estimarSeccion(texto, compañia) {
+            const txt = (texto + ' ' + compañia).toLowerCase();
+            if (txt.includes('🎺') || txt.includes('orquesta') || txt.includes('banda') || txt.includes('charanga') || txt.includes('la banda de ayer') || txt.includes('festicultores') || txt.includes('orquestas')) {
+                return 'orquestas';
+            }
+            if (txt.includes('🎤') || txt.includes('🎸') || txt.includes('música') || txt.includes('concierto') || txt.includes('tributo') || txt.includes('fito') || txt.includes('kase') || txt.includes('sho-hai') || txt.includes('underfest') || txt.includes('festival') || txt.includes('conciertos')) {
+                return 'musica';
+            }
+            if (txt.includes('🎉') || txt.includes('festa') || txt.includes('magosto') || txt.includes('sabor') || txt.includes('outubrofest') || txt.includes('mercado') || txt.includes('feria') || txt.includes('gastronómica') || txt.includes('centola') || txt.includes('tapas') || txt.includes('festas') || txt.includes('romerías')) {
+                return 'fiestas';
+            }
+            if (txt.includes('🎭') || txt.includes('teatro') || txt.includes('humor') || txt.includes('monálogo') || txt.includes('compañía') || txt.includes('comedia') || txt.includes('espectáculo') || txt.includes('mago') || txt.includes('maxia') || txt.includes('pallaso') || txt.includes('danza') || txt.includes('espectáculos')) {
+                return 'teatro';
+            }
+            return 'teatro';
+        }
+
+        async function cargarAgendaTXT() {
+            try {
+                const response = await fetch('agenda.txt');
+                if (!response.ok) throw new Error();
+                const rawText = await response.text();
+                procesarTextoAgenda(rawText);
+            } catch (error) {
+                document.getElementById('lista-eventos').innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-circle-exclamation text-2xl mb-2 text-red-500"></i>
+                        <p class="text-xs font-semibold">No se pudo cargar la agenda desde agenda.txt</p>
+                    </div>
+                `;
+            }
+        }
+
+        function procesarTextoAgenda(txt) {
+            const lineas = txt.split('\n');
+            let diaActual = "";
+            let fechaOrdenActual = null;
+            let eventoActivo = null;
+
+            eventosAgendaCompleta = [];
+
+            for (let i = 0; i < lineas.length; i++) {
+                let linea = lineas[i].trim();
+                if (!linea) continue;
+
+                // Detectar cambio de Día
+                if (linea.startsWith('📅') && (linea.toUpperCase().includes('LUNES') || linea.toUpperCase().includes('MARTES') || linea.toUpperCase().includes('MIÉRCOLES') || linea.toUpperCase().includes('JUEVES') || linea.toUpperCase().includes('VIERNES') || linea.toUpperCase().includes('SÁBADO') || linea.toUpperCase().includes('DOMINGO') || linea.toUpperCase().includes('DEL'))) {
+                    diaActual = linea.replace('📅', '').trim();
+                    fechaOrdenActual = intentarParsearFecha(diaActual);
+                    continue;
+                }
+
+                if (linea.startsWith('✤') || linea.startsWith('━') || linea.includes('AGENDA RÍAS BAIXAS') || linea.includes('Música |') || linea.includes('Rías Baixas ·') || linea.includes('EXPOSICIONES Y ACTIVIDADES') || linea.includes('IMPORTANTE:') || linea.includes('UNA SEMANA') || linea.includes('📍 Pontevedra ·') || linea.includes('Una gran temporada') || (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS'))) {
+                    continue;
+                }
+
+                // Detectar evento: Solo si empieza con ciertos símbolos y NO es "🎭 Compañía"
+                const esCompania = linea.startsWith('🎭 Compañía:');
+                const inicioEvento = !esCompania && (
+                    linea.startsWith('•') || linea.startsWith('🎤') || linea.startsWith('🎭') || 
+                    linea.startsWith('🎉') || linea.startsWith('🎺') || linea.startsWith('🎬') || 
+                    linea.startsWith('🌰') || linea.startsWith('🍷') || linea.startsWith('🔬') || 
+                    linea.startsWith('🎨') || linea.startsWith('📚') || linea.startsWith('🎼') || 
+                    linea.startsWith('❤️') || linea.startsWith('🎻') || linea.startsWith('🛍️') || 
+                    linea.startsWith('🌿') || linea.startsWith('💃') || linea.startsWith('⛪') || 
+                    linea.startsWith('🕺')
+                );
+                
+                if (inicioEvento) {
+                    if (eventoActivo && diaActual) {
+                        eventosAgendaCompleta.push(eventoActivo);
+                    }
+
+                    // Remover sólo viñetas iniciales como •, manteniendo emojis de inicio sin romper el título
+                    let tituloLimpio = linea.replace(/^[•\s*]+/, '').trim();
+
+                    eventoActivo = {
+                        mes: '',
+                        titulo: tituloLimpio,
+                        lugar: 'Por confirmar',
+                        fecha: diaActual,
+                        hora: 'Por confirmar',
+                        precio: 'Por confirmar',
+                        comp: '',
+                        fechaOrden: fechaOrdenActual
+                    };
+                    continue;
+                }
+
+                if (eventoActivo) {
+                    if (linea.startsWith('📍')) {
+                        eventoActivo.lugar = linea.replace('📍', '').trim();
+                    } else if (linea.startsWith('🕒')) {
+                        eventoActivo.hora = linea.replace('🕒', '').trim();
+                    } else if (linea.startsWith('🎟️')) {
+                        eventoActivo.precio = linea.replace('🎟️', '').trim();
+                    } else if (esCompania) {
+                        eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
+                    } else if (linea.startsWith('🎤 Cartel:')) {
+                        eventoActivo.titulo += " - " + linea.replace('🎤 Cartel:', '').trim();
+                    }
+                }
+            }
+
+            if (eventoActivo && diaActual) {
+                eventosAgendaCompleta.push(eventoActivo);
+            }
+
+            eventosAgendaCompleta.forEach(ev => {
+                ev.seccion = estimarSeccion(ev.titulo + ' ' + ev.lugar, ev.comp);
+                ev.mes = extraerMesAnioLabel(ev.fechaOrden);
+            });
+
+            eventosAgendaCompleta.sort((a, b) => a.fechaOrden - b.fechaOrden);
+
+            renderAgenda();
+        }
+
         function renderAgenda() {
             const contenedor = document.getElementById('lista-eventos');
             const textoBuscador = document.getElementById('buscador-eventos').value.toLowerCase().trim();
@@ -670,19 +666,16 @@
 
             const filtrados = eventosAgendaCompleta.filter(ev => {
                 const coincideSeccion = (seccionFiltro === 'todas' || ev.seccion === seccionFiltro);
-                const coincideMes = (mesFiltro === 'todos' || ev.mes === mesFiltro);
+                const coincideMes = (mesFiltro === 'todos' || ev.mes.toLowerCase() === mesFiltro.toLowerCase());
                 const coincideTexto = ev.titulo.toLowerCase().includes(textoBuscador) || 
                                       ev.lugar.toLowerCase().includes(textoBuscador) || 
                                       ev.fecha.toLowerCase().includes(textoBuscador) ||
                                       (ev.comp && ev.comp.toLowerCase().includes(textoBuscador));
                 
-                // Comprobación de eventos expirados
-                const fechaEv = new Date(ev.fechaOrden);
-                fechaEv.setHours(0, 0, 0, 0);
-                const esPasado = fechaEv < hoy;
+                const esPasado = ev.fechaOrden < hoy;
 
                 if (ocultarPasados && esPasado) {
-                    return false; // Se oculta por completo
+                    return false;
                 }
 
                 return coincideSeccion && coincideMes && coincideTexto;
@@ -717,11 +710,7 @@
                     secTexto = 'Fiestas & Ferias';
                 }
 
-                // Detectar si el evento ya pasó en relación a hoy
-                const fechaEv = new Date(ev.fechaOrden);
-                fechaEv.setHours(0, 0, 0, 0);
-                const yaHaPasado = fechaEv < hoy;
-
+                const yaHaPasado = ev.fechaOrden < hoy;
                 let estiloPasadoCard = '';
                 let badgeExpirado = '';
 
@@ -765,13 +754,11 @@
             }).join('');
         }
 
-        // Filtro pasados
         function alternarPasados() {
             ocultarPasados = document.getElementById('ocultar-pasados').checked;
             renderAgenda();
         }
 
-        // Filtro por sección
         function filtrarSeccion(seccion, boton) {
             seccionFiltro = seccion;
             document.querySelectorAll('.sec-btn').forEach(btn => {
@@ -781,7 +768,6 @@
             renderAgenda();
         }
 
-        // Filtro por mes
         function filtrarMes(mes, boton) {
             mesFiltro = mes;
             document.querySelectorAll('.mes-btn').forEach(btn => {
@@ -795,7 +781,6 @@
             renderAgenda();
         }
 
-        // Cambiar pestañas principales
         function cambiarPestana(pestana) {
             const secAgenda = document.getElementById('seccion-agenda');
             const secQuedadas = document.getElementById('seccion-quedadas');
@@ -855,7 +840,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            renderAgenda();
+            cargarAgendaTXT();
         });
     </script>
 </body>
