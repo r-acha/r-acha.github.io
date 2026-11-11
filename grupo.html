@@ -11,7 +11,7 @@
     <!-- Google Font Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -23,7 +23,7 @@
                     },
                     colors: {
                         wa: {
-                            green: '#25D366',
+                            green: '#22c55e',
                             emerald: '#128C7E',
                             teal: '#075E54',
                             dark: '#0b141a',
@@ -44,10 +44,29 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
         }
         .neon-glow {
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.25);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.25);
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Estilos específicos para las pestañas principales */
+        .tab-main-btn {
+            background: transparent;
+            color: #94a3b8;
+            transition: all 0.25s ease-in-out;
+        }
+        .tab-main-btn .tab-icon {
+            color: #10b981;
+            transition: color 0.25s ease;
+        }
+        .tab-main-btn.active {
+            background-color: #22c55e !important;
+            color: #000000 !important;
+        }
+        .tab-main-btn.active .tab-icon {
+            color: #000000 !important;
+            opacity: 1 !important;
+        }
     </style>
 </head>
 <body class="bg-wa-dark text-slate-100 font-sans antialiased selection:bg-wa-green selection:text-black min-h-screen flex flex-col justify-between">
@@ -77,7 +96,7 @@
                     <span class="hidden sm:inline">Compartir</span>
                 </button>
                 <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
-                   class="flex items-center gap-1.5 text-xs bg-wa-green hover:bg-[#20ba59] text-black font-bold px-3 py-1.5 rounded-full shadow transition">
+                   class="flex items-center gap-1.5 text-xs bg-wa-green hover:bg-[#1eb954] text-black font-bold px-3 py-1.5 rounded-full shadow transition">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
                     <span>Abrir Chat</span>
                 </a>
@@ -124,7 +143,7 @@
 
                 <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
-                       class="w-full sm:w-auto px-7 py-3 bg-wa-green hover:bg-[#20ba59] text-black font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-wa-green/20 transition transform active:scale-95 flex items-center justify-center gap-2">
+                       class="w-full sm:w-auto px-7 py-3 bg-wa-green hover:bg-[#1eb954] text-black font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-wa-green/20 transition transform active:scale-95 flex items-center justify-center gap-2">
                         <i class="fa-brands fa-whatsapp text-xl"></i>
                         <span>Unirme al Grupo de WhatsApp</span>
                     </a>
@@ -180,17 +199,20 @@
             </div>
         </section>
 
-        <!-- SELECTOR DE PESTAÑAS PRINCIPALES -->
-        <div class="flex space-x-2 border-b border-wa-border pb-2" id="agenda-seccion">
-            <button onclick="cambiarPestana('agenda')" id="tab-agenda" 
-                    class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow">
-                <i class="fa-solid fa-masks-theater text-black"></i>
-                <span>Agenda Galicia 2026–2027</span>
+        <!-- SELECTOR DE PESTAÑAS PRINCIPALES ADAPTADO -->
+        <div class="flex items-center gap-3 border-b border-wa-border pb-4" id="agenda-seccion" role="tablist">
+            <!-- Pestaña Agenda Galicia -->
+            <button onclick="cambiarPestana('agenda')" id="tab-agenda" role="tab" aria-selected="true"
+                    class="tab-main-btn active flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug">
+                <i class="fa-solid fa-masks-theater text-lg shrink-0 tab-icon"></i>
+                <span>Agenda Galicia<br class="hidden sm:inline"> 2026–2027</span>
             </button>
-            <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" 
-                    class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white">
-                <i class="fa-solid fa-thumbtack text-emerald-400"></i>
-                <span>Quedadas del Grupo</span>
+
+            <!-- Pestaña Quedadas del Grupo -->
+            <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" role="tab" aria-selected="false"
+                    class="tab-main-btn flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug hover:bg-wa-card/50">
+                <i class="fa-solid fa-thumbtack text-lg shrink-0 tab-icon"></i>
+                <span>Quedadas del<br class="hidden sm:inline"> Grupo</span>
             </button>
         </div>
 
@@ -335,7 +357,7 @@
             <div class="pt-2 flex justify-end gap-2">
                 <button onclick="cerrarModalReglas()" class="px-3.5 py-2 rounded-lg bg-wa-card hover:bg-wa-hover text-slate-300 text-xs transition">Cerrar</button>
                 <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
-                   class="px-4 py-2 rounded-lg bg-wa-green hover:bg-[#20ba59] text-black font-bold text-xs transition flex items-center gap-1.5">
+                   class="px-4 py-2 rounded-lg bg-wa-green hover:bg-[#1eb954] text-black font-bold text-xs transition flex items-center gap-1.5">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
                     <span>Ir a WhatsApp</span>
                 </a>
@@ -394,7 +416,7 @@
             </div>
 
             <div class="pt-2 border-t border-wa-border/70">
-                <button id="modalBtnCompartirWA" class="w-full py-2.5 px-4 rounded-xl bg-wa-green hover:bg-[#20ba59] text-black font-bold text-xs transition flex items-center justify-center gap-2 shadow-md">
+                <button id="modalBtnCompartirWA" class="w-full py-2.5 px-4 rounded-xl bg-wa-green hover:bg-[#1eb954] text-black font-bold text-xs transition flex items-center justify-center gap-2 shadow-md">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
                     <span>Proponer este plan en el grupo</span>
                 </button>
@@ -425,12 +447,11 @@
             return hoy;
         }
 
-        // Sanitizador de texto que elimina rombos rotos pero preserva selectores como \uFE0F necesarios para emojis compuestos
         function sanitizarTexto(str) {
             if (!str) return '';
             return str
-                .replace(/\uFFFD/g, '') // Elimina caracter corrupto U+FFFD (rombo con ?)
-                .replace(/[\uFEFF\u200B\u200E\u200F]/g, '') // Quita espacio nulo y BOM. Mantiene \uFE0F (necesario para emojis complejos)
+                .replace(/\uFFFD/g, '')
+                .replace(/[\uFEFF\u200B\u200E\u200F]/g, '')
                 .trim();
         }
 
@@ -501,7 +522,6 @@
             return 'teatro';
         }
 
-        /* CARGA Y PARSEO DE AGENDA.TXT (con timestamp anti-caché) */
         async function cargarAgendaTXT() {
             try {
                 const response = await fetch('agenda.txt?t=' + Date.now());
@@ -732,7 +752,6 @@
             }).join('');
         }
 
-        /* CARGA Y PARSEO DE QUEDADAS.TXT (con timestamp anti-caché) */
         async function cargarQuedadasTXT() {
             try {
                 const response = await fetch('quedadas.txt?t=' + Date.now());
@@ -759,7 +778,6 @@
 
                 const textoCompleto = lineas.join(' ').toUpperCase();
 
-                // Excluir de forma blindada todos los textos e instrucciones administrativas y de ayuda
                 if (
                     textoCompleto.includes('QUEDADAS Y PLANES') || 
                     textoCompleto.includes('PRÓXIMAS QUEDADAS') || 
@@ -874,7 +892,7 @@
                             </div>
                             <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
                                 <button onclick="apuntarseWhatsApp('${encodeURIComponent(q.titulo)}')" 
-                                        class="text-xs px-3 py-1.5 rounded-lg bg-wa-green hover:bg-[#20ba59] text-black font-bold transition flex items-center gap-1.5 shadow">
+                                        class="text-xs px-3 py-1.5 rounded-lg bg-wa-green hover:bg-[#1eb954] text-black font-bold transition flex items-center gap-1.5 shadow">
                                     <i class="fa-brands fa-whatsapp"></i>
                                     <span>Me apunto</span>
                                 </button>
@@ -930,14 +948,24 @@
             if (pestana === 'agenda') {
                 secAgenda.classList.remove('hidden');
                 secQuedadas.classList.add('hidden');
-                tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow';
-                tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white';
+                
+                tabAgenda.classList.add('active');
+                tabAgenda.setAttribute('aria-selected', 'true');
+
+                tabQuedadas.classList.remove('active');
+                tabQuedadas.setAttribute('aria-selected', 'false');
+
                 renderAgenda();
             } else {
                 secAgenda.classList.add('hidden');
                 secQuedadas.classList.remove('hidden');
-                tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow';
-                tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white';
+
+                tabQuedadas.classList.add('active');
+                tabQuedadas.setAttribute('aria-selected', 'true');
+
+                tabAgenda.classList.remove('active');
+                tabAgenda.setAttribute('aria-selected', 'false');
+
                 renderQuedadas();
             }
         }
