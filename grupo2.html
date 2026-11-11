@@ -56,7 +56,6 @@
     <header class="sticky top-0 z-40 bg-wa-panel/90 backdrop-blur-md border-b border-wa-border/80 px-4 py-3">
         <div class="max-w-4xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <!-- Mini Logo Emblema -->
                 <div class="w-10 h-10 rounded-full bg-black border-2 border-slate-700 flex items-center justify-center overflow-hidden shadow-inner select-none">
                     <div class="text-center font-black leading-none tracking-tighter text-[9px] text-white">
                         <span class="block border-b border-white pb-[1px]">MO<span class="text-[6px] text-emerald-400">CERO</span></span>
@@ -90,19 +89,15 @@
 
         <!-- Hero Section -->
         <section class="text-center pt-2 pb-2">
-            <!-- Insignia Principal -->
             <div class="mx-auto w-32 h-32 sm:w-36 sm:h-36 rounded-full logo-box border-4 border-wa-card flex items-center justify-center p-3 relative mb-5 neon-glow select-none">
                 <div class="w-full h-full rounded-full bg-neutral-900 border border-neutral-700/60 flex flex-col items-center justify-center relative overflow-hidden">
                     <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px]"></div>
-                    
                     <div class="relative z-10 border-2 border-white px-3 py-1.5 text-center bg-black/60 backdrop-blur-sm rounded-sm">
                         <div class="flex items-baseline justify-center border-b border-white pb-0.5">
                             <span class="font-extrabold text-2xl tracking-tighter text-white">mo</span>
                             <span class="text-[9px] font-bold tracking-widest text-emerald-400 ml-1">CERO</span>
                         </div>
-                        <div class="font-black text-xl tracking-wider text-white pt-0.5 uppercase">
-                            RRiña
-                        </div>
+                        <div class="font-black text-xl tracking-wider text-white pt-0.5 uppercase">RRiña</div>
                     </div>
                 </div>
 
@@ -123,11 +118,10 @@
                 </h2>
 
                 <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-                    Grupo para gente de aprox juventud años de Pontevedra y Vigo. Aquí venimos a conocer gente, echar unas risas, hacer planes y disfrutar.
+                    Grupo para gente de Pontevedra y Vigo. Aquí venimos a conocer gente, echar unas risas, hacer planes y disfrutar.
                     <span class="block mt-1 font-semibold text-slate-200">Sin malos rollos, sin dramas. 😎</span>
                 </p>
 
-                <!-- Action CTA -->
                 <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
                        class="w-full sm:w-auto px-7 py-3 bg-wa-green hover:bg-[#20ba59] text-black font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-wa-green/20 transition transform active:scale-95 flex items-center justify-center gap-2">
@@ -202,8 +196,6 @@
 
         <!-- SECCIÓN 1: AGENDA COMPLETA GALICIA 2026-2027 -->
         <section id="seccion-agenda" class="space-y-4">
-            
-            <!-- Barra de control y filtros -->
             <div class="bg-wa-panel p-4 rounded-xl border border-wa-border space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div class="flex flex-col">
@@ -215,7 +207,6 @@
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-                        <!-- Interruptor Ocultar Pasados -->
                         <label class="inline-flex items-center cursor-pointer text-xs text-slate-300">
                             <input type="checkbox" id="ocultar-pasados" onchange="alternarPasados()" checked class="sr-only peer">
                             <div class="relative w-9 h-5 bg-wa-card peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-wa-green peer-checked:after:bg-black peer-checked:after:border-black"></div>
@@ -230,7 +221,6 @@
                     </div>
                 </div>
 
-                <!-- Filtro por Sección / Categoría -->
                 <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1 text-xs" id="filtros-seccion">
                     <button onclick="filtrarSeccion('todas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-bold whitespace-nowrap">Todas las secciones</button>
                     <button onclick="filtrarSeccion('orquestas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎺 Orquestas</button>
@@ -239,7 +229,6 @@
                     <button onclick="filtrarSeccion('teatro', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎭 Teatro & Humor</button>
                 </div>
 
-                <!-- Filtro por Mes -->
                 <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1 text-xs border-t border-wa-border/50">
                     <span class="text-[11px] text-slate-400 flex items-center pr-1"><i class="fa-regular fa-calendar mr-1"></i> Mes:</span>
                     <button onclick="filtrarMes('todos', this)" class="mes-btn px-2.5 py-1 rounded bg-slate-700 text-white font-medium whitespace-nowrap">Todos</button>
@@ -264,142 +253,15 @@
                         <i class="fa-solid fa-thumbtack text-wa-green"></i>
                         Quedadas Oficiales del Grupo
                     </h3>
-                    <p class="text-xs text-slate-400">Planes activos coordinados en WhatsApp</p>
+                    <p class="text-xs text-slate-400">Planes activos coordinados en WhatsApp (cargados desde quedadas.txt)</p>
                 </div>
                 <button onclick="abrirModalReglas()" class="text-xs bg-wa-card hover:bg-wa-hover text-emerald-400 border border-wa-border px-3 py-2 rounded-xl transition flex items-center gap-1.5 font-medium w-fit">
                     <i class="fa-solid fa-circle-question"></i> ¿Cómo apuntarse?
                 </button>
             </div>
 
-            <!-- Grid de Quedadas -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
-                <!-- Oporto -->
-                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full">
-                                🍷🚌 Portugal
-                            </span>
-                            <span class="text-wa-green font-bold bg-wa-card px-2 py-0.5 rounded border border-wa-border">225 €</span>
-                        </div>
-                        <h4 class="font-bold text-base text-white">Vinhos Verdes y Oporto 🇵🇹</h4>
-                        <p class="text-xs text-slate-400">
-                            <strong>Fecha:</strong> Sábado 14 y domingo 15 de noviembre<br>
-                            <strong>Salida y regreso:</strong> Cambados<br>
-                            Palacio da Brejoeira, bodega Ponte da Barca, viñedos Quinta da Aveleda, cena, noche en Oporto y visita a Gaia. Comidas y visitas incluidas.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
-                        <div class="text-xs text-slate-300">
-                            <span class="font-semibold text-white">Apuntados:</span> Roberto +1
-                        </div>
-                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
-                            Me apunto
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Uxía -->
-                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-purple-400 bg-purple-950/60 border border-purple-800/50 px-2.5 py-0.5 rounded-full">
-                                🎤 Vilagarcía
-                            </span>
-                            <span class="text-slate-400">20:00 h</span>
-                        </div>
-                        <h4 class="font-bold text-base text-white">Uxía – Será por Flores</h4>
-                        <p class="text-xs text-slate-400">
-                            <strong>Fecha:</strong> Viernes 13 de noviembre<br>
-                            <strong>Lugar:</strong> Auditorio Municipal, Vilagarcía de Arousa.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
-                        <div class="text-xs text-slate-300">
-                            <span class="font-semibold text-white">Apuntados:</span> Cris
-                        </div>
-                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
-                            Me apunto
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Fortaleza de Chocolate -->
-                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-amber-400 bg-amber-950/60 border-amber-800/50 px-2.5 py-0.5 rounded-full">
-                                🍫🏰 Valença do Minho 🇵🇹
-                            </span>
-                            <span class="text-slate-400">28 de Noviembre</span>
-                        </div>
-                        <h4 class="font-bold text-base text-white">Fortaleza de Chocolate</h4>
-                        <p class="text-xs text-slate-400">
-                            <strong>Lugar:</strong> Fortaleza de Valença, Portugal.<br>
-                            Feria de chocolates, bombones artesanos y ambiente navideño.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
-                        <div class="text-xs text-slate-300">
-                            <span class="font-semibold text-white">Apuntados:</span> Cris, ¿Roberto +1?
-                        </div>
-                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
-                            Me apunto
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Vía Verde -->
-                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full">
-                                🚶‍♂️🌿 O Salnés
-                            </span>
-                            <span class="text-slate-400">Fecha por determinar</span>
-                        </div>
-                        <h4 class="font-bold text-base text-white">Ruta Vía Verde do Salnés</h4>
-                        <p class="text-xs text-slate-400">
-                            Paseo de naturaleza al aire libre con parada final para tomar algo en buena compañía.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
-                        <div class="text-xs text-slate-300">
-                            <span class="font-semibold text-white">Apuntados:</span> Roberto +2, Dora
-                        </div>
-                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
-                            Me apunto
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Termas Caldas -->
-                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm md:col-span-2">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-cyan-400 bg-cyan-950/60 border-cyan-800/50 px-2.5 py-0.5 rounded-full">
-                                ♨️💦 Caldas de Reis
-                            </span>
-                            <span class="text-wa-green font-bold bg-wa-card px-2 py-0.5 rounded border border-wa-border">13 €</span>
-                        </div>
-                        <h4 class="font-bold text-base text-white">Termas de Caldas de Reis</h4>
-                        <p class="text-xs text-slate-400">
-                            <strong>Fecha:</strong> Por determinar.<br>
-                            Jornada relajante en aguas termales y desconexión grupal.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
-                        <div class="text-xs text-slate-300">
-                            <span class="font-semibold text-white">Apuntados:</span> Roberto +3
-                        </div>
-                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
-                            Me apunto
-                        </button>
-                    </div>
-                </div>
-
-            </div>
+            <!-- Grid Dinámico de Quedadas -->
+            <div id="lista-quedadas" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </section>
 
         <!-- Mini FAQ -->
@@ -481,21 +343,19 @@
         </div>
     </div>
 
-    <!-- Modal Detalle del Evento (Overlay con Asistente IA) -->
+    <!-- Modal Detalle del Evento -->
     <div id="modalEvento" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
         <div class="bg-wa-panel border border-wa-border w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto no-scrollbar">
             <button onclick="cerrarModalEvento()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Cabecera Evento -->
             <div class="space-y-1.5 pr-6">
                 <span id="modalEvBadge" class="inline-flex items-center gap-1 text-[11px] font-semibold border px-2.5 py-0.5 rounded-full"></span>
                 <h3 id="modalEvTitulo" class="text-lg sm:text-xl font-extrabold text-white leading-tight"></h3>
                 <p id="modalEvComp" class="text-xs text-emerald-400 font-medium hidden"></p>
             </div>
 
-            <!-- Ficha Técnica -->
             <div class="bg-wa-card/60 border border-wa-border/60 rounded-xl p-3.5 space-y-2 text-xs text-slate-300">
                 <div class="flex items-center gap-2.5">
                     <i class="fa-regular fa-calendar text-wa-green text-sm w-4 text-center"></i>
@@ -515,7 +375,6 @@
                 </div>
             </div>
 
-            <!-- Acciones Inteligentes & Ubicación -->
             <div class="space-y-2 pt-1">
                 <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                     <i class="fa-solid fa-wand-magic-sparkles text-wa-green"></i> Acciones & Asistencia
@@ -534,7 +393,6 @@
                 </div>
             </div>
 
-            <!-- Botón WhatsApp -->
             <div class="pt-2 border-t border-wa-border/70">
                 <button id="modalBtnCompartirWA" class="w-full py-2.5 px-4 rounded-xl bg-wa-green hover:bg-[#20ba59] text-black font-bold text-xs transition flex items-center justify-center gap-2 shadow-md">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
@@ -544,9 +402,10 @@
         </div>
     </div>
 
-    <!-- Script de Interactividad, Parseo Dinámico y Ordenación Cronológica -->
+    <!-- Scripts de Interactividad y Parseo de ambos archivos -->
     <script>
         let eventosAgendaCompleta = [];
+        let quedadasCompleta = [];
         let seccionFiltro = 'todas';
         let mesFiltro = 'todos';
         let ocultarPasados = true;
@@ -566,21 +425,15 @@
             return hoy;
         }
 
-        // Extrae minutos para comparar horas (ej. "20:30 h", "21:00", "8:00 h")
         function extraerMinutos(horaStr) {
             if (!horaStr || horaStr === 'Por confirmar' || horaStr.toLowerCase().includes('varios')) return 9999;
             const match = horaStr.match(/(\d{1,2})[:.](\d{2})/);
-            if (match) {
-                return parseInt(match[1], 10) * 60 + parseInt(match[2], 10);
-            }
+            if (match) return parseInt(match[1], 10) * 60 + parseInt(match[2], 10);
             const matchSimple = horaStr.match(/(\d{1,2})\s*h/i);
-            if (matchSimple) {
-                return parseInt(matchSimple[1], 10) * 60;
-            }
+            if (matchSimple) return parseInt(matchSimple[1], 10) * 60;
             return 9999;
         }
 
-        // Intenta parsear la fecha del evento
         function intentarParsearFecha(texto) {
             try {
                 const txtLower = texto.toLowerCase().trim();
@@ -619,7 +472,7 @@
         }
 
         function estimarSeccion(texto, compañia) {
-            const txt = (texto + ' ' + compañia).toLowerCase();
+            const txt = (texto + ' ' + (compañia || '')).toLowerCase();
             if (txt.includes('🎺') || txt.includes('orquesta') || txt.includes('banda') || txt.includes('charanga') || txt.includes('la banda de ayer') || txt.includes('festicultores') || txt.includes('orquestas')) {
                 return 'orquestas';
             }
@@ -635,6 +488,7 @@
             return 'teatro';
         }
 
+        /* CARGA Y PARSEO DE AGENDA.TXT */
         async function cargarAgendaTXT() {
             try {
                 const response = await fetch('agenda.txt');
@@ -663,7 +517,6 @@
                 let linea = lineas[i].trim();
                 if (!linea) continue;
 
-                // Detectar cabecera de Día (ej. 📅 VIERNES 13 DE NOVIEMBRE DE 2026)
                 if ((linea.startsWith('📅') || linea.startsWith('📆')) && (
                     linea.toUpperCase().includes('LUNES') || 
                     linea.toUpperCase().includes('MARTES') || 
@@ -679,7 +532,6 @@
                     continue;
                 }
 
-                // Omitir cabeceras, líneas decorativas y separadores
                 if (
                     linea.startsWith('✤') || 
                     linea.startsWith('━') || 
@@ -701,7 +553,6 @@
                 const esPrecio = linea.startsWith('🎟️');
                 const esCompania = linea.startsWith('🎭 Compañía:');
                 const esCartel = linea.startsWith('🎤 Cartel:');
-                // Detecta fechas internas de eventos multifecha tipo "📆 13, 14 y 15 de noviembre de 2026"
                 const esRangoFechas = linea.startsWith('📆') || (linea.startsWith('📅') && !diaActual);
 
                 const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel || esRangoFechas;
@@ -752,7 +603,6 @@
                 ev.mes = extraerMesAnioLabel(ev.fechaOrden);
             });
 
-            // Ordenación cronológica exacta: fecha (día) y desempate por hora
             eventosAgendaCompleta.sort((a, b) => {
                 const diffFecha = a.fechaOrden - b.fechaOrden;
                 if (diffFecha !== 0) return diffFecha;
@@ -776,11 +626,7 @@
                                       (ev.comp && ev.comp.toLowerCase().includes(textoBuscador));
                 
                 const esPasado = ev.fechaOrden < hoy;
-
-                if (ocultarPasados && esPasado) {
-                    return false;
-                }
-
+                if (ocultarPasados && esPasado) return false;
                 return coincideSeccion && coincideMes && coincideTexto;
             });
 
@@ -850,7 +696,6 @@
                             </p>
                         </div>
 
-                        <!-- Pie de tarjeta blindado para móviles -->
                         <div class="mt-3 pt-2.5 border-t border-wa-border/70 flex items-center justify-between gap-2 text-[11px] text-slate-400">
                             <span class="flex items-center gap-1.5 min-w-0 truncate">
                                 <i class="fa-regular fa-calendar text-wa-green shrink-0"></i> 
@@ -864,6 +709,149 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        /* CARGA Y PARSEO DINÁMICO DE QUEDADAS.TXT */
+        async function cargarQuedadasTXT() {
+            try {
+                const response = await fetch('quedadas.txt');
+                if (!response.ok) throw new Error();
+                const rawText = await response.text();
+                procesarTextoQuedadas(rawText);
+            } catch (error) {
+                document.getElementById('lista-quedadas').innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-circle-exclamation text-2xl mb-2 text-yellow-500"></i>
+                        <p class="text-xs font-semibold">No se pudo cargar quedadas.txt</p>
+                    </div>
+                `;
+            }
+        }
+
+        function procesarTextoQuedadas(txt) {
+            const bloques = txt.split(/━━━━━━━━━━━━━━━━━━+/);
+            quedadasCompleta = [];
+
+            for (let bloque of bloques) {
+                const lineas = bloque.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                if (lineas.length === 0) continue;
+
+                // Descartar cabeceras o secciones informativas finales
+                const primerTexto = lineas[0].toUpperCase();
+                if (
+                    primerTexto.includes('QUEDADAS Y PLANES') || 
+                    primerTexto.includes('PRÓXIMAS QUEDADAS') || 
+                    primerTexto.includes('CÓMO APUNTARSE') || 
+                    primerTexto.includes('IMPORTANTE') ||
+                    lineas[0].startsWith('1️⃣')
+                ) {
+                    continue;
+                }
+
+                let titulo = lineas[0];
+                let precio = "";
+                let detalles = [];
+                let apuntados = [];
+                let modoApuntados = false;
+
+                for (let i = 1; i < lineas.length; i++) {
+                    const l = lineas[i];
+
+                    if (l.startsWith('💰') || l.toUpperCase().includes('PRECIO:')) {
+                        precio = l.replace(/💰|Precio:/gi, '').trim();
+                    }
+
+                    if (l.includes('👥 Apuntados:')) {
+                        modoApuntados = true;
+                        continue;
+                    }
+
+                    if (modoApuntados) {
+                        if (l.startsWith('•') || l.startsWith('-')) {
+                            apuntados.push(l.replace(/^[•\-]\s*/, '').trim());
+                        } else if (l) {
+                            apuntados.push(l);
+                        }
+                    } else {
+                        detalles.push(l);
+                    }
+                }
+
+                quedadasCompleta.push({
+                    titulo: titulo,
+                    precio: precio,
+                    detalles: detalles,
+                    apuntados: apuntados
+                });
+            }
+
+            renderQuedadas();
+        }
+
+        function renderQuedadas() {
+            const contenedor = document.getElementById('lista-quedadas');
+            if (quedadasCompleta.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-mug-hot text-2xl mb-2 text-slate-500"></i>
+                        <p class="text-xs">No hay quedadas activas en este momento.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            contenedor.innerHTML = quedadasCompleta.map((q, idx) => {
+                const apuntadosTexto = q.apuntados.length > 0 ? q.apuntados.join(', ') : '¡Sé el primero en apuntarte!';
+                const detallesHtml = q.detalles.map(d => {
+                    if (d.startsWith('•')) {
+                        return `<span class="block pl-2 text-[11px] text-slate-400">${d}</span>`;
+                    }
+                    return `<span class="block text-slate-300 font-medium">${d}</span>`;
+                }).join('');
+
+                const badgePrecio = q.precio ? `
+                    <span class="text-wa-green font-bold bg-wa-card px-2.5 py-0.5 rounded border border-wa-border text-xs">
+                        ${q.precio}
+                    </span>
+                ` : '';
+
+                return `
+                    <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                        <div class="space-y-2.5">
+                            <div class="flex items-start justify-between gap-2">
+                                <h4 class="font-bold text-base text-white leading-snug">${q.titulo}</h4>
+                                ${badgePrecio}
+                            </div>
+                            <div class="text-xs space-y-1 text-slate-300 border-t border-wa-border/50 pt-2">
+                                ${detallesHtml}
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-wa-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="text-xs text-slate-300">
+                                <span class="font-semibold text-white">Apuntados:</span> 
+                                <span class="text-emerald-400">${apuntadosTexto}</span>
+                            </div>
+                            <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                                <button onclick="apuntarseWhatsApp('${encodeURIComponent(q.titulo)}')" 
+                                        class="text-xs px-3 py-1.5 rounded-lg bg-wa-green hover:bg-[#20ba59] text-black font-bold transition flex items-center gap-1.5 shadow">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>Me apunto</span>
+                                </button>
+                                <button onclick="abrirModalReglas()" class="text-xs p-1.5 rounded-lg bg-wa-card hover:bg-wa-hover text-slate-400 border border-wa-border" title="¿Cómo funciona?">
+                                    <i class="fa-solid fa-circle-question"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function apuntarseWhatsApp(tituloCodificado) {
+            const titulo = decodeURIComponent(tituloCodificado);
+            const msg = encodeURIComponent(`¡Hola! Me quiero apuntar a la quedada: "${titulo}" 🍻`);
+            window.open(`https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?text=${msg}`, '_blank');
         }
 
         function alternarPasados() {
@@ -910,6 +898,7 @@
                 secQuedadas.classList.remove('hidden');
                 tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow';
                 tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white';
+                renderQuedadas();
             }
         }
 
@@ -923,7 +912,6 @@
             document.getElementById('modalReglas').classList.remove('flex');
         }
 
-        // Overlay Detalle del Evento
         function abrirModalEvento(indice) {
             const ev = eventosAgendaCompleta[indice];
             if (!ev) return;
@@ -943,7 +931,6 @@
                 compEl.classList.add('hidden');
             }
 
-            // Badge de categoría
             const badgeEl = document.getElementById('modalEvBadge');
             let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-800/50';
             let badgeHtml = '<i class="fa-solid fa-masks-theater text-[10px]"></i> Teatro & Espectáculo';
@@ -961,11 +948,9 @@
             badgeEl.className = `inline-flex items-center gap-1 text-[11px] font-semibold border px-2.5 py-0.5 rounded-full ${badgeClass}`;
             badgeEl.innerHTML = badgeHtml;
 
-            // Enlace a Google Maps
             const queryMaps = encodeURIComponent(`${ev.titulo} ${ev.lugar} Galicia`);
             document.getElementById('modalBtnMaps').href = `https://www.google.com/maps/search/?api=1&query=${queryMaps}`;
 
-            // Enlace WhatsApp para proponer el evento
             document.getElementById('modalBtnCompartirWA').onclick = () => {
                 const txtMsg = encodeURIComponent(`🍻 *Plan Morriña Cero:* ${ev.titulo}\n📅 ${ev.fecha} - 🕒 ${ev.hora}\n📍 ${ev.lugar}\n🎟️ ${ev.precio}\n¿Quién se apunta?`);
                 window.open(`https://api.whatsapp.com/send?text=${txtMsg}`, '_blank');
@@ -982,7 +967,6 @@
             modal.classList.remove('flex');
         }
 
-        // Consulta contextualizada a IA sobre el evento seleccionado
         function consultarIAEvento() {
             if (!eventoSeleccionadoActual) return;
             const ev = eventoSeleccionadoActual;
@@ -1018,7 +1002,6 @@
             document.body.removeChild(tempInput);
         }
 
-        // Cierre de modales con tecla ESC
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 cerrarModalReglas();
@@ -1026,8 +1009,10 @@
             }
         });
 
+        // Cargar ambos archivos .txt al iniciar
         window.addEventListener('DOMContentLoaded', () => {
             cargarAgendaTXT();
+            cargarQuedadasTXT();
         });
     </script>
 </body>
