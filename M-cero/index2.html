@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morriña Cero | Quedadas y Agenda Cultural Pontevedra & Vigo</title>
+    <title>Morriña Cero | Agenda Cultural Galicia Día a Día</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -11,7 +11,7 @@
     <!-- Google Font Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -50,13 +50,12 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-wa-dark text-slate-100 font-sans antialiased selection:bg-wa-green selection:text-black min-h-screen flex flex-col justify-between">
+<body class="bg-wa-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
 
     <!-- Top Navigation Bar -->
     <header class="sticky top-0 z-40 bg-wa-panel/90 backdrop-blur-md border-b border-wa-border/80 px-4 py-3">
         <div class="max-w-4xl mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <!-- Mini Logo Emblema -->
                 <div class="w-10 h-10 rounded-full bg-black border-2 border-slate-700 flex items-center justify-center overflow-hidden shadow-inner select-none">
                     <div class="text-center font-black leading-none tracking-tighter text-[9px] text-white">
                         <span class="block border-b border-white pb-[1px]">MO<span class="text-[6px] text-emerald-400">CERO</span></span>
@@ -68,7 +67,7 @@
                         Morriña Cero
                         <span class="inline-block w-2 h-2 rounded-full bg-wa-green"></span>
                     </h1>
-                    <p class="text-[11px] text-emerald-400 font-medium">Pontevedra & Vigo</p>
+                    <p class="text-[11px] text-emerald-400 font-medium">Lectura desde agenda.txt 📄</p>
                 </div>
             </div>
 
@@ -80,7 +79,7 @@
                 <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
                    class="flex items-center gap-1.5 text-xs bg-wa-green hover:bg-[#20ba59] text-black font-bold px-3 py-1.5 rounded-full shadow transition">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
-                    <span>Abrir Chat</span>
+                    <span>WhatsApp</span>
                 </a>
             </div>
         </div>
@@ -90,108 +89,41 @@
 
         <!-- Hero Section -->
         <section class="text-center pt-2 pb-2">
-            <!-- Insignia Principal -->
-            <div class="mx-auto w-32 h-32 sm:w-36 sm:h-36 rounded-full logo-box border-4 border-wa-card flex items-center justify-center p-3 relative mb-5 neon-glow select-none">
+            <div class="mx-auto w-24 h-24 sm:w-28 sm:h-28 rounded-full logo-box border-4 border-wa-card flex items-center justify-center p-3 relative mb-4 neon-glow select-none">
                 <div class="w-full h-full rounded-full bg-neutral-900 border border-neutral-700/60 flex flex-col items-center justify-center relative overflow-hidden">
                     <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px]"></div>
-                    
-                    <div class="relative z-10 border-2 border-white px-3 py-1.5 text-center bg-black/60 backdrop-blur-sm rounded-sm">
+                    <div class="relative z-10 border border-white px-2.5 py-1 text-center bg-black/60 backdrop-blur-sm rounded-sm">
                         <div class="flex items-baseline justify-center border-b border-white pb-0.5">
-                            <span class="font-extrabold text-2xl tracking-tighter text-white">mo</span>
-                            <span class="text-[9px] font-bold tracking-widest text-emerald-400 ml-1">CERO</span>
+                            <span class="font-extrabold text-xl tracking-tighter text-white">mo</span>
+                            <span class="text-[7px] font-bold tracking-widest text-emerald-400 ml-0.5">CERO</span>
                         </div>
-                        <div class="font-black text-xl tracking-wider text-white pt-0.5 uppercase">
+                        <div class="font-black text-lg tracking-wider text-white pt-0.5 uppercase">
                             RRiña
                         </div>
                     </div>
-                </div>
-
-                <div class="absolute -bottom-2 bg-wa-emerald text-white text-[11px] font-bold px-3 py-1 rounded-full border-2 border-wa-dark flex items-center gap-1.5 shadow-lg">
-                    <span class="w-2 h-2 rounded-full bg-wa-green animate-ping"></span>
-                    <span>42 miembros</span>
                 </div>
             </div>
 
             <div class="space-y-3 max-w-xl mx-auto">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wa-card text-xs text-slate-300 border border-wa-border">
-                    <i class="fa-solid fa-location-dot text-red-400"></i>
-                    <span>Pontevedra · Vigo · Rías Baixas · Galicia</span>
+                    <i class="fa-solid fa-cloud-arrow-down text-wa-green animate-bounce"></i>
+                    <span id="txt-status">Cargando agenda desde archivo...</span>
                 </div>
-
-                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-                    ¡Menos morriña y más <span class="text-wa-green">buen rollo</span>! 🤫🍻
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                    Agenda Cultural de Galicia <span class="text-wa-green">En Directo</span>
                 </h2>
-
-                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
-                    Grupo para gente de aprox juventud años de Pontevedra y Vigo. Aquí venimos a conocer gente, echar unas risas, hacer planes y disfrutar.
-                    <span class="block mt-1 font-semibold text-slate-200">Sin malos rollos, sin dramas. 😎</span>
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    Sincronizada directamente de agenda.txt en esta ruta. Todo el ocio, fiestas y espectáculos sin instalar apps.
                 </p>
-
-                <!-- Action CTA -->
-                <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
-                       class="w-full sm:w-auto px-7 py-3 bg-wa-green hover:bg-[#20ba59] text-black font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-wa-green/20 transition transform active:scale-95 flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-whatsapp text-xl"></i>
-                        <span>Unirme al Grupo de WhatsApp</span>
-                    </a>
-                    <a href="#agenda-seccion" class="w-full sm:w-auto px-6 py-3 bg-wa-card hover:bg-wa-hover text-slate-200 font-semibold text-sm rounded-full border border-wa-border transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-calendar-days text-wa-green"></i>
-                        <span>Consultar Agenda 2026–2027</span>
-                    </a>
-                </div>
             </div>
         </section>
 
-        <!-- Reglas / Filosofía de la Comunidad -->
-        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5 shadow-md">
-            <div class="flex items-center justify-between pb-3 border-b border-wa-border/70 mb-4">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-wa-green flex items-center justify-center">
-                        <i class="fa-solid fa-handshake-simple"></i>
-                    </div>
-                    <h3 class="font-bold text-base text-white">Normas y Esencia del Grupo</h3>
-                </div>
-                <span class="text-xs bg-wa-card text-emerald-400 px-2.5 py-1 rounded-full font-mono">100% Buen Rollo</span>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
-                    <span class="text-lg">📍</span>
-                    <div>
-                        <h4 class="font-semibold text-xs text-slate-200">Pontevedra · Vigo · alrededores</h4>
-                        <p class="text-[11px] text-slate-400">Gente local o comarca con ganas de sociabilizar y hacer planes activos.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
-                    <span class="text-lg">👥</span>
-                    <div>
-                        <h4 class="font-semibold text-xs text-slate-200">Buen ambiente y gente de buen rollo</h4>
-                        <p class="text-[11px] text-slate-400">Sin malos rollos, sin dramas. Entra con ganas de sumar y pasarlo bien.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
-                    <span class="text-lg">🍻</span>
-                    <div>
-                        <h4 class="font-semibold text-xs text-slate-200">Quedadas · cenas · copas</h4>
-                        <p class="text-[11px] text-slate-400">Planes improvisados, escapadas, senderismo y tardeo.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
-                    <span class="text-lg">🤫</span>
-                    <div>
-                        <h4 class="font-semibold text-xs text-slate-200">Pacto de Confianza</h4>
-                        <p class="text-[11px] text-slate-400">Lo que pasa en el grupo... se queda en el grupo. Discreción y respeto.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SELECTOR DE PESTAÑAS PRINCIPALES -->
+        <!-- SELECTOR DE PESTAÑAS -->
         <div class="flex space-x-2 border-b border-wa-border pb-2" id="agenda-seccion">
             <button onclick="cambiarPestana('agenda')" id="tab-agenda" 
                     class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow">
                 <i class="fa-solid fa-masks-theater text-black"></i>
-                <span>Agenda Galicia 2026–2027</span>
+                <span>Agenda Cultural Día a Día</span>
             </button>
             <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" 
                     class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white">
@@ -200,52 +132,51 @@
             </button>
         </div>
 
-        <!-- SECCIÓN 1: AGENDA COMPLETA GALICIA 2026-2027 -->
+        <!-- SECCIÓN 1: AGENDA COMPLETA GALICIA DESDE TXT -->
         <section id="seccion-agenda" class="space-y-4">
             
-            <!-- Barra de control y filtros -->
+            <!-- Control bar -->
             <div class="bg-wa-panel p-4 rounded-xl border border-wa-border space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                        <h3 class="font-bold text-base text-white flex items-center gap-2">
+                    <div class="flex flex-col">
+                        <h3 class="font-bold text-sm sm:text-base text-white flex items-center gap-2">
                             <i class="fa-solid fa-calendar-days text-wa-green"></i>
-                            Agenda Oficial 2026–2027
+                            Programación Diaria Activa
                         </h3>
-                        <p class="text-xs text-slate-400">Pontevedra, Vigo, Vilagarcía, Moaña, Valga, O Rosal y toda Galicia</p>
+                        <p class="text-[11px] text-slate-400">Lectura y filtrado cronológico dinámico</p>
                     </div>
-                    <div class="relative sm:w-64">
-                        <input type="text" id="buscador-eventos" oninput="filtrarEventos()" placeholder="Buscar artista, concello, sala..."
-                               class="w-full bg-wa-card text-xs text-white rounded-lg pl-8 pr-3 py-2 border border-wa-border focus:border-wa-green focus:outline-none placeholder-slate-500">
-                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                        <label class="inline-flex items-center cursor-pointer text-[11px] sm:text-xs text-slate-300">
+                            <input type="checkbox" id="ocultar-pasados" onchange="alternarPasados()" checked class="sr-only peer">
+                            <div class="relative w-8 h-4.5 bg-wa-card peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-wa-green peer-checked:after:bg-black peer-checked:after:border-black"></div>
+                            <span class="ms-2 font-medium">Ocultar eventos pasados</span>
+                        </label>
+
+                        <div class="relative w-full sm:w-60">
+                            <input type="text" id="buscador-eventos" oninput="filtrarEventos()" placeholder="Buscar artista, concello, teatro..."
+                                   class="w-full bg-wa-card text-xs text-white rounded-lg pl-8 pr-3 py-1.5 border border-wa-border focus:border-wa-green focus:outline-none placeholder-slate-500">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Filtro por Sección / Categoría -->
                 <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1 text-xs" id="filtros-seccion">
                     <button onclick="filtrarSeccion('todas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-bold whitespace-nowrap">Todas las secciones</button>
-                    <button onclick="filtrarSeccion('orquestas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎺 Orquestas</button>
-                    <button onclick="filtrarSeccion('musica', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎤 Conciertos & Música</button>
-                    <button onclick="filtrarSeccion('fiestas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎉 Fiestas & Ferias</button>
-                    <button onclick="filtrarSeccion('teatro', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎭 Teatro & Humor</button>
-                </div>
-
-                <!-- Filtro por Mes -->
-                <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1 text-xs border-t border-wa-border/50">
-                    <span class="text-[11px] text-slate-400 flex items-center pr-1"><i class="fa-regular fa-calendar mr-1"></i> Mes:</span>
-                    <button onclick="filtrarMes('todos', this)" class="mes-btn px-2.5 py-1 rounded bg-slate-700 text-white font-medium whitespace-nowrap">Todos</button>
-                    <button onclick="filtrarMes('Noviembre 2026', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Nov 2026</button>
-                    <button onclick="filtrarMes('Diciembre 2026', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Dic 2026</button>
-                    <button onclick="filtrarMes('Enero 2027', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Ene 2027</button>
-                    <button onclick="filtrarMes('Febrero 2027', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Feb 2027</button>
-                    <button onclick="filtrarMes('Marzo 2027', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Mar 2027</button>
+                    <button onclick="filtrarSeccion('orquestas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎺 Orquestas y Bandas</button>
+                    <button onclick="filtrarSeccion('musica', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎤 Conciertos</button>
+                    <button onclick="filtrarSeccion('fiestas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎉 Fiestas y Ferias</button>
+                    <button onclick="filtrarSeccion('teatro', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎭 Teatro e Humor</button>
                 </div>
             </div>
 
             <!-- Listado dinámico de eventos -->
-            <div id="lista-eventos" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+            <div id="lista-eventos-agrupados" class="space-y-6">
+                <!-- Se rellena por JS -->
+            </div>
         </section>
 
-        <!-- SECCIÓN 2: QUEDADAS OFICIALES DEL GRUPO -->
+        <!-- SECCIÓN 2: QUEDADAS (SE MANTIENE IGUAL) -->
         <section id="seccion-quedadas" class="hidden space-y-4">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-wa-panel p-4 rounded-xl border border-wa-border">
                 <div>
@@ -260,10 +191,7 @@
                 </button>
             </div>
 
-            <!-- Grid de Quedadas -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
-                <!-- Oporto -->
                 <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between text-[11px]">
@@ -289,7 +217,6 @@
                     </div>
                 </div>
 
-                <!-- Uxía -->
                 <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between text-[11px]">
@@ -314,11 +241,10 @@
                     </div>
                 </div>
 
-                <!-- Fortaleza de Chocolate -->
                 <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-amber-400 bg-amber-950/60 border border-amber-800/50 px-2.5 py-0.5 rounded-full">
+                            <span class="inline-flex items-center gap-1 font-semibold text-amber-400 bg-amber-950/60 border-amber-800/50 px-2.5 py-0.5 rounded-full">
                                 🍫🏰 Valença do Minho 🇵🇹
                             </span>
                             <span class="text-slate-400">28 de Noviembre</span>
@@ -339,7 +265,6 @@
                     </div>
                 </div>
 
-                <!-- Vía Verde -->
                 <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between text-[11px]">
@@ -362,54 +287,6 @@
                         </button>
                     </div>
                 </div>
-
-                <!-- Termas Caldas -->
-                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm md:col-span-2">
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full">
-                                ♨️💦 Caldas de Reis
-                            </span>
-                            <span class="text-wa-green font-bold bg-wa-card px-2 py-0.5 rounded border border-wa-border">13 €</span>
-                        </div>
-                        <h4 class="font-bold text-base text-white">Termas de Caldas de Reis</h4>
-                        <p class="text-xs text-slate-400">
-                            <strong>Fecha:</strong> Por determinar.<br>
-                            Jornada relajante en aguas termales y desconexión grupal.
-                        </p>
-                    </div>
-                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
-                        <div class="text-xs text-slate-300">
-                            <span class="font-semibold text-white">Apuntados:</span> Roberto +3
-                        </div>
-                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
-                            Me apunto
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Mini FAQ -->
-        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5">
-            <h4 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                <i class="fa-regular fa-circle-question text-wa-green"></i>
-                ¿Cómo funciona Morriña Cero?
-            </h4>
-            <div class="space-y-3 text-xs sm:text-sm text-slate-300">
-                <div class="border-b border-wa-border/50 pb-2.5">
-                    <p class="font-semibold text-white">1. ¿Tengo que pagar alguna cuota por pertenecer?</p>
-                    <p class="text-slate-400 text-xs mt-0.5">Ninguna. Es una comunidad libre de personas de Pontevedra, Vigo y alrededores. En las quedadas cada quien paga lo que consume.</p>
-                </div>
-                <div class="border-b border-wa-border/50 pb-2.5">
-                    <p class="font-semibold text-white">2. ¿Cómo me apunto a las quedadas?</p>
-                    <p class="text-slate-400 text-xs mt-0.5">En el chat de WhatsApp mantenemos una lista en el mensaje fijado. Lo copias, añades tu nombre y vuelves a fijarlo para que nadie se pierda.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-white">3. ¿Quién propone los planes?</p>
-                    <p class="text-slate-400 text-xs mt-0.5">Cualquier miembro del grupo puede proponer un plan o apuntarse a los eventos de la agenda cultural.</p>
-                </div>
             </div>
         </section>
 
@@ -419,7 +296,7 @@
     <footer class="bg-wa-panel border-t border-wa-border py-6 px-4 text-center text-xs text-slate-400">
         <div class="max-w-4xl mx-auto space-y-2">
             <p class="font-medium text-slate-300">Morriña Cero · Grupo Social Pontevedra & Vigo</p>
-            <p class="text-[11px] text-slate-400">Agenda y quedadas para compartir buenos ratos en Galicia.</p>
+            <p class="text-[11px] text-slate-400">Carga automática en tiempo real de agenda.txt</p>
             <div class="pt-2 flex justify-center gap-4 text-base text-slate-400">
                 <button onclick="copiarEnlace()" title="Copiar invitación" class="hover:text-wa-green transition"><i class="fa-solid fa-link"></i></button>
                 <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="hover:text-wa-green transition"><i class="fa-brands fa-whatsapp"></i></a>
@@ -433,7 +310,7 @@
         <span id="toastMsg">Enlace copiado con éxito</span>
     </div>
 
-    <!-- Modal Instrucciones para apuntarse -->
+    <!-- Modal Instrucciones -->
     <div id="modalReglas" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-wa-panel border border-wa-border w-full max-w-md rounded-2xl p-5 shadow-2xl space-y-4">
             <div class="flex items-center justify-between pb-2 border-b border-wa-border">
@@ -445,7 +322,6 @@
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
-
             <div class="space-y-2.5 text-xs text-slate-300">
                 <p>1️⃣ Busca el <strong>mensaje fijado 📌</strong> en el chat de WhatsApp.</p>
                 <p>2️⃣ Desfija el mensaje.</p>
@@ -454,11 +330,9 @@
                 <p>5️⃣ Añade tu nombre o modifica la información.</p>
                 <p>6️⃣ <strong>¡Vuelve a fijar el mensaje actualizado!</strong></p>
             </div>
-
             <div class="p-3 bg-black/40 rounded-xl border-l-2 border-wa-green text-[11px] text-slate-400">
-                ⚠️ <strong>¡Importante!</strong> Cada vez que alguien se apunte, se borre o cambie algún dato, hay que actualizar y volver a fijar la lista. ¡Una sola lista, siempre al día y sin líos! 🍻
+                ⚠️ <strong>¡Importante!</strong> Cada vez que alguien se apunte, hay que actualizar y volver a fijar la lista para evitar errores. ¡Una única lista coordinada! 🍻
             </div>
-
             <div class="pt-2 flex justify-end gap-2">
                 <button onclick="cerrarModalReglas()" class="px-3.5 py-2 rounded-lg bg-wa-card hover:bg-wa-hover text-slate-300 text-xs transition">Cerrar</button>
                 <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
@@ -470,236 +344,342 @@
         </div>
     </div>
 
-    <!-- Script de Interactividad y Base de Datos Completa -->
+    <!-- Script de carga dinámica del archivo TXT -->
     <script>
-        // BASE DE DATOS COMPLETA DE EVENTOS 2026 - 2027
-        const eventosAgendaCompleta = [
-            // ORQUESTAS
-            { seccion: 'orquestas', mes: 'Noviembre 2026', titulo: 'Charanga FESTICULTORES TROUPE', lugar: 'San Martiño de Moaña, Moaña (Pontevedra)', fecha: 'Sábado 7 de noviembre de 2026', hora: 'Por confirmar', precio: 'Entrada libre', comp: '' },
-            { seccion: 'orquestas', mes: 'Noviembre 2026', titulo: 'Grupo LA BANDA DE AYER', lugar: 'San Martiño de Moaña, Moaña (Pontevedra)', fecha: 'Sábado 14 de noviembre de 2026', hora: 'Por confirmar', precio: 'Entrada libre', comp: '' },
-
-            // CONCIERTOS Y MÚSICA - NOVIEMBRE 2026
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Techno Pop', lugar: 'Auditorio Mar de Vigo', fecha: 'Viernes 6 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Erik Urano – Gira Stalker', lugar: 'Sala Mondo Club, Vigo', fecha: 'Viernes 6 de noviembre de 2026', hora: '20:30 h', precio: 'Desde 16,50 €', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Hevia – 25 aniversario', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Sábado 7 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Uxía – Será por flores', lugar: 'Auditorio Municipal, Vilagarcía', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'María José Llergo', lugar: 'Teatro Afundación, Vigo', fecha: 'Viernes 13 de noviembre de 2026', hora: '21:00 h', precio: '13,60 €', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Sho-Hai – Gira 2026/2027', lugar: 'Sala Rouge, Vigo', fecha: 'Viernes 13 de noviembre de 2026', hora: '21:00 h', precio: '22 €', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Quique González & Toni Brunet – Acustiquísimos', lugar: 'Vigo', fecha: 'Sábado 14 de noviembre de 2026', hora: '21:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Sho-Hai – Gira 2026/2027', lugar: 'Sala Tebras, Lugo', fecha: 'Sábado 14 de noviembre de 2026', hora: '21:30 h', precio: '22 €', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'ABBA The New Experience', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 15 de noviembre de 2026', hora: 'Por confirmar', precio: 'Desde 39,60 €', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'St. Paul & The Broken Bones – Underfest', lugar: 'Vigo', fecha: 'Domingo 15 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Simply the Best – Tina Turner Tribute', lugar: 'Cine Teatro Salesianos, Vigo', fecha: 'Sábado 21 de noviembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Ángel Stanich Band', lugar: 'Teatro Principal, Pontevedra', fecha: 'Sábado 21 de noviembre de 2026', hora: '21:00 h', precio: 'Desde 24 €', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Malú', lugar: 'Vigo', fecha: 'Sábado 21 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Jeanette – 50 aniversario', lugar: 'Vigo', fecha: 'Domingo 22 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Belén Aguilera', lugar: 'Auditorio Mar de Vigo', fecha: 'Viernes 27 de noviembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Noviembre 2026', titulo: 'Copos de avena', lugar: 'Sala Krazzy Kray, Cambados', fecha: 'Sábado 28 de noviembre de 2026', hora: '19:30 h', precio: 'Por confirmar', comp: '' },
-
-            // CONCIERTOS - DICIEMBRE 2026
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'Vicente Amigo – 40 aniversario', lugar: 'Vigo', fecha: 'Sábado 5 de diciembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'El Altar del Holocausto – Ecos Tour', lugar: 'Sala Masterclub, Vigo', fecha: 'Viernes 11 de diciembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'Depedro', lugar: 'Vigo', fecha: 'Sábado 12 de diciembre de 2026', hora: '21:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'The Soul of Gospel – Black Heritage Choir', lugar: 'Vigo', fecha: 'Miércoles 16 de diciembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Diciembre 2026', titulo: 'Abraham Cupeiro – Relatos a carón dun candil', lugar: 'Vigo', fecha: 'Domingo 27 de diciembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '' },
-
-            // CONCIERTOS - ENERO / FEBRERO 2027
-            { seccion: 'musica', mes: 'Enero 2027', titulo: 'Conductores Suicidas – Tributo a Sabina', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 9 de enero de 2027', hora: 'Por confirmar', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Enero 2027', titulo: 'Kase.O', lugar: 'Coliseum, A Coruña', fecha: 'Sábado 16 de enero de 2027', hora: 'Por confirmar', precio: 'Desde 34 €', comp: '' },
-            { seccion: 'musica', mes: 'Enero 2027', titulo: 'Maldita Nerea – Origen Solo', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Sábado 30 de enero de 2027', hora: 'Por confirmar', precio: 'Por confirmar', comp: '' },
-            { seccion: 'musica', mes: 'Febrero 2027', titulo: 'Aurum – Bandas sonoras a la luz de las velas', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 13 de febrero de 2027', hora: '20:30 h', precio: 'Desde 33 €', comp: '' },
-
-            // FIESTAS Y FERIAS
-            { seccion: 'fiestas', mes: 'Noviembre 2026', titulo: 'Magosto Popular de Seixo', lugar: 'Marín', fecha: 'Domingo 8 de noviembre de 2026', hora: 'Por confirmar', precio: 'Popular', comp: '' },
-            { seccion: 'fiestas', mes: 'Noviembre 2026', titulo: 'Noche de Cine – Fiesta temática', lugar: 'NH Collection, Vigo', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'fiestas', mes: 'Diciembre 2026', titulo: 'Sabores del Mundo – Navidad', lugar: 'Praza do Berbés, Vigo', fecha: 'Del 3 de diciembre 2026 al 6 de enero 2027', hora: 'Todo el día', precio: 'Acceso libre', comp: '' },
-
-            // TEATRO, HUMOR Y ESPECTÁCULOS - NOVIEMBRE 2026
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Quen dixo medo? Os divertidos espíritos do Samaín', lugar: 'Auditorio Municipal, Catoira', fecha: 'Domingo 1 de noviembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Barafunda' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Señores (unha comedia machirula de ste xeito)', lugar: 'Auditorio José Gil, As Neves', fecha: 'Domingo 1 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'De Ste Xeito Producións' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Historias para escagharriñarse', lugar: 'Sala Celso Parada, Quintela, Moaña', fecha: 'Viernes 6 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Teatro Ghazafelhos' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Daniel Fez – Estamos cucú de la cabeza', lugar: 'Teatro Afundación, Vigo', fecha: 'Viernes 6 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'As aventuras de Nabiza Girl: O estraño caso da cultura minguante', lugar: 'Auditorio Municipal, A Illa de Arousa', fecha: 'Sábado 7 de noviembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Isa Risco' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Moi Animal – Touriñán', lugar: 'O Grove (por verificar)', fecha: 'Sábado 7 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: 'Xosé A. Touriñán' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Go On!', lugar: 'Auditorio Municipal, O Rosal', fecha: 'Domingo 8 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: '42 Norte' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Moi Animal – Touriñán', lugar: 'Teatro Afundación, Vigo', fecha: 'Domingo 8 de noviembre de 2026', hora: '18:00 h', precio: 'Por confirmar', comp: 'Xosé A. Touriñán' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'O Libro da Selva', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Domingo 8 de noviembre de 2026', hora: '18:30 h', precio: 'Desde 4,50 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Gigante', lugar: 'Teatro Afundación, Vigo', fecha: 'Miércoles 11 de noviembre de 2026', hora: '20:30 h', precio: '25,27 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Enredada', lugar: 'Multiúsos de Arcade, Soutomaior', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:30 h', precio: 'GRATIS', comp: 'Leti da Taberna' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Misery', lugar: 'Afundación, Pontevedra', fecha: 'Viernes 13 de noviembre de 2026', hora: '20:30 h', precio: 'Desde 27,50 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Berto Romero – Lo Nunca Visto', lugar: 'Auditorio Mar de Vigo', fecha: '13, 14 y 15 de noviembre de 2026', hora: 'Varios horarios', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'A verdadeira historia dos tres porquiños e o lobo feroz', lugar: 'Auditorio Emilia Pardo Bazán, Sanxenxo', fecha: 'Sábado 14 de noviembre de 2026', hora: '18:00 h', precio: '5,00 €', comp: 'Teatro del Andamio' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Meigas, habelas hainas', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 14 de noviembre de 2026', hora: '20:00 h', precio: 'Desde 19,80 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Cotorras', lugar: 'Centro Cultural Manuel Lamazares, Rodeiro', fecha: 'Sábado 14 de noviembre de 2026', hora: '21:00 h', precio: 'GRATIS', comp: 'Malasombra' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Cotorras', lugar: 'Auditorio Municipal, Mondariz', fecha: 'Domingo 15 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Malasombra' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'O Monstro de Cores', lugar: 'Pazo da Cultura, Pontevedra', fecha: 'Domingo 15 de noviembre de 2026', hora: '18:30 h', precio: 'Desde 4,50 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Esas cousas marabillosas', lugar: 'Auditorio Municipal, O Rosal', fecha: 'Domingo 15 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Empatía Teatro' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Molto Barroco', lugar: 'Auditorio Municipal do Mosteiro, Meis', fecha: 'Domingo 15 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Bulebule', lugar: 'Sala Celso Parada, Quintela, Moaña', fecha: 'Viernes 20 de noviembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Os Náufragos Teatro' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Os contos de Violeta', lugar: 'Casa da Cultura, Valga', fecha: 'Viernes 20 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Bea Campos' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'El otro lado de la cama', lugar: 'Vigo', fecha: 'Viernes 20 de noviembre de 2026', hora: 'Por confirmar', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Cabaré climático', lugar: 'Auditorio Municipal, A Cañiza', fecha: 'Sábado 21 de noviembre de 2026', hora: '20:30 h', precio: 'GRATIS', comp: 'Vas Rir' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Coaches de choque', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 21 de noviembre de 2026', hora: '20:30 h', precio: '16,60 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Costureiriña bonita', lugar: 'CEIP Pedro Antonio Cerviño, Campo Lameiro', fecha: 'Martes 24 de noviembre de 2026', hora: '12:00 h', precio: 'GRATIS', comp: 'A Cova das Letras' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Vivaldi & Paganini – Dos maestros, un concierto', lugar: 'Vigo', fecha: 'Martes 24 de noviembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Alleo', lugar: 'Centro Sociocultural de Tenorio, Cerdedo-Cotobade', fecha: 'Viernes 27 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Colectivo Globo (+danza)' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Coa Cabeza nas nubes (versión de sala)', lugar: 'Auditorio, Valga', fecha: 'Viernes 27 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Cía. SÖA (+danza)' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Novos lobos', lugar: 'Auditorio, Valga', fecha: 'Viernes 27 de noviembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Fantoches Baj' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Bernarda', lugar: 'Afundación, Pontevedra', fecha: 'Viernes 27 de noviembre de 2026', hora: '20:30 h', precio: 'Desde 18,60 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Goyo Jiménez – América Forever', lugar: 'Vilagarcía (por verificar)', fecha: 'Viernes 27 de noviembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Goyo Jiménez – América Forever', lugar: 'Vigo', fecha: 'Sábado 28 de noviembre de 2026', hora: '19:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'La bella durmiente', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 28 de noviembre de 2026', hora: '19:00 h', precio: 'Desde 27,50 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Limpa limpa', lugar: 'Centro Sociocultural José Raído, Patelas, Cuntis', fecha: 'Sábado 28 de noviembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Expresión Producións' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Galicia Ilusiona – Gran Gala de Magia', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 29 de noviembre de 2026', hora: '17:00 h', precio: 'Desde 18,80 €', comp: '' },
-            { seccion: 'teatro', mes: 'Noviembre 2026', titulo: 'Paco Candela – Gira 30', lugar: 'Vigo', fecha: 'Domingo 29 de noviembre de 2026', hora: '19:00 h', precio: 'Por confirmar', comp: '' },
-
-            // TEATRO - DICIEMBRE 2026
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Brincadeiras da lingua', lugar: 'Salón Confraría Pescadores, Vilanova de Arousa', fecha: 'Viernes 4 de diciembre de 2026', hora: '12:00 h', precio: 'GRATIS', comp: 'Migallas Teatro' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'A cámara escura', lugar: 'CEIP Manuel Cordo Boullosa, Ponte Caldelas', fecha: 'Viernes 4 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Vórtice Escénico' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'David Cepo en directo', lugar: 'Teatro Afundación, Vigo', fecha: '4 y 5 de diciembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Ignatius Farray', lugar: 'Teatro Afundación, Vigo', fecha: 'Sábado 5 de diciembre de 2026', hora: '20:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Shado El Mago – Cleptomago', lugar: 'Vigo', fecha: 'Domingo 6 de diciembre de 2026', hora: '20:00 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: '4 monos', lugar: 'Salón de Actos Casa de Cultura, Meaño', fecha: 'Jueves 10 de diciembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Tropa de Trapo' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Dulcinea – Paloma San Basilio', lugar: 'Afundación, Pontevedra', fecha: 'Viernes 11 de diciembre de 2026', hora: '20:30 h', precio: 'Desde 23,76 €', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Carapuchiña Vermella', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 12 de diciembre de 2026', hora: '17:00 h', precio: 'Desde 13,60 €', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'El Farmafioso', lugar: 'Auditorio Municipal, Vigo', fecha: 'Sábado 12 de diciembre de 2026', hora: '18:30 h', precio: 'Por confirmar', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'De algo hai que morrer', lugar: 'Sala de Cultura, Mondariz Balneario', fecha: 'Sábado 12 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Malasombra' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Máis saaabor!', lugar: 'Auditorio Municipal, Ribadumia', fecha: 'Domingo 13 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Culturactiva' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Neste Nadal, vida máis cultural', lugar: 'CEIP Pío Cabanillas Gallas, Dozón', fecha: 'Jueves 17 de diciembre de 2026', hora: '16:00 h', precio: 'GRATIS', comp: 'Martín Camiña' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'A maxia do Nadal', lugar: 'Auditorio do Concello, Pazos de Borbén', fecha: 'Sábado 19 de diciembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'O Mago Paco' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'O que non estaba escrito', lugar: 'Centro Social, Pontecesures', fecha: 'Sábado 19 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Tarabela Creativa' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Barullo de Nadal!', lugar: 'Os Pendellos, Agolada', fecha: 'Domingo 20 de diciembre de 2026', hora: '15:00 h', precio: 'GRATIS', comp: 'Nelson Quinteiro' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Molto Barroco', lugar: 'Auditorio da Azucreira, Portas', fecha: 'Domingo 20 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'X Galicia Magic Fest', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 20 de diciembre de 2026', hora: 'Por confirmar', precio: 'Desde 24,20 €', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Chegar e encher', lugar: 'Casa da Cultura, Vilaboa', fecha: 'Martes 22 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Inventi Teatro' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Retrincos de Castelao', lugar: 'Pazo da Crega, Barro', fecha: 'Martes 22 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Artefeito' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Cirkote', lugar: 'Praza do Siñor Afranio, Silleda', fecha: 'Miércoles 23 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Kote Malabar' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Ándale, bon appétit!', lugar: 'Casa da Cultura Manuel Lueiro Rey, O Grove', fecha: 'Miércoles 23 de diciembre de 2026', hora: '17:30 h', precio: 'GRATIS', comp: 'Teatro Ghazafelhos' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Pepiña Maruxiña quere voar', lugar: 'Centro Social, Forcarei', fecha: 'Sábado 26 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Barafunda' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Conto danza de Nadal', lugar: 'A Seca, Poio', fecha: 'Sábado 26 de diciembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'Nelson Quinteiro (+danza)' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Molto Barroco', lugar: 'Auditorio Sobrino Buhígas, Campo Lameiro', fecha: 'Sábado 26 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'O Apalpador e as palabras perdidas', lugar: 'Centro Social, Pontecesures', fecha: 'Sábado 26 de diciembre de 2026', hora: '19:00 h', precio: 'GRATIS', comp: 'A Xanela do Maxín' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Top Manta', lugar: 'Casa da Cultura, Vilaboa', fecha: 'Sábado 26 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Fulano, Mengano e Citano' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Conto de Nadal', lugar: 'Auditorio de Soutelo de Montes, Forcarei', fecha: 'Domingo 27 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Mago Richard' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Neura, unha comedia neurótico-festiva', lugar: 'CS Mougás, Oia', fecha: 'Domingo 27 de diciembre de 2026', hora: '18:00 h', precio: 'GRATIS', comp: 'De Ste Xeito' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Esfínter 6', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 27 de diciembre de 2026', hora: '18:30 h', precio: 'Desde 24,20 €', comp: '' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Maxia, misterios e outras historias', lugar: 'Casa da Cultura Manuel Lueiro Rey, O Grove', fecha: 'Lunes 28 de diciembre de 2026', hora: '17:30 h', precio: 'GRATIS', comp: 'Magia en la Manga' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Pum pum, quen hai?', lugar: 'Pazo da Crega, Barro', fecha: 'Lunes 28 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Ártika Cía.' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Hamelin', lugar: 'Casa de Cultura Roberto Blanco Torres, Cuntis', fecha: 'Martes 29 de diciembre de 2026', hora: '17:00 h', precio: 'GRATIS', comp: 'Fran Rei' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Pequenas grandes maxias', lugar: 'Praza do Concello, Baiona', fecha: 'Martes 29 de diciembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Mago Teto' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Dedín, dedín, dedal', lugar: 'Edificio Multiúsos, Moraña', fecha: 'Martes 29 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: '42 Norte' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Tachán!', lugar: 'Casa da Cultura Manuel Lueiro Rey, O Grove', fecha: 'Miércoles 30 de diciembre de 2026', hora: '17:30 h', precio: 'GRATIS', comp: 'Inventi Teatro' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Un Nadal chungo que te cagas', lugar: 'Praza do Concello, Baiona', fecha: 'Miércoles 30 de diciembre de 2026', hora: '18:30 h', precio: 'GRATIS', comp: 'Peter Punk Pallaso' },
-            { seccion: 'teatro', mes: 'Diciembre 2026', titulo: 'Gaiferos polo camiño a Compostela', lugar: 'Casa da Cultura, Vilaboa', fecha: 'Miércoles 30 de diciembre de 2026', hora: '20:00 h', precio: 'GRATIS', comp: 'Títeres Cachirulo' },
-
-            // TEATRO - ENERO 2027
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Dedín, dedín, dedal', lugar: 'Auditorio de Soutelo de Montes, Forcarei', fecha: 'Sábado 2 de enero de 2027', hora: '17:00 h', precio: 'GRATIS', comp: '42 Norte' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Love está no aire – David Amor', lugar: 'Auditorio Municipal, Arbo', fecha: 'Sábado 2 de enero de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'David Amor' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Memorias dun neno labrego', lugar: 'Auditorio Municipal, A Illa de Arousa', fecha: 'Domingo 3 de enero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Contraproducións' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'O cego dos monifates', lugar: 'Os Pendellos, Agolada', fecha: 'Martes 5 de enero de 2027', hora: '18:30 h', precio: 'GRATIS', comp: 'Seisdedos' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Daniel Fez – Estamos cucú de la cabeza', lugar: 'Afundación, Pontevedra', fecha: 'Domingo 10 de enero de 2027', hora: '18:00 h', precio: 'Desde 19,80 €', comp: '' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'In tempore… por dicir algo', lugar: 'Auditorio José Gil, As Neves', fecha: 'Sábado 23 de enero de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Juan Luis Lage' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Dedín, dedín, dedal', lugar: 'Centro Cultural, A Guarda', fecha: 'Sábado 30 de enero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: '42 Norte' },
-            { seccion: 'teatro', mes: 'Enero 2027', titulo: 'Lamine Thior – Más que palabras', lugar: 'Afundación, Pontevedra', fecha: 'Sábado 30 de enero de 2027', hora: 'Por confirmar', precio: 'Por confirmar', comp: '' },
-
-            // TEATRO - FEBRERO 2027
-            { seccion: 'teatro', mes: 'Febrero 2027', titulo: 'Peque Disco Moc Moc and Remember Temazos 90-2000', lugar: 'Auditorio, Valga', fecha: 'Domingo 14 de febrero de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Mere Clown' },
-            { seccion: 'teatro', mes: 'Febrero 2027', titulo: 'Jastac Japi Jolídais', lugar: 'Auditorio Municipal do Mosteiro, Meis', fecha: 'Domingo 21 de febrero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Leti da Taberna' },
-            { seccion: 'teatro', mes: 'Febrero 2027', titulo: 'Nanai da China', lugar: 'Centro Cultural, A Guarda', fecha: 'Sábado 27 de febrero de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Pérez & Fernández' },
-
-            // TEATRO - MARZO 2027
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Un tal Romeo', lugar: 'Auditorio Manuel Dopazo, Silleda', fecha: 'Domingo 7 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'A Ramboia' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Cotorras', lugar: 'Edificio Multiúsos, Moraña', fecha: 'Domingo 7 de marzo de 2027', hora: '20:00 h', precio: 'GRATIS', comp: 'Malasombra' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Travesía Unicornio', lugar: 'Auditorio, Valga', fecha: 'Viernes 12 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Teatro Ghazafelhos' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Contos para contar cartos', lugar: 'Salón Santa Eulalia, Silleda', fecha: 'Sábado 13 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Avelino González' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Bernarda', lugar: 'Pavillón, Meaño', fecha: 'Domingo 14 de marzo de 2027', hora: '18:30 h', precio: 'GRATIS', comp: 'Malasombra' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Commed(ia) – Versión extendida', lugar: 'Auditorio Municipal, Caldas de Reis', fecha: 'Domingo 14 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Píscore' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Mesura', lugar: 'Auditorio Municipal, Ribadumia', fecha: 'Domingo 14 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Raquel Ferradás (+danza)' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Tin', lugar: 'Centro Cultural, A Guarda', fecha: 'Sábado 20 de marzo de 2027', hora: '18:00 h', precio: 'GRATIS', comp: 'Dani García' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Cotorras', lugar: 'Auditorio Municipal, Caldas de Reis', fecha: 'Domingo 28 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Malasombra' },
-            { seccion: 'teatro', mes: 'Marzo 2027', titulo: 'Uxía apaga lumes', lugar: 'Xardín Umbrío, Vilanova de Arousa', fecha: 'Domingo 28 de marzo de 2027', hora: '19:00 h', precio: 'GRATIS', comp: 'Teatro Escena' }
-        ];
-
+        let eventosAgenda = [];
         let seccionFiltro = 'todas';
-        let mesFiltro = 'todos';
+        let ocultarPasados = true;
 
-        // Renderizar los eventos con los filtros aplicados
+        // Función para limpiar de formato los meses y parsearlos con exactitud
+        const mesesEsp = {
+            enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5,
+            julio: 6, agosto: 7, septiembre: 8, octubre: 9, noviembre: 10, diciembre: 11,
+            ene: 0, feb: 1, mar: 2, abr: 3, may: 4, jun: 5, jul: 6, ago: 7, sep: 8, oct: 9, nov: 10, dic: 11
+        };
+
+        // Generar objeto de Fecha de hoy a las 00:00:00 para hacer la comparación cronológica
+        function obtenerFechaHoy() {
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+            return hoy;
+        }
+
+        // Intento inteligente de parsear la fecha de un evento o de una cabecera para ordenación
+        function intentarParsearFecha(texto) {
+            try {
+                const txtLower = texto.toLowerCase().trim();
+                
+                // Formatos soportados: "Lunes 13 de noviembre de 2026", "Viernes 30 de octubre de 2026", "Del 3 de dic. 2026 al 6 de ene. 2027", etc.
+                // Buscaremos el año (2026, 2027), el día (un número) y el mes usando regex.
+                const matchAño = txtLower.match(/\b(2026|2027|2028)\b/);
+                const año = matchAño ? parseInt(matchAño[0]) : obtenerFechaHoy().getFullYear();
+                
+                // Si contiene "al", suele ser un rango. Tomamos la fecha del principio del rango.
+                let parteFecha = txtLower;
+                if (txtLower.includes('del') && txtLower.includes('al')) {
+                    const matchRango = txtLower.match(/del\s+(\d+)\s+de\s+(\w+)\.?(?:\s+(\d{4}))?\s+al/);
+                    if (matchRango) {
+                        const diaRango = parseInt(matchRango[1]);
+                        const mesRango = mesesEsp[matchRango[2].replace('.', '')] || 0;
+                        const añoRango = matchRango[3] ? parseInt(matchRango[3]) : año;
+                        return new Date(añoRango, mesRango, diaRango);
+                    }
+                }
+
+                // Extracción normal
+                const matchDia = txtLower.match(/\b(\d{1,2})\b/);
+                const dia = matchDia ? parseInt(matchDia[1]) : 1;
+
+                let mes = 0;
+                for (const [key, value] of Object.entries(mesesEsp)) {
+                    if (txtLower.includes(key)) {
+                        mes = value;
+                        break;
+                    }
+                }
+
+                return new Date(año, mes, dia);
+            } catch (e) {
+                return obtenerFechaHoy(); // Fallback
+            }
+        }
+
+        // Determinar dinámicamente el tag de la sección/categoría en base al emoji o palabras clave
+        function estimarSeccion(texto, compañia) {
+            const txt = (texto + ' ' + compañia).toLowerCase();
+            if (txt.includes('🎺') || txt.includes('orquesta') || txt.includes('banda') || txt.includes('charanga') || txt.includes('la banda de ayer') || txt.includes('festicultores')) {
+                return 'orquestas';
+            }
+            if (txt.includes('🎤') || txt.includes('🎸') || txt.includes('música') || txt.includes('concierto') || txt.includes('tributo') || txt.includes('fito') || txt.includes('kase') || txt.includes('sho-hai') || txt.includes('underfest')) {
+                return 'musica';
+            }
+            if (txt.includes('🎉') || txt.includes('festa') || txt.includes('magosto') || txt.includes('sabor') || txt.includes('outubrofest') || txt.includes('mercado') || txt.includes('feria') || txt.includes('feira')) {
+                return 'fiestas';
+            }
+            if (txt.includes('🎭') || txt.includes('teatro') || txt.includes('humor') || txt.includes('monólogo') || txt.includes('compañía') || txt.includes('comedia') || txt.includes('espectáculo') || txt.includes('mago') || txt.includes('maxia') || txt.includes('pallaso') || txt.includes('danza')) {
+                return 'teatro';
+            }
+            return 'teatro'; // Default
+        }
+
+        // Cargar y Parsear el archivo TXT
+        async function cargarAgendaTXT() {
+            const txtStatus = document.getElementById('txt-status');
+            try {
+                const response = await fetch('agenda.txt');
+                if (!response.ok) throw new Error('No se pudo encontrar agenda.txt');
+                const rawText = await response.text();
+                
+                txtStatus.innerHTML = '<i class="fa-solid fa-circle-check text-wa-green"></i> Agenda.txt cargada correctamente';
+                procesarTextoAgenda(rawText);
+            } catch (error) {
+                console.error(error);
+                txtStatus.innerHTML = '<i class="fa-solid fa-circle-exclamation text-red-500"></i> Error leyendo agenda.txt en la ruta actual';
+                document.getElementById('lista-eventos-agrupados').innerHTML = `
+                    <div class="py-8 text-center bg-wa-card/30 rounded-xl border border-dashed border-red-800/40">
+                        <i class="fa-solid fa-circle-exclamation text-3xl mb-2 text-red-400 animate-pulse"></i>
+                        <p class="text-sm font-bold text-slate-100">No se pudo cargar agenda.txt</p>
+                        <p class="text-xs text-slate-400 mt-1">Asegúrate de que 'agenda.txt' esté subido en el mismo directorio que esta web.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Parsear el archivo TXT a objetos con estructura
+        function procesarTextoAgenda(txt) {
+            const lineas = txt.split('\n');
+            let diaActual = "";
+            let fechaOrdenActual = null;
+            let eventoActivo = null;
+
+            eventosAgenda = [];
+
+            for (let i = 0; i < lineas.length; i++) {
+                let linea = lineas[i].trim();
+                if (!linea) continue;
+
+                // Detectar cambio de Día
+                if (linea.startsWith('📅') && (linea.toUpperCase().includes('LUNES') || linea.toUpperCase().includes('MARTES') || linea.toUpperCase().includes('MIÉRCOLES') || linea.toUpperCase().includes('JUEVES') || linea.toUpperCase().includes('VIERNES') || linea.toUpperCase().includes('SÁBADO') || linea.toUpperCase().includes('DOMINGO') || linea.toUpperCase().includes('DEL'))) {
+                    diaActual = linea.replace('📅', '').trim();
+                    fechaOrdenActual = intentarParsearFecha(diaActual);
+                    continue;
+                }
+
+                // Omitir cabeceras, líneas separadoras o decoraciones
+                if (linea.startsWith('✤') || linea.startsWith('━') || linea.includes('AGENDA RÍAS BAIXAS') || linea.includes('Música |') || linea.includes('Rías Baixas ·') || linea.includes('EXPOSICIONES Y ACTIVIDADES') || linea.includes('IMPORTANTE:') || linea.includes('UNA SEMANA') || linea.includes('📍 Pontevedra ·') || linea.includes('Una gran temporada') || (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS'))) {
+                    continue;
+                }
+
+                // Detectar inicio de evento (Por lo general con un Emoji al principio)
+                const inicioEvento = linea.startsWith('•') || linea.startsWith('🎤') || linea.startsWith('🎭') || linea.startsWith('🎉') || linea.startsWith('🎺') || linea.startsWith('🎬') || linea.startsWith('🌰') || linea.startsWith('🍷') || linea.startsWith('🔬') || linea.startsWith('🎨') || linea.startsWith('📚') || linea.startsWith('🎼') || linea.startsWith('❤️') || linea.startsWith('🎻') || linea.startsWith('🛍️') || linea.startsWith('🌿') || linea.startsWith('🍷') || linea.startsWith('💃') || linea.startsWith('⛪') || linea.startsWith('🕺');
+                
+                if (inicioEvento) {
+                    // Si ya había un evento, se guarda
+                    if (eventoActivo && diaActual) {
+                        eventosAgenda.push(eventoActivo);
+                    }
+
+                    // Remover viñeta inicial de WhatsApp
+                    let tituloLimpio = linea.replace(/^[•\s*]+/, '').trim();
+                    // Quitar el emoji inicial del título para guardarlo más estético si hace falta
+                    tituloLimpio = tituloLimpio.replace(/^[^\w\sÁÉÍÓÚÑáéíóúñ]/g, '').trim();
+
+                    eventoActivo = {
+                        dia: diaActual,
+                        fechaOrden: fechaOrdenActual,
+                        titulo: tituloLimpio,
+                        lugar: 'Por confirmar',
+                        hora: 'Por confirmar',
+                        precio: 'Por confirmar',
+                        comp: '',
+                        cartel: ''
+                    };
+                    continue;
+                }
+
+                // Extraer detalles de los bloques
+                if (eventoActivo) {
+                    if (linea.startsWith('📍')) {
+                        eventoActivo.lugar = linea.replace('📍', '').trim();
+                    } else if (linea.startsWith('🕒')) {
+                        eventoActivo.hora = linea.replace('🕒', '').trim();
+                    } else if (linea.startsWith('🎟️')) {
+                        eventoActivo.precio = linea.replace('🎟️', '').trim();
+                    } else if (linea.startsWith('🎭 Compañía:')) {
+                        eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
+                    } else if (linea.startsWith('🎤 Cartel:')) {
+                        eventoActivo.cartel = linea.replace('🎤 Cartel:', '').trim();
+                    } else if (linea.startsWith('📆') || linea.startsWith('📅')) {
+                        // Si trae una fecha interna de rango o actualización, la respetamos
+                        eventoActivo.fechaExterna = linea.replace(/^[📆📅]\s*/, '').trim();
+                    }
+                }
+            }
+
+            // Añadir el último que quedó abierto
+            if (eventoActivo && diaActual) {
+                eventosAgenda.push(eventoActivo);
+            }
+
+            // Asignar secciones estimadas después de la recogida total
+            eventosAgenda.forEach(ev => {
+                ev.seccion = estimarSeccion(ev.titulo + ' ' + ev.lugar + ' ' + (ev.cartel || ''), ev.comp);
+            });
+
+            // Re-ordenar cronológicamente de forma estricta por su fecha de orden
+            eventosAgenda.sort((a, b) => a.fechaOrden - b.fechaOrden);
+
+            renderAgenda();
+        }
+
+        // Renderizar y Agrupar eventos Día a Día en la interfaz
         function renderAgenda() {
-            const contenedor = document.getElementById('lista-eventos');
+            const contenedor = document.getElementById('lista-eventos-agrupados');
             const textoBuscador = document.getElementById('buscador-eventos').value.toLowerCase().trim();
+            const hoy = obtenerFechaHoy();
 
-            const filtrados = eventosAgendaCompleta.filter(ev => {
+            // Filtrado
+            const filtrados = eventosAgenda.filter(ev => {
                 const coincideSeccion = (seccionFiltro === 'todas' || ev.seccion === seccionFiltro);
-                const coincideMes = (mesFiltro === 'todos' || ev.mes === mesFiltro);
                 const coincideTexto = ev.titulo.toLowerCase().includes(textoBuscador) || 
                                       ev.lugar.toLowerCase().includes(textoBuscador) || 
-                                      ev.fecha.toLowerCase().includes(textoBuscador) ||
-                                      (ev.comp && ev.comp.toLowerCase().includes(textoBuscador));
-                return coincideSeccion && coincideMes && coincideTexto;
+                                      ev.dia.toLowerCase().includes(textoBuscador) ||
+                                      (ev.comp && ev.comp.toLowerCase().includes(textoBuscador)) ||
+                                      (ev.cartel && ev.cartel.toLowerCase().includes(textoBuscador));
+                
+                const esPasado = ev.fechaOrden < hoy;
+
+                if (ocultarPasados && esPasado) {
+                    return false;
+                }
+
+                return coincideSeccion && coincideTexto;
             });
 
             if (filtrados.length === 0) {
                 contenedor.innerHTML = `
-                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
-                        <i class="fa-solid fa-calendar-xmark text-2xl mb-2 text-slate-500"></i>
-                        <p class="text-xs">No se encontraron eventos para los filtros seleccionados.</p>
+                    <div class="py-12 text-center text-slate-400 bg-wa-card/25 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-calendar-xmark text-3xl mb-2 text-slate-500"></i>
+                        <p class="text-sm font-medium">No se encontraron eventos activos.</p>
+                        <p class="text-xs text-slate-500 mt-1">Prueba desactivando "Ocultar pasados" o buscando otro término.</p>
                     </div>
                 `;
                 return;
             }
 
-            contenedor.innerHTML = filtrados.map(ev => {
-                let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-800/50';
-                let iconoSec = 'fa-masks-theater';
-                let secTexto = 'Teatro & Espectáculo';
+            // Agrupar por el día
+            const agrupadosPorDia = {};
+            filtrados.forEach(ev => {
+                if (!agrupadosPorDia[ev.dia]) {
+                    agrupadosPorDia[ev.dia] = {
+                        diaLabel: ev.dia,
+                        fechaOrden: ev.fechaOrden,
+                        eventos: []
+                    };
+                }
+                agrupadosPorDia[ev.dia].eventos.push(ev);
+            });
 
-                if (ev.seccion === 'orquestas') {
-                    badgeClass = 'text-yellow-400 bg-yellow-950/60 border-yellow-800/50';
-                    iconoSec = 'fa-music';
-                    secTexto = 'Orquesta';
-                } else if (ev.seccion === 'musica') {
-                    badgeClass = 'text-purple-400 bg-purple-950/60 border-purple-800/50';
-                    iconoSec = 'fa-microphone';
-                    secTexto = 'Música en Vivo';
-                } else if (ev.seccion === 'fiestas') {
-                    badgeClass = 'text-amber-400 bg-amber-950/60 border-amber-800/50';
-                    iconoSec = 'fa-champagne-glasses';
-                    secTexto = 'Fiestas & Ferias';
+            // Construir HTML
+            let htmlTotal = '';
+
+            Object.values(agrupadosPorDia).forEach(grupo => {
+                const esPasadoDia = grupo.fechaOrden < hoy;
+                let estiloCabecera = 'text-wa-green';
+                let estiloIcono = 'fa-calendar-day';
+                let badgeFinalizado = '';
+
+                if (esPasadoDia) {
+                    estiloCabecera = 'text-slate-500 line-through decoration-1';
+                    estiloIcono = 'fa-calendar-xmark text-red-500';
+                    badgeFinalizado = `<span class="bg-red-950/40 text-red-400 text-[9px] font-bold px-2 py-0.5 rounded border border-red-800/50 uppercase">Finalizado</span>`;
                 }
 
-                const esGratis = ev.precio.toUpperCase().includes('GRATIS') || ev.precio.toUpperCase().includes('LIBRE');
-                const badgePrecio = esGratis 
-                    ? `<span class="bg-emerald-500/20 text-wa-green font-bold px-2 py-0.5 rounded text-[10px] border border-wa-green/30">GRATIS</span>`
-                    : `<span class="bg-wa-card text-slate-300 font-medium px-2 py-0.5 rounded text-[10px] border border-wa-border">${ev.precio}</span>`;
-
-                return `
-                    <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 p-4 rounded-xl transition flex flex-col justify-between shadow-sm">
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between text-[11px]">
-                                <span class="inline-flex items-center gap-1 font-semibold border px-2 py-0.5 rounded-full ${badgeClass}">
-                                    <i class="fa-solid ${iconoSec} text-[10px]"></i> ${secTexto}
-                                </span>
-                                ${badgePrecio}
-                            </div>
-                            <h4 class="font-bold text-white text-sm sm:text-base leading-snug">${ev.titulo}</h4>
-                            ${ev.comp ? `<p class="text-[11px] text-emerald-400 font-medium">🎭 Cía: ${ev.comp}</p>` : ''}
-                            <p class="text-xs text-slate-300 flex items-start gap-1.5 pt-0.5">
-                                <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-xs"></i>
-                                <span>${ev.lugar}</span>
-                            </p>
+                htmlTotal += `
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-wa-border pb-1.5 pt-2">
+                            <h3 class="font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 ${estiloCabecera}">
+                                <i class="fa-solid ${estiloIcono} text-sm"></i>
+                                <span>${grupo.diaLabel}</span>
+                            </h3>
+                            ${badgeFinalizado}
                         </div>
-                        <div class="mt-3 pt-2.5 border-t border-wa-border/70 flex items-center justify-between text-[11px] text-slate-400">
-                            <span class="flex items-center gap-1">
-                                <i class="fa-regular fa-calendar text-wa-green"></i> ${ev.fecha}
-                            </span>
-                            ${ev.hora !== 'Por confirmar' ? `<span class="text-slate-300 font-mono">${ev.hora}</span>` : ''}
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            ${grupo.eventos.map(ev => {
+                                let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-800/50';
+                                let iconoSec = 'fa-masks-theater';
+                                let secTexto = 'Teatro';
+
+                                if (ev.seccion === 'orquestas') {
+                                    badgeClass = 'text-yellow-400 bg-yellow-950/60 border-yellow-800/50';
+                                    iconoSec = 'fa-music';
+                                    secTexto = 'Orquesta';
+                                } else if (ev.seccion === 'musica') {
+                                    badgeClass = 'text-purple-400 bg-purple-950/60 border-purple-800/50';
+                                    iconoSec = 'fa-microphone';
+                                    secTexto = 'Música';
+                                } else if (ev.seccion === 'fiestas') {
+                                    badgeClass = 'text-amber-400 bg-amber-950/60 border-amber-800/50';
+                                    iconoSec = 'fa-champagne-glasses';
+                                    secTexto = 'Fiesta & Ferias';
+                                }
+
+                                const yaHaPasado = ev.fechaOrden < hoy;
+                                let estiloExpirado = yaHaPasado ? 'opacity-35 border-dashed scale-98 pointer-events-none' : '';
+                                let badgeExpirado = yaHaPasado ? `<span class="bg-red-900/30 text-red-300 font-bold px-1.5 py-0.5 rounded text-[9px] border border-red-800/30">PASADO</span>` : '';
+
+                                const esGratis = ev.precio.toUpperCase().includes('GRATIS') || ev.precio.toUpperCase().includes('LIBRE');
+                                const badgePrecio = esGratis 
+                                    ? `<span class="bg-emerald-500/20 text-wa-green font-bold px-2 py-0.5 rounded text-[10px] border border-wa-green/30">GRATIS</span>`
+                                    : `<span class="bg-wa-card text-slate-300 font-medium px-2 py-0.5 rounded text-[10px] border border-wa-border">${ev.precio}</span>`;
+
+                                return `
+                                    <div class="bg-wa-panel border border-wa-border hover:border-wa-green/45 p-4 rounded-xl transition flex flex-col justify-between shadow-sm relative overflow-hidden ${estiloExpirado}">
+                                        <div class="space-y-2.5">
+                                            <div class="flex items-center justify-between text-[11px]">
+                                                <span class="inline-flex items-center gap-1 font-semibold border px-2 py-0.5 rounded-full ${badgeClass}">
+                                                    <i class="fa-solid ${iconoSec} text-[10px]"></i> ${secTexto}
+                                                </span>
+                                                <div class="flex items-center gap-1.5">
+                                                    ${badgeExpirado}
+                                                    ${badgePrecio}
+                                                </div>
+                                            </div>
+                                            <h4 class="font-bold text-white text-sm sm:text-base leading-snug">${ev.titulo}</h4>
+                                            
+                                            ${ev.cartel ? `<p class="text-[11px] text-slate-300 bg-wa-card/40 p-2 rounded-lg border border-wa-border/50">👥 <strong>Cartel:</strong> ${ev.cartel}</p>` : ''}
+                                            
+                                            ${ev.comp ? `<p class="text-[11px] text-emerald-400 font-medium"><i class="fa-solid fa-masks-theater text-xs mr-1"></i> Cía: ${ev.comp}</p>` : ''}
+                                            
+                                            <p class="text-[11px] text-slate-300 flex items-start gap-1.5 pt-0.5">
+                                                <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-xs"></i>
+                                                <span>${ev.lugar}</span>
+                                            </p>
+                                        </div>
+                                        <div class="mt-3.5 pt-2 border-t border-wa-border/70 flex items-center justify-between text-[11px] text-slate-400">
+                                            <span class="flex items-center gap-1">
+                                                <i class="fa-regular fa-clock text-wa-green"></i> ${ev.hora}
+                                            </span>
+                                            <span class="text-slate-500 text-[10px] font-medium">${ev.fechaExterna || ev.dia.split(' de ')[0]}</span>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
                         </div>
                     </div>
                 `;
-            }).join('');
+            });
+
+            contenedor.innerHTML = htmlTotal;
         }
 
-        // Filtro por sección
+        // Acciones y eventos
+        function alternarPasados() {
+            ocultarPasados = document.getElementById('ocultar-pasados').checked;
+            renderAgenda();
+        }
+
         function filtrarSeccion(seccion, boton) {
             seccionFiltro = seccion;
             document.querySelectorAll('.sec-btn').forEach(btn => {
@@ -709,21 +689,10 @@
             renderAgenda();
         }
 
-        // Filtro por mes
-        function filtrarMes(mes, boton) {
-            mesFiltro = mes;
-            document.querySelectorAll('.mes-btn').forEach(btn => {
-                btn.className = "mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border";
-            });
-            boton.className = "mes-btn px-2.5 py-1 rounded bg-slate-700 text-white font-medium whitespace-nowrap";
-            renderAgenda();
-        }
-
         function filtrarEventos() {
             renderAgenda();
         }
 
-        // Cambiar pestañas principales
         function cambiarPestana(pestana) {
             const secAgenda = document.getElementById('seccion-agenda');
             const secQuedadas = document.getElementById('seccion-quedadas');
@@ -775,15 +744,16 @@
             tempInput.select();
             try {
                 document.execCommand('copy');
-                mostrarToast('Enlace copiado al portapapeles. ¡Pásalo al grupo!');
+                mostrarToast('Enlace de la agenda copiado. ¡Compártelo con el grupo!');
             } catch (err) {
                 mostrarToast('Comparte este enlace: ' + url);
             }
             document.body.removeChild(tempInput);
         }
 
+        // Carga inicial al estar el documento listo
         window.addEventListener('DOMContentLoaded', () => {
-            renderAgenda();
+            cargarAgendaTXT();
         });
     </script>
 </body>
