@@ -402,7 +402,7 @@
         </div>
     </div>
 
-    <!-- Scripts de Interactividad y Parseo de ambos archivos -->
+    <!-- Script de Interactividad, Parseo Dinámico y Sanitización -->
     <script>
         let eventosAgendaCompleta = [];
         let quedadasCompleta = [];
@@ -423,6 +423,19 @@
             const hoy = new Date();
             hoy.setHours(0, 0, 0, 0);
             return hoy;
+        }
+
+        // Sanitizador de cadenas: elimina caracteres corruptos de codificación, U+FFFD, BOM y selectores de variación
+        function sanitizarTexto(str) {
+            if (!str) return '';
+            return str
+                .replace(/\uFFFD/g, '')               // Carácter de reemplazo (el rombo con ?)
+                .replace(/[\uFEFF\u200B\u200E\u200F\uFE0F]/g, '') // BOM y espacios de ancho cero
+                .trim();
+        }
+
+        function limpiarPrefijoFecha(linea) {
+            return linea.replace(/^[📅📆🗓\s\uFFFD\uFEFF\u200B\u200E\u200F\uFE0F\?]+/, '').trim();
         }
 
         function extraerMinutos(horaStr) {
@@ -514,24 +527,34 @@
             eventosAgendaCompleta = [];
 
             for (let i = 0; i < lineas.length; i++) {
-                let linea = lineas[i].trim();
+                let linea = sanitizarTexto(lineas[i]);
                 if (!linea) continue;
 
-                if ((linea.startsWith('📅') || linea.startsWith('📆')) && (
-                    linea.toUpperCase().includes('LUNES') || 
-                    linea.toUpperCase().includes('MARTES') || 
-                    linea.toUpperCase().includes('MIÉRCOLES') || 
-                    linea.toUpperCase().includes('JUEVES') || 
-                    linea.toUpperCase().includes('VIERNES') || 
-                    linea.toUpperCase().includes('SÁBADO') || 
-                    linea.toUpperCase().includes('DOMINGO') || 
-                    linea.toUpperCase().includes('DEL')
-                )) {
-                    diaActual = linea.replace(/^[📅📆]\s*/, '').trim();
+                // Detectar cabecera de Día de la semana
+                const lineaUpper = linea.toUpperCase();
+                const esCabeceraDia = (
+                    lineaUpper.includes('LUNES') || 
+                    lineaUpper.includes('MARTES') || 
+                    lineaUpper.includes('MIÉRCOLES') || 
+                    lineaUpper.includes('JUEVES') || 
+                    lineaUpper.includes('VIERNES') || 
+                    lineaUpper.includes('SÁBADO') || 
+                    lineaUpper.includes('DOMINGO') || 
+                    lineaUpper.includes('DEL ')
+                ) && (
+                    linea.startsWith('📅') || 
+                    linea.startsWith('📆') || 
+                    linea.startsWith('🗓') || 
+                    /^[A-ZÁÉÍÓÚÑ\s\d,]+de\s+[a-záéíóúñ]+/i.test(limpiarPrefijoFecha(linea))
+                );
+
+                if (esCabeceraDia) {
+                    diaActual = limpiarPrefijoFecha(linea);
                     fechaOrdenActual = intentarParsearFecha(diaActual);
                     continue;
                 }
 
+                // Omitir cabeceras, líneas decorativas y separadores
                 if (
                     linea.startsWith('✤') || 
                     linea.startsWith('━') || 
@@ -549,11 +572,11 @@
                 }
 
                 const esLugar = linea.startsWith('📍');
-                const esHora = linea.startsWith('🕒');
-                const esPrecio = linea.startsWith('🎟️');
+                const esHora = linea.startsWith('🕒') || linea.startsWith('🕗');
+                const esPrecio = linea.startsWith('🎟️') || linea.startsWith('🎟');
                 const esCompania = linea.startsWith('🎭 Compañía:');
                 const esCartel = linea.startsWith('🎤 Cartel:');
-                const esRangoFechas = linea.startsWith('📆') || (linea.startsWith('📅') && !diaActual);
+                const esRangoFechas = linea.startsWith('📆') || (linea.startsWith('📅') && !esCabeceraDia);
 
                 const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel || esRangoFechas;
 
@@ -581,15 +604,15 @@
                     if (esLugar) {
                         eventoActivo.lugar = linea.replace('📍', '').trim();
                     } else if (esHora) {
-                        eventoActivo.hora = linea.replace('🕒', '').trim();
+                        eventoActivo.hora = linea.replace(/🕒|🕗/g, '').trim();
                     } else if (esPrecio) {
-                        eventoActivo.precio = linea.replace('🎟️', '').trim();
+                        eventoActivo.precio = linea.replace(/🎟️|🎟/g, '').trim();
                     } else if (esCompania) {
                         eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
                     } else if (esCartel) {
                         eventoActivo.titulo += " - " + linea.replace('🎤 Cartel:', '').trim();
                     } else if (esRangoFechas) {
-                        eventoActivo.fecha = linea.replace(/^[📆📅]\s*/, '').trim();
+                        eventoActivo.fecha = limpiarPrefijoFecha(linea);
                     }
                 }
             }
@@ -603,6 +626,7 @@
                 ev.mes = extraerMesAnioLabel(ev.fechaOrden);
             });
 
+            // Ordenación cronológica exacta
             eventosAgendaCompleta.sort((a, b) => {
                 const diffFecha = a.fechaOrden - b.fechaOrden;
                 if (diffFecha !== 0) return diffFecha;
@@ -711,7 +735,7 @@
             }).join('');
         }
 
-        /* CARGA Y PARSEO DINÁMICO DE QUEDADAS.TXT */
+        /* CARGA Y PARSEO DE QUEDADAS.TXT */
         async function cargarQuedadasTXT() {
             try {
                 const response = await fetch('quedadas.txt');
@@ -733,10 +757,9 @@
             quedadasCompleta = [];
 
             for (let bloque of bloques) {
-                const lineas = bloque.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                const lineas = bloque.split('\n').map(l => sanitizarTexto(l)).filter(l => l.length > 0);
                 if (lineas.length === 0) continue;
 
-                // Descartar cabeceras o secciones informativas finales
                 const primerTexto = lineas[0].toUpperCase();
                 if (
                     primerTexto.includes('QUEDADAS Y PLANES') || 
@@ -800,7 +823,7 @@
                 return;
             }
 
-            contenedor.innerHTML = quedadasCompleta.map((q, idx) => {
+            contenedor.innerHTML = quedadasCompleta.map((q) => {
                 const apuntadosTexto = q.apuntados.length > 0 ? q.apuntados.join(', ') : '¡Sé el primero en apuntarte!';
                 const detallesHtml = q.detalles.map(d => {
                     if (d.startsWith('•')) {
@@ -1009,7 +1032,6 @@
             }
         });
 
-        // Cargar ambos archivos .txt al iniciar
         window.addEventListener('DOMContentLoaded', () => {
             cargarAgendaTXT();
             cargarQuedadasTXT();
