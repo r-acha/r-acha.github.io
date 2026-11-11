@@ -108,7 +108,7 @@
 
                 <div class="absolute -bottom-2 bg-wa-emerald text-white text-[11px] font-bold px-3 py-1 rounded-full border-2 border-wa-dark flex items-center gap-1.5 shadow-lg">
                     <span class="w-2 h-2 rounded-full bg-wa-green animate-ping"></span>
-                    <span>41 miembros</span>
+                    <span>42 miembros</span>
                 </div>
             </div>
 
@@ -404,7 +404,7 @@
 
         <!-- Mini FAQ -->
         <section class="bg-wa-panel rounded-2xl border border-wa-border p-5">
-            <h4 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
                 <i class="fa-regular fa-circle-question text-wa-green"></i>
                 ¿Cómo funciona Morriña Cero?
             </h4>
@@ -481,12 +481,76 @@
         </div>
     </div>
 
-    <!-- Script de Interactividad y Parseo dinámico de agenda.txt -->
+    <!-- Modal Detalle del Evento (Overlay con Asistente IA) -->
+    <div id="modalEvento" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-wa-panel border border-wa-border w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto no-scrollbar">
+            <button onclick="cerrarModalEvento()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Cabecera Evento -->
+            <div class="space-y-1.5 pr-6">
+                <span id="modalEvBadge" class="inline-flex items-center gap-1 text-[11px] font-semibold border px-2.5 py-0.5 rounded-full"></span>
+                <h3 id="modalEvTitulo" class="text-lg sm:text-xl font-extrabold text-white leading-tight"></h3>
+                <p id="modalEvComp" class="text-xs text-emerald-400 font-medium hidden"></p>
+            </div>
+
+            <!-- Ficha Técnica -->
+            <div class="bg-wa-card/60 border border-wa-border/60 rounded-xl p-3.5 space-y-2 text-xs text-slate-300">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-regular fa-calendar text-wa-green text-sm w-4 text-center"></i>
+                    <span id="modalEvFecha" class="font-medium"></span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-regular fa-clock text-wa-green text-sm w-4 text-center"></i>
+                    <span id="modalEvHora" class="font-mono text-slate-200"></span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                    <i class="fa-solid fa-location-dot text-red-400 text-sm w-4 text-center mt-0.5"></i>
+                    <span id="modalEvLugar" class="flex-1 leading-snug"></span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-ticket text-amber-400 text-sm w-4 text-center"></i>
+                    <span id="modalEvPrecio" class="font-semibold"></span>
+                </div>
+            </div>
+
+            <!-- Acciones Inteligentes & Ubicación -->
+            <div class="space-y-2 pt-1">
+                <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-wa-green"></i> Acciones & Asistencia
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <a id="modalBtnMaps" href="#" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-wa-card hover:bg-wa-hover text-slate-200 border border-wa-border text-xs transition">
+                        <i class="fa-solid fa-map-location-dot text-red-400"></i>
+                        <span>Ver en Maps</span>
+                    </a>
+                    <button id="modalBtnIA" onclick="consultarIAEvento()" 
+                       class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border border-emerald-700/60 text-xs transition font-semibold">
+                        <i class="fa-solid fa-sparkles text-emerald-400"></i>
+                        <span>Saber más con IA</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Botón WhatsApp -->
+            <div class="pt-2 border-t border-wa-border/70">
+                <button id="modalBtnCompartirWA" class="w-full py-2.5 px-4 rounded-xl bg-wa-green hover:bg-[#20ba59] text-black font-bold text-xs transition flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Proponer este plan en el grupo</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Interactividad, Parseo Dinámico y Ordenación Cronológica -->
     <script>
         let eventosAgendaCompleta = [];
         let seccionFiltro = 'todas';
         let mesFiltro = 'todos';
         let ocultarPasados = true;
+        let eventoSeleccionadoActual = null;
 
         const mesesEsp = {
             enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5,
@@ -500,6 +564,20 @@
             const hoy = new Date();
             hoy.setHours(0, 0, 0, 0);
             return hoy;
+        }
+
+        // Extrae minutos para comparar horas (ej. "20:30 h", "21:00", "8:00 h")
+        function extraerMinutos(horaStr) {
+            if (!horaStr || horaStr === 'Por confirmar' || horaStr.toLowerCase().includes('varios')) return 9999;
+            const match = horaStr.match(/(\d{1,2})[:.](\d{2})/);
+            if (match) {
+                return parseInt(match[1], 10) * 60 + parseInt(match[2], 10);
+            }
+            const matchSimple = horaStr.match(/(\d{1,2})\s*h/i);
+            if (matchSimple) {
+                return parseInt(matchSimple[1], 10) * 60;
+            }
+            return 9999;
         }
 
         // Intenta parsear la fecha del evento
@@ -536,7 +614,6 @@
             }
         }
 
-        // Extrae el mes con formato ej. "Noviembre 2026"
         function extraerMesAnioLabel(fechaObj) {
             return `${mesesLabel[fechaObj.getMonth()]} ${fechaObj.getFullYear()}`;
         }
@@ -586,34 +663,54 @@
                 let linea = lineas[i].trim();
                 if (!linea) continue;
 
-                // Detectar cambio de Día
-                if (linea.startsWith('📅') && (linea.toUpperCase().includes('LUNES') || linea.toUpperCase().includes('MARTES') || linea.toUpperCase().includes('MIÉRCOLES') || linea.toUpperCase().includes('JUEVES') || linea.toUpperCase().includes('VIERNES') || linea.toUpperCase().includes('SÁBADO') || linea.toUpperCase().includes('DOMINGO') || linea.toUpperCase().includes('DEL'))) {
-                    diaActual = linea.replace('📅', '').trim();
+                // Detectar cabecera de Día (ej. 📅 VIERNES 13 DE NOVIEMBRE DE 2026)
+                if ((linea.startsWith('📅') || linea.startsWith('📆')) && (
+                    linea.toUpperCase().includes('LUNES') || 
+                    linea.toUpperCase().includes('MARTES') || 
+                    linea.toUpperCase().includes('MIÉRCOLES') || 
+                    linea.toUpperCase().includes('JUEVES') || 
+                    linea.toUpperCase().includes('VIERNES') || 
+                    linea.toUpperCase().includes('SÁBADO') || 
+                    linea.toUpperCase().includes('DOMINGO') || 
+                    linea.toUpperCase().includes('DEL')
+                )) {
+                    diaActual = linea.replace(/^[📅📆]\s*/, '').trim();
                     fechaOrdenActual = intentarParsearFecha(diaActual);
                     continue;
                 }
 
-                // Omitir cabeceras o texto decorativo general
-                if (linea.startsWith('✤') || linea.startsWith('━') || linea.includes('AGENDA RÍAS BAIXAS') || linea.includes('Música |') || linea.includes('Rías Baixas ·') || linea.includes('EXPOSICIONES Y ACTIVIDADES') || linea.includes('IMPORTANTE:') || linea.includes('UNA SEMANA') || linea.includes('📍 Pontevedra ·') || linea.includes('Una gran temporada') || (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS'))) {
+                // Omitir cabeceras, líneas decorativas y separadores
+                if (
+                    linea.startsWith('✤') || 
+                    linea.startsWith('━') || 
+                    linea.includes('AGENDA RÍAS BAIXAS') || 
+                    linea.includes('Música |') || 
+                    linea.includes('Rías Baixas ·') || 
+                    linea.includes('EXPOSICIONES Y ACTIVIDADES') || 
+                    linea.includes('IMPORTANTE:') || 
+                    linea.includes('UNA SEMANA') || 
+                    linea.includes('📍 Pontevedra ·') || 
+                    linea.includes('Una gran temporada') || 
+                    (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS'))
+                ) {
                     continue;
                 }
 
-                // Se identifican las propiedades específicas por sus iconos característicos
                 const esLugar = linea.startsWith('📍');
                 const esHora = linea.startsWith('🕒');
                 const esPrecio = linea.startsWith('🎟️');
                 const esCompania = linea.startsWith('🎭 Compañía:');
                 const esCartel = linea.startsWith('🎤 Cartel:');
+                // Detecta fechas internas de eventos multifecha tipo "📆 13, 14 y 15 de noviembre de 2026"
+                const esRangoFechas = linea.startsWith('📆') || (linea.startsWith('📅') && !diaActual);
 
-                // Si no es ninguna de las propiedades anteriores, se asume que es el TÍTULO de un nuevo evento
-                const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel;
+                const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel || esRangoFechas;
 
                 if (!esPropiedad) {
                     if (eventoActivo && diaActual) {
                         eventosAgendaCompleta.push(eventoActivo);
                     }
 
-                    // Se eliminan viñetas como • al inicio, pero conservando los emojis originales (🎭, 🎤, etc.)
                     let tituloLimpio = linea.replace(/^[•\s*]+/, '').trim();
 
                     eventoActivo = {
@@ -629,7 +726,6 @@
                     continue;
                 }
 
-                // Si ya hay un evento activo y es una propiedad, se le asigna
                 if (eventoActivo) {
                     if (esLugar) {
                         eventoActivo.lugar = linea.replace('📍', '').trim();
@@ -641,11 +737,12 @@
                         eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
                     } else if (esCartel) {
                         eventoActivo.titulo += " - " + linea.replace('🎤 Cartel:', '').trim();
+                    } else if (esRangoFechas) {
+                        eventoActivo.fecha = linea.replace(/^[📆📅]\s*/, '').trim();
                     }
                 }
             }
 
-            // Guardar último evento al finalizar el bucle
             if (eventoActivo && diaActual) {
                 eventosAgendaCompleta.push(eventoActivo);
             }
@@ -655,7 +752,12 @@
                 ev.mes = extraerMesAnioLabel(ev.fechaOrden);
             });
 
-            eventosAgendaCompleta.sort((a, b) => a.fechaOrden - b.fechaOrden);
+            // Ordenación cronológica exacta: fecha (día) y desempate por hora
+            eventosAgendaCompleta.sort((a, b) => {
+                const diffFecha = a.fechaOrden - b.fechaOrden;
+                if (diffFecha !== 0) return diffFecha;
+                return extraerMinutos(a.hora) - extraerMinutos(b.hora);
+            });
 
             renderAgenda();
         }
@@ -693,6 +795,8 @@
             }
 
             contenedor.innerHTML = filtrados.map(ev => {
+                const idxReal = eventosAgendaCompleta.indexOf(ev);
+
                 let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-800/50';
                 let iconoSec = 'fa-masks-theater';
                 let secTexto = 'Teatro & Espectáculo';
@@ -726,29 +830,36 @@
                     : `<span class="bg-wa-card text-slate-300 font-medium px-2 py-0.5 rounded text-[10px] border border-wa-border">${ev.precio}</span>`;
 
                 return `
-                    <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 p-4 rounded-xl transition flex flex-col justify-between shadow-sm ${estiloPasadoCard}">
+                    <div onclick="abrirModalEvento(${idxReal})" 
+                         class="bg-wa-panel border border-wa-border hover:border-wa-green/50 p-4 rounded-xl transition cursor-pointer flex flex-col justify-between shadow-sm group ${estiloPasadoCard}">
                         <div class="space-y-2">
-                            <div class="flex items-center justify-between text-[11px]">
-                                <span class="inline-flex items-center gap-1 font-semibold border px-2 py-0.5 rounded-full ${badgeClass}">
+                            <div class="flex items-center justify-between text-[11px] gap-2">
+                                <span class="inline-flex items-center gap-1 font-semibold border px-2.5 py-0.5 rounded-full ${badgeClass} truncate">
                                     <i class="fa-solid ${iconoSec} text-[10px]"></i> ${secTexto}
                                 </span>
-                                <div class="flex items-center gap-1.5">
+                                <div class="flex items-center gap-1.5 shrink-0">
                                     ${badgeExpirado}
                                     ${badgePrecio}
                                 </div>
                             </div>
-                            <h4 class="font-bold text-white text-sm sm:text-base leading-snug">${ev.titulo}</h4>
+                            <h4 class="font-bold text-white text-sm sm:text-base leading-snug group-hover:text-emerald-300 transition-colors">${ev.titulo}</h4>
                             ${ev.comp ? `<p class="text-[11px] text-emerald-400 font-medium">🎭 Cía: ${ev.comp}</p>` : ''}
                             <p class="text-xs text-slate-300 flex items-start gap-1.5 pt-0.5">
-                                <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-xs"></i>
-                                <span>${ev.lugar}</span>
+                                <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-xs shrink-0"></i>
+                                <span class="line-clamp-2">${ev.lugar}</span>
                             </p>
                         </div>
-                        <div class="mt-3 pt-2.5 border-t border-wa-border/70 flex items-center justify-between text-[11px] text-slate-400">
-                            <span class="flex items-center gap-1">
-                                <i class="fa-regular fa-calendar text-wa-green"></i> ${ev.fecha}
+
+                        <!-- Pie de tarjeta blindado para móviles -->
+                        <div class="mt-3 pt-2.5 border-t border-wa-border/70 flex items-center justify-between gap-2 text-[11px] text-slate-400">
+                            <span class="flex items-center gap-1.5 min-w-0 truncate">
+                                <i class="fa-regular fa-calendar text-wa-green shrink-0"></i> 
+                                <span class="truncate">${ev.fecha}</span>
                             </span>
-                            ${ev.hora !== 'Por confirmar' ? `<span class="text-slate-300 font-mono">${ev.hora}</span>` : ''}
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                ${ev.hora !== 'Por confirmar' ? `<span class="text-slate-200 font-mono font-semibold bg-wa-card px-2 py-0.5 rounded border border-wa-border text-[10px] whitespace-nowrap">${ev.hora}</span>` : ''}
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-wa-green transition-transform group-hover:translate-x-0.5"></i>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -812,6 +923,73 @@
             document.getElementById('modalReglas').classList.remove('flex');
         }
 
+        // Overlay Detalle del Evento
+        function abrirModalEvento(indice) {
+            const ev = eventosAgendaCompleta[indice];
+            if (!ev) return;
+            eventoSeleccionadoActual = ev;
+
+            document.getElementById('modalEvTitulo').innerText = ev.titulo;
+            document.getElementById('modalEvFecha').innerText = ev.fecha;
+            document.getElementById('modalEvHora').innerText = ev.hora !== 'Por confirmar' ? ev.hora : 'Pendiente de confirmación';
+            document.getElementById('modalEvLugar').innerText = ev.lugar;
+            document.getElementById('modalEvPrecio').innerText = ev.precio;
+
+            const compEl = document.getElementById('modalEvComp');
+            if (ev.comp) {
+                compEl.innerText = `🎭 Compañía: ${ev.comp}`;
+                compEl.classList.remove('hidden');
+            } else {
+                compEl.classList.add('hidden');
+            }
+
+            // Badge de categoría
+            const badgeEl = document.getElementById('modalEvBadge');
+            let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-800/50';
+            let badgeHtml = '<i class="fa-solid fa-masks-theater text-[10px]"></i> Teatro & Espectáculo';
+
+            if (ev.seccion === 'orquestas') {
+                badgeClass = 'text-yellow-400 bg-yellow-950/60 border-yellow-800/50';
+                badgeHtml = '<i class="fa-solid fa-music text-[10px]"></i> Orquesta';
+            } else if (ev.seccion === 'musica') {
+                badgeClass = 'text-purple-400 bg-purple-950/60 border-purple-800/50';
+                badgeHtml = '<i class="fa-solid fa-microphone text-[10px]"></i> Música en Vivo';
+            } else if (ev.seccion === 'fiestas') {
+                badgeClass = 'text-amber-400 bg-amber-950/60 border-amber-800/50';
+                badgeHtml = '<i class="fa-solid fa-champagne-glasses text-[10px]"></i> Fiestas & Ferias';
+            }
+            badgeEl.className = `inline-flex items-center gap-1 text-[11px] font-semibold border px-2.5 py-0.5 rounded-full ${badgeClass}`;
+            badgeEl.innerHTML = badgeHtml;
+
+            // Enlace a Google Maps
+            const queryMaps = encodeURIComponent(`${ev.titulo} ${ev.lugar} Galicia`);
+            document.getElementById('modalBtnMaps').href = `https://www.google.com/maps/search/?api=1&query=${queryMaps}`;
+
+            // Enlace WhatsApp para proponer el evento
+            document.getElementById('modalBtnCompartirWA').onclick = () => {
+                const txtMsg = encodeURIComponent(`🍻 *Plan Morriña Cero:* ${ev.titulo}\n📅 ${ev.fecha} - 🕒 ${ev.hora}\n📍 ${ev.lugar}\n🎟️ ${ev.precio}\n¿Quién se apunta?`);
+                window.open(`https://api.whatsapp.com/send?text=${txtMsg}`, '_blank');
+            };
+
+            const modal = document.getElementById('modalEvento');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function cerrarModalEvento() {
+            const modal = document.getElementById('modalEvento');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Consulta contextualizada a IA sobre el evento seleccionado
+        function consultarIAEvento() {
+            if (!eventoSeleccionadoActual) return;
+            const ev = eventoSeleccionadoActual;
+            const prompt = encodeURIComponent(`Dame información detallada, trayectoria, estilo y qué esperar del espectáculo o evento "${ev.titulo}" que se celebra en "${ev.lugar}" Galicia (${ev.fecha}).`);
+            window.open(`https://gemini.google.com/app?q=${prompt}`, '_blank');
+        }
+
         function mostrarToast(mensaje) {
             const toast = document.getElementById('toast');
             const msg = document.getElementById('toastMsg');
@@ -840,9 +1018,17 @@
             document.body.removeChild(tempInput);
         }
 
+        // Cierre de modales con tecla ESC
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                cerrarModalReglas();
+                cerrarModalEvento();
+            }
+        });
+
         window.addEventListener('DOMContentLoaded', () => {
             cargarAgendaTXT();
         });
     </script>
 </body>
-  </html>
+    </html>
