@@ -108,7 +108,7 @@
 
                 <div class="absolute -bottom-2 bg-wa-emerald text-white text-[11px] font-bold px-3 py-1 rounded-full border-2 border-wa-dark flex items-center gap-1.5 shadow-lg">
                     <span class="w-2 h-2 rounded-full bg-wa-green animate-ping"></span>
-                    <span>41 miembros</span>
+                    <span>42 miembros</span>
                 </div>
             </div>
 
@@ -663,14 +663,23 @@
                 let linea = lineas[i].trim();
                 if (!linea) continue;
 
-                // Detectar cambio de Día
-                if (linea.startsWith('📅') && (linea.toUpperCase().includes('LUNES') || linea.toUpperCase().includes('MARTES') || linea.toUpperCase().includes('MIÉRCOLES') || linea.toUpperCase().includes('JUEVES') || linea.toUpperCase().includes('VIERNES') || linea.toUpperCase().includes('SÁBADO') || linea.toUpperCase().includes('DOMINGO') || linea.toUpperCase().includes('DEL'))) {
-                    diaActual = linea.replace('📅', '').trim();
+                // Detectar cabecera de Día (ej. 📅 VIERNES 13 DE NOVIEMBRE DE 2026)
+                if ((linea.startsWith('📅') || linea.startsWith('📆')) && (
+                    linea.toUpperCase().includes('LUNES') || 
+                    linea.toUpperCase().includes('MARTES') || 
+                    linea.toUpperCase().includes('MIÉRCOLES') || 
+                    linea.toUpperCase().includes('JUEVES') || 
+                    linea.toUpperCase().includes('VIERNES') || 
+                    linea.toUpperCase().includes('SÁBADO') || 
+                    linea.toUpperCase().includes('DOMINGO') || 
+                    linea.toUpperCase().includes('DEL')
+                )) {
+                    diaActual = linea.replace(/^[📅📆]\s*/, '').trim();
                     fechaOrdenActual = intentarParsearFecha(diaActual);
                     continue;
                 }
 
-                // Omitir cabeceras, líneas decorativas y fechas sueltas/agrupadas
+                // Omitir cabeceras, líneas decorativas y separadores
                 if (
                     linea.startsWith('✤') || 
                     linea.startsWith('━') || 
@@ -682,8 +691,7 @@
                     linea.includes('UNA SEMANA') || 
                     linea.includes('📍 Pontevedra ·') || 
                     linea.includes('Una gran temporada') || 
-                    (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS')) ||
-                    /^[📅📆]?\s*\d{1,2}(?:,\s*\d{1,2})*\s+y\s+\d{1,2}\s+de\s+[a-z]+/i.test(linea)
+                    (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS'))
                 ) {
                     continue;
                 }
@@ -693,8 +701,10 @@
                 const esPrecio = linea.startsWith('🎟️');
                 const esCompania = linea.startsWith('🎭 Compañía:');
                 const esCartel = linea.startsWith('🎤 Cartel:');
+                // Detecta fechas internas de eventos multifecha tipo "📆 13, 14 y 15 de noviembre de 2026"
+                const esRangoFechas = linea.startsWith('📆') || (linea.startsWith('📅') && !diaActual);
 
-                const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel;
+                const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel || esRangoFechas;
 
                 if (!esPropiedad) {
                     if (eventoActivo && diaActual) {
@@ -727,6 +737,8 @@
                         eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
                     } else if (esCartel) {
                         eventoActivo.titulo += " - " + linea.replace('🎤 Cartel:', '').trim();
+                    } else if (esRangoFechas) {
+                        eventoActivo.fecha = linea.replace(/^[📆📅]\s*/, '').trim();
                     }
                 }
             }
