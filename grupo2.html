@@ -425,11 +425,12 @@
             return hoy;
         }
 
+        // Sanitizador de texto que elimina rombos rotos pero preserva selectores como \uFE0F necesarios para emojis compuestos
         function sanitizarTexto(str) {
             if (!str) return '';
             return str
-                .replace(/\uFFFD/g, '')               // Rombo negro con interrogante roto
-                .replace(/[\uFEFF\u200B\u200E\u200F]/g, '') // BOM y espacios nulos invisibles
+                .replace(/\uFFFD/g, '') // Elimina caracter corrupto U+FFFD (rombo con ?)
+                .replace(/[\uFEFF\u200B\u200E\u200F]/g, '') // Quita espacio nulo y BOM. Mantiene \uFE0F (necesario para emojis complejos)
                 .trim();
         }
 
@@ -758,15 +759,26 @@
 
                 const textoCompleto = lineas.join(' ').toUpperCase();
 
-                // Descartar cabeceras, reglas de cómo apuntarse o bloques de advertencias
+                // Excluir de forma blindada todos los textos e instrucciones administrativas y de ayuda
                 if (
                     textoCompleto.includes('QUEDADAS Y PLANES') || 
                     textoCompleto.includes('PRÓXIMAS QUEDADAS') || 
+                    textoCompleto.includes('¿CÓMO APUNTARSE') || 
                     textoCompleto.includes('CÓMO APUNTARSE') || 
                     textoCompleto.includes('DESFIJA EL MENSAJE') ||
+                    textoCompleto.includes('COPÍA TODO SU') ||
+                    textoCompleto.includes('PÉGALO DE NUEVO') ||
+                    textoCompleto.includes('MODIFICA LA INFORMACIÓN') ||
+                    textoCompleto.includes('VUELVA A FIJAR EL MENSAJE') ||
                     textoCompleto.includes('VUELVE A FIJAR') ||
-                    textoCompleto.includes('IMPORTANTE') ||
-                    /^[1-9]️⃣/.test(lineas[0])
+                    textoCompleto.includes('¡IMPORTANTE!') ||
+                    textoCompleto.includes('SE BORRE O CAMBIE ALGUN') ||
+                    textoCompleto.includes('UNA SOLA LISTA') ||
+                    lineas[0].startsWith('1️⃣') ||
+                    lineas[0].startsWith('1') ||
+                    /^[0-9]\s*️⃣/.test(lineas[0]) ||
+                    lineas[0].toUpperCase().startsWith('📌 ¿CÓMO') ||
+                    lineas[0].toUpperCase().startsWith('📌 CÓMO')
                 ) {
                     continue;
                 }
@@ -790,10 +802,8 @@
                     }
 
                     if (modoApuntados) {
-                        // Limpiar viñetas y separar nombres múltiples en la misma línea
                         let limpio = l.replace(/^[•\-]\s*/, '').trim();
                         if (limpio) {
-                            // Si vienen nombres separados por puntos o varios espacios (ej. "Sofía. Berta")
                             let subNombres = limpio.split(/(?<=\w)\.\s+|\s{2,}/).map(n => n.trim()).filter(n => n.length > 0);
                             apuntados.push(...subNombres);
                         }
