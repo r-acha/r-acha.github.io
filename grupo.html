@@ -1,183 +1,1058 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agenda Galicia & Quedadas</title>
-  <style>
-    :root {
-      --bg-dark: #0f172a;
-      --active-green: #22c55e;
-      --text-inactive: #94a3b8;
-      --text-active: #090d16;
-      --border-color: rgba(255, 255, 255, 0.1);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morriña Cero | Quedadas y Agenda Cultural Pontevedra & Vigo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        wa: {
+                            green: '#25D366',
+                            emerald: '#128C7E',
+                            teal: '#075E54',
+                            dark: '#0b141a',
+                            panel: '#111b21',
+                            card: '#1f2c34',
+                            hover: '#2a3942',
+                            border: '#2a3942'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
-    body {
-      background-color: var(--bg-dark);
-      color: #f8fafc;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 24px 16px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 600px;
-    }
-
-    /* Barra de pestañas */
-    .tabs-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border-color);
-      width: 100%;
-    }
-
-    /* Botones de pestaña */
-    .tab-btn {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 12px 18px;
-      background: transparent;
-      border: none;
-      outline: none;
-      border-radius: 14px;
-      color: var(--text-inactive);
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.25s ease-in-out;
-      text-align: center;
-      line-height: 1.25;
-      user-select: none;
-    }
-
-    /* Icono en estado inactivo */
-    .tab-btn .tab-icon {
-      width: 22px;
-      height: 22px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-inactive);
-      fill: currentColor;
-      transition: color 0.25s ease, fill 0.25s ease;
-      flex-shrink: 0;
-    }
-
-    /* Estado activo */
-    .tab-btn.active {
-      background-color: var(--active-green);
-      color: var(--text-active);
-      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
-    }
-
-    /* Icono en estado activo: forzar negro pleno */
-    .tab-btn.active .tab-icon {
-      color: var(--text-active) !important;
-      fill: var(--text-active) !important;
-      opacity: 1 !important;
-    }
-
-    /* Paneles de contenido */
-    .tab-panel {
-      display: none;
-      padding: 24px 8px;
-      animation: fadeIn 0.2s ease-in-out;
-    }
-
-    .tab-panel.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    <style>
+        .logo-box {
+            background: linear-gradient(145deg, #18191c 0%, #000000 100%);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+        }
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.25);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body>
+<body class="bg-wa-dark text-slate-100 font-sans antialiased selection:bg-wa-green selection:text-black min-h-screen flex flex-col justify-between">
 
-  <div class="container">
-    <!-- Selector de pestañas -->
-    <nav class="tabs-nav" role="tablist">
-      <!-- Pestaña 1: Agenda Galicia -->
-      <button 
-        type="button" 
-        class="tab-btn active" 
-        role="tab" 
-        id="tab-agenda" 
-        aria-selected="true" 
-        aria-controls="panel-agenda"
-        onclick="switchTab('agenda')">
-        <svg class="tab-icon" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5c0 .28-.22.5-.5.5h-5c-.28 0-.5-.22-.5-.5 0-1.66 1.34-3 3-3s3 1.34 3 3zm-4.5-5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm7 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
-        </svg>
-        <span>Agenda Galicia<br>2026–2027</span>
-      </button>
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-wa-panel/90 backdrop-blur-md border-b border-wa-border/80 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-black border-2 border-slate-700 flex items-center justify-center overflow-hidden shadow-inner select-none">
+                    <div class="text-center font-black leading-none tracking-tighter text-[9px] text-white">
+                        <span class="block border-b border-white pb-[1px]">MO<span class="text-[6px] text-emerald-400">CERO</span></span>
+                        <span class="block pt-[1px] tracking-widest text-[8px]">RRiña</span>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
+                        Morriña Cero
+                        <span class="inline-block w-2 h-2 rounded-full bg-wa-green"></span>
+                    </h1>
+                    <p class="text-[11px] text-emerald-400 font-medium">Pontevedra & Vigo</p>
+                </div>
+            </div>
 
-      <!-- Pestaña 2: Quedadas del Grupo -->
-      <button 
-        type="button" 
-        class="tab-btn" 
-        role="tab" 
-        id="tab-quedadas" 
-        aria-selected="false" 
-        aria-controls="panel-quedadas"
-        onclick="switchTab('quedadas')">
-        <svg class="tab-icon" viewBox="0 0 24 24">
-          <path d="M16 12V4H17V2H7V4H8V12L6 14V16H11V22H13V16H18V14L16 12Z"/>
-        </svg>
-        <span>Quedadas del<br>Grupo</span>
-      </button>
-    </nav>
+            <div class="flex items-center gap-2">
+                <button onclick="copiarEnlace()" class="flex items-center gap-1.5 text-xs bg-wa-card hover:bg-wa-hover text-slate-300 hover:text-white px-3 py-1.5 rounded-full border border-wa-border transition">
+                    <i class="fa-solid fa-share-nodes text-wa-green"></i>
+                    <span class="hidden sm:inline">Compartir</span>
+                </button>
+                <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-center gap-1.5 text-xs bg-wa-green hover:bg-[#20ba59] text-black font-bold px-3 py-1.5 rounded-full shadow transition">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Abrir Chat</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
-    <!-- Contenido pestaña Agenda -->
-    <section id="panel-agenda" class="tab-panel active" role="tabpanel" aria-labelledby="tab-agenda">
-      <!-- Tu contenido o lista de eventos de la agenda aquí -->
-    </section>
+    <main class="max-w-4xl mx-auto px-4 py-6 w-full space-y-8 flex-grow">
 
-    <!-- Contenido pestaña Quedadas -->
-    <section id="panel-quedadas" class="tab-panel" role="tabpanel" aria-labelledby="tab-quedadas">
-      <!-- Tu contenido o lista de quedadas aquí -->
-    </section>
-  </div>
+        <!-- Hero Section -->
+        <section class="text-center pt-2 pb-2">
+            <div class="mx-auto w-32 h-32 sm:w-36 sm:h-36 rounded-full logo-box border-4 border-wa-card flex items-center justify-center p-3 relative mb-5 neon-glow select-none">
+                <div class="w-full h-full rounded-full bg-neutral-900 border border-neutral-700/60 flex flex-col items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px]"></div>
+                    <div class="relative z-10 border-2 border-white px-3 py-1.5 text-center bg-black/60 backdrop-blur-sm rounded-sm">
+                        <div class="flex items-baseline justify-center border-b border-white pb-0.5">
+                            <span class="font-extrabold text-2xl tracking-tighter text-white">mo</span>
+                            <span class="text-[9px] font-bold tracking-widest text-emerald-400 ml-1">CERO</span>
+                        </div>
+                        <div class="font-black text-xl tracking-wider text-white pt-0.5 uppercase">RRiña</div>
+                    </div>
+                </div>
 
-  <script>
-    function switchTab(target) {
-      // 1. Alternar estado activo en los botones
-      const isAgenda = target === 'agenda';
-      const btnAgenda = document.getElementById('tab-agenda');
-      const btnQuedadas = document.getElementById('tab-quedadas');
-      const panelAgenda = document.getElementById('panel-agenda');
-      const panelQuedadas = document.getElementById('panel-quedadas');
+                <div class="absolute -bottom-2 bg-wa-emerald text-white text-[11px] font-bold px-3 py-1 rounded-full border-2 border-wa-dark flex items-center gap-1.5 shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-wa-green animate-ping"></span>
+                    <span>42 miembros</span>
+                </div>
+            </div>
 
-      btnAgenda.classList.toggle('active', isAgenda);
-      btnAgenda.setAttribute('aria-selected', isAgenda);
+            <div class="space-y-3 max-w-xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wa-card text-xs text-slate-300 border border-wa-border">
+                    <i class="fa-solid fa-location-dot text-red-400"></i>
+                    <span>Pontevedra · Vigo · Rías Baixas · Galicia</span>
+                </div>
 
-      btnQuedadas.classList.toggle('active', !isAgenda);
-      btnQuedadas.setAttribute('aria-selected', !isAgenda);
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                    ¡Menos morriña y más <span class="text-wa-green">buen rollo</span>! 🤫🍻
+                </h2>
 
-      // 2. Alternar visibilidad de paneles
-      panelAgenda.classList.toggle('active', isAgenda);
-      panelQuedadas.classList.toggle('active', !isAgenda);
-    }
-  </script>
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                    Grupo para gente de Pontevedra y Vigo. Aquí venimos a conocer gente, echar unas risas, hacer planes y disfrutar.
+                    <span class="block mt-1 font-semibold text-slate-200">Sin malos rollos, sin dramas. 😎</span>
+                </p>
+
+                <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
+                       class="w-full sm:w-auto px-7 py-3 bg-wa-green hover:bg-[#20ba59] text-black font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-wa-green/20 transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Unirme al Grupo de WhatsApp</span>
+                    </a>
+                    <a href="#agenda-seccion" class="w-full sm:w-auto px-6 py-3 bg-wa-card hover:bg-wa-hover text-slate-200 font-semibold text-sm rounded-full border border-wa-border transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calendar-days text-wa-green"></i>
+                        <span>Consultar Agenda 2026–2027</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reglas / Filosofía de la Comunidad -->
+        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5 shadow-md">
+            <div class="flex items-center justify-between pb-3 border-b border-wa-border/70 mb-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-wa-green flex items-center justify-center">
+                        <i class="fa-solid fa-handshake-simple"></i>
+                    </div>
+                    <h3 class="font-bold text-base text-white">Normas y Esencia del Grupo</h3>
+                </div>
+                <span class="text-xs bg-wa-card text-emerald-400 px-2.5 py-1 rounded-full font-mono">100% Buen Rollo</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-lg">📍</span>
+                    <div>
+                        <h4 class="font-semibold text-xs text-slate-200">Pontevedra · Vigo · alrededores</h4>
+                        <p class="text-[11px] text-slate-400">Gente local o comarca con ganas de sociabilizar y hacer planes activos.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-lg">👥</span>
+                    <div>
+                        <h4 class="font-semibold text-xs text-slate-200">Buen ambiente y gente de buen rollo</h4>
+                        <p class="text-[11px] text-slate-400">Sin malos rollos, sin dramas. Entra con ganas de sumar y pasarlo bien.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-lg">🍻</span>
+                    <div>
+                        <h4 class="font-semibold text-xs text-slate-200">Quedadas · cenas · copas</h4>
+                        <p class="text-[11px] text-slate-400">Planes improvisados, escapadas, senderismo y tardeo.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-lg">🤫</span>
+                    <div>
+                        <h4 class="font-semibold text-xs text-slate-200">Pacto de Confianza</h4>
+                        <p class="text-[11px] text-slate-400">Lo que pasa en el grupo... se queda en el grupo. Discreción y respeto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SELECTOR DE PESTAÑAS PRINCIPALES -->
+        <div class="flex space-x-2 border-b border-wa-border pb-2" id="agenda-seccion">
+            <button onclick="cambiarPestana('agenda')" id="tab-agenda" 
+                    class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow">
+                <i class="fa-solid fa-masks-theater text-black"></i>
+                <span>Agenda Galicia 2026–2027</span>
+            </button>
+            <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" 
+                    class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white">
+                <i class="fa-solid fa-thumbtack text-emerald-400"></i>
+                <span>Quedadas del Grupo</span>
+            </button>
+        </div>
+
+        <!-- SECCIÓN 1: AGENDA COMPLETA GALICIA 2026-2027 -->
+        <section id="seccion-agenda" class="space-y-4">
+            <div class="bg-wa-panel p-4 rounded-xl border border-wa-border space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex flex-col">
+                        <h3 class="font-bold text-base text-white flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-days text-wa-green"></i>
+                            Agenda Oficial 2026–2027
+                        </h3>
+                        <p class="text-xs text-slate-400">Pontevedra, Vigo, Vilagarcía, Moaña, Valga, O Rosal y toda Galicia</p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                        <label class="inline-flex items-center cursor-pointer text-xs text-slate-300">
+                            <input type="checkbox" id="ocultar-pasados" onchange="alternarPasados()" checked class="sr-only peer">
+                            <div class="relative w-9 h-5 bg-wa-card peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-wa-green peer-checked:after:bg-black peer-checked:after:border-black"></div>
+                            <span class="ms-2 font-medium">Ocultar eventos pasados</span>
+                        </label>
+
+                        <div class="relative w-full sm:w-64">
+                            <input type="text" id="buscador-eventos" oninput="filtrarEventos()" placeholder="Buscar artista, concello, sala..."
+                                   class="w-full bg-wa-card text-xs text-white rounded-lg pl-8 pr-3 py-2 border border-wa-border focus:border-wa-green focus:outline-none placeholder-slate-500">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1 text-xs" id="filtros-seccion">
+                    <button onclick="filtrarSeccion('todas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-bold whitespace-nowrap">Todas las secciones</button>
+                    <button onclick="filtrarSeccion('orquestas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎺 Orquestas</button>
+                    <button onclick="filtrarSeccion('musica', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎤 Conciertos & Música</button>
+                    <button onclick="filtrarSeccion('fiestas', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎉 Fiestas & Ferias</button>
+                    <button onclick="filtrarSeccion('teatro', this)" class="sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">🎭 Teatro & Humor</button>
+                </div>
+
+                <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1 text-xs border-t border-wa-border/50">
+                    <span class="text-[11px] text-slate-400 flex items-center pr-1"><i class="fa-regular fa-calendar mr-1"></i> Mes:</span>
+                    <button onclick="filtrarMes('todos', this)" class="mes-btn px-2.5 py-1 rounded bg-slate-700 text-white font-medium whitespace-nowrap">Todos</button>
+                    <button onclick="filtrarMes('Octubre 2026', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Oct 2026</button>
+                    <button onclick="filtrarMes('Noviembre 2026', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Nov 2026</button>
+                    <button onclick="filtrarMes('Diciembre 2026', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Dic 2026</button>
+                    <button onclick="filtrarMes('Enero 2027', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Ene 2027</button>
+                    <button onclick="filtrarMes('Febrero 2027', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Feb 2027</button>
+                    <button onclick="filtrarMes('Marzo 2027', this)" class="mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border">Mar 2027</button>
+                </div>
+            </div>
+
+            <!-- Listado dinámico de eventos -->
+            <div id="lista-eventos" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+        </section>
+
+        <!-- SECCIÓN 2: QUEDADAS OFICIALES DEL GRUPO -->
+        <section id="seccion-quedadas" class="hidden space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-wa-panel p-4 rounded-xl border border-wa-border">
+                <div>
+                    <h3 class="font-bold text-base text-white flex items-center gap-2">
+                        <i class="fa-solid fa-thumbtack text-wa-green"></i>
+                        Quedadas Oficiales del Grupo
+                    </h3>
+                    <p class="text-xs text-slate-400">Planes activos coordinados en WhatsApp (actualizados al momento)</p>
+                </div>
+                <button onclick="abrirModalReglas()" class="text-xs bg-wa-card hover:bg-wa-hover text-emerald-400 border border-wa-border px-3 py-2 rounded-xl transition flex items-center gap-1.5 font-medium w-fit">
+                    <i class="fa-solid fa-circle-question"></i> ¿Cómo apuntarse?
+                </button>
+            </div>
+
+            <!-- Grid Dinámico de Quedadas -->
+            <div id="lista-quedadas" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </section>
+
+        <!-- Mini FAQ -->
+        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                <i class="fa-regular fa-circle-question text-wa-green"></i>
+                ¿Cómo funciona Morriña Cero?
+            </h4>
+            <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+                <div class="border-b border-wa-border/50 pb-2.5">
+                    <p class="font-semibold text-white">1. ¿Tengo que pagar alguna cuota por pertenecer?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">Ninguna. Es una comunidad libre de personas de Pontevedra, Vigo y alrededores. En las quedadas cada quien paga lo que consume.</p>
+                </div>
+                <div class="border-b border-wa-border/50 pb-2.5">
+                    <p class="font-semibold text-white">2. ¿Cómo me apunto a las quedadas?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">En el chat de WhatsApp mantenemos una lista en el mensaje fijado. Lo copias, añades tu nombre y vuelves a fijarlo para que nadie se pierda.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-white">3. ¿Quién propone los planes?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">Cualquier miembro del grupo puede proponer un plan o apuntarse a los eventos de la agenda cultural.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-wa-panel border-t border-wa-border py-6 px-4 text-center text-xs text-slate-400">
+        <div class="max-w-4xl mx-auto space-y-2">
+            <p class="font-medium text-slate-300">Morriña Cero · Grupo Social Pontevedra & Vigo</p>
+            <p class="text-[11px] text-slate-400">Agenda y quedadas para compartir buenos ratos en Galicia.</p>
+            <div class="pt-2 flex justify-center gap-4 text-base text-slate-400">
+                <button onclick="copiarEnlace()" title="Copiar invitación" class="hover:text-wa-green transition"><i class="fa-solid fa-link"></i></button>
+                <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="hover:text-wa-green transition"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-wa-card border border-wa-green/60 text-white px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs">
+        <i class="fa-solid fa-circle-check text-wa-green text-sm"></i>
+        <span id="toastMsg">Enlace copiado con éxito</span>
+    </div>
+
+    <!-- Modal Instrucciones para apuntarse -->
+    <div id="modalReglas" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-wa-panel border border-wa-border w-full max-w-md rounded-2xl p-5 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-wa-border">
+                <h3 class="font-bold text-white text-base flex items-center gap-2">
+                    <i class="fa-solid fa-thumbtack text-wa-green"></i>
+                    ¿Cómo apuntarse a una quedada?
+                </h3>
+                <button onclick="cerrarModalReglas()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-2.5 text-xs text-slate-300">
+                <p>1️⃣ Busca el <strong>mensaje fijado 📌</strong> en el chat de WhatsApp.</p>
+                <p>2️⃣ Desfija el mensaje.</p>
+                <p>3️⃣ Copia todo su contenido.</p>
+                <p>4️⃣ Pégalo de nuevo en la conversación.</p>
+                <p>5️⃣ Añade tu nombre o modifica la información.</p>
+                <p>6️⃣ <strong>¡Vuelve a fijar el mensaje actualizado!</strong></p>
+            </div>
+
+            <div class="p-3 bg-black/40 rounded-xl border-l-2 border-wa-green text-[11px] text-slate-400">
+                ⚠️ <strong>¡Importante!</strong> Cada vez que alguien se apunte, se borre o cambie algún dato, hay que actualizar y volver a fijar la lista. ¡Una sola lista, siempre al día y sin líos! 🍻
+            </div>
+
+            <div class="pt-2 flex justify-end gap-2">
+                <button onclick="cerrarModalReglas()" class="px-3.5 py-2 rounded-lg bg-wa-card hover:bg-wa-hover text-slate-300 text-xs transition">Cerrar</button>
+                <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
+                   class="px-4 py-2 rounded-lg bg-wa-green hover:bg-[#20ba59] text-black font-bold text-xs transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Ir a WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalle del Evento -->
+    <div id="modalEvento" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="bg-wa-panel border border-wa-border w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto no-scrollbar">
+            <button onclick="cerrarModalEvento()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="space-y-1.5 pr-6">
+                <span id="modalEvBadge" class="inline-flex items-center gap-1 text-[11px] font-semibold border px-2.5 py-0.5 rounded-full"></span>
+                <h3 id="modalEvTitulo" class="text-lg sm:text-xl font-extrabold text-white leading-tight"></h3>
+                <p id="modalEvComp" class="text-xs text-emerald-400 font-medium hidden"></p>
+            </div>
+
+            <div class="bg-wa-card/60 border border-wa-border/60 rounded-xl p-3.5 space-y-2 text-xs text-slate-300">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-regular fa-calendar text-wa-green text-sm w-4 text-center"></i>
+                    <span id="modalEvFecha" class="font-medium"></span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-regular fa-clock text-wa-green text-sm w-4 text-center"></i>
+                    <span id="modalEvHora" class="font-mono text-slate-200"></span>
+                </div>
+                <div class="flex items-start gap-2.5">
+                    <i class="fa-solid fa-location-dot text-red-400 text-sm w-4 text-center mt-0.5"></i>
+                    <span id="modalEvLugar" class="flex-1 leading-snug"></span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-ticket text-amber-400 text-sm w-4 text-center"></i>
+                    <span id="modalEvPrecio" class="font-semibold"></span>
+                </div>
+            </div>
+
+            <div class="space-y-2 pt-1">
+                <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-wa-green"></i> Acciones & Asistencia
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <a id="modalBtnMaps" href="#" target="_blank" rel="noopener noreferrer"
+                       class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-wa-card hover:bg-wa-hover text-slate-200 border border-wa-border text-xs transition">
+                        <i class="fa-solid fa-map-location-dot text-red-400"></i>
+                        <span>Ver en Maps</span>
+                    </a>
+                    <button id="modalBtnIA" onclick="consultarIAEvento()" 
+                       class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border border-emerald-700/60 text-xs transition font-semibold">
+                        <i class="fa-solid fa-sparkles text-emerald-400"></i>
+                        <span>Saber más con IA</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-2 border-t border-wa-border/70">
+                <button id="modalBtnCompartirWA" class="w-full py-2.5 px-4 rounded-xl bg-wa-green hover:bg-[#20ba59] text-black font-bold text-xs transition flex items-center justify-center gap-2 shadow-md">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Proponer este plan en el grupo</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Interactividad, Parseo Dinámico y Anti-Caché -->
+    <script>
+        let eventosAgendaCompleta = [];
+        let quedadasCompleta = [];
+        let seccionFiltro = 'todas';
+        let mesFiltro = 'todos';
+        let ocultarPasados = true;
+        let eventoSeleccionadoActual = null;
+
+        const mesesEsp = {
+            enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5,
+            julio: 6, agosto: 7, septiembre: 8, octubre: 9, noviembre: 10, diciembre: 11,
+            ene: 0, feb: 1, mar: 2, abr: 3, may: 4, jun: 5, jul: 6, ago: 7, sep: 8, oct: 9, nov: 10, dic: 11
+        };
+
+        const mesesLabel = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+        function obtenerFechaHoy() {
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+            return hoy;
+        }
+
+        // Sanitizador de texto que elimina rombos rotos pero preserva selectores como \uFE0F necesarios para emojis compuestos
+        function sanitizarTexto(str) {
+            if (!str) return '';
+            return str
+                .replace(/\uFFFD/g, '') // Elimina caracter corrupto U+FFFD (rombo con ?)
+                .replace(/[\uFEFF\u200B\u200E\u200F]/g, '') // Quita espacio nulo y BOM. Mantiene \uFE0F (necesario para emojis complejos)
+                .trim();
+        }
+
+        function limpiarPrefijoFecha(linea) {
+            return linea.replace(/^[📅📆🗓\s\uFFFD\uFEFF\u200B\u200E\u200F\?]+/, '').trim();
+        }
+
+        function extraerMinutos(horaStr) {
+            if (!horaStr || horaStr === 'Por confirmar' || horaStr.toLowerCase().includes('varios')) return 9999;
+            const match = horaStr.match(/(\d{1,2})[:.](\d{2})/);
+            if (match) return parseInt(match[1], 10) * 60 + parseInt(match[2], 10);
+            const matchSimple = horaStr.match(/(\d{1,2})\s*h/i);
+            if (matchSimple) return parseInt(matchSimple[1], 10) * 60;
+            return 9999;
+        }
+
+        function intentarParsearFecha(texto) {
+            try {
+                const txtLower = texto.toLowerCase().trim();
+                const matchAño = txtLower.match(/\b(2026|2027|2028)\b/);
+                const año = matchAño ? parseInt(matchAño[0]) : obtenerFechaHoy().getFullYear();
+                
+                if (txtLower.includes('del') && txtLower.includes('al')) {
+                    const matchRango = txtLower.match(/del\s+(\d+)\s+de\s+(\w+)\.?(?:\s+(\d{4}))?\s+al/);
+                    if (matchRango) {
+                        const diaRango = parseInt(matchRango[1]);
+                        const mesRango = mesesEsp[matchRango[2].replace('.', '')] || 0;
+                        const añoRango = matchRango[3] ? parseInt(matchRango[3]) : año;
+                        return new Date(añoRango, mesRango, diaRango);
+                    }
+                }
+
+                const matchDia = txtLower.match(/\b(\d{1,2})\b/);
+                const dia = matchDia ? parseInt(matchDia[1]) : 1;
+
+                let mes = 0;
+                for (const [key, value] of Object.entries(mesesEsp)) {
+                    if (txtLower.includes(key)) {
+                        mes = value;
+                        break;
+                    }
+                }
+
+                return new Date(año, mes, dia);
+            } catch (e) {
+                return obtenerFechaHoy();
+            }
+        }
+
+        function extraerMesAnioLabel(fechaObj) {
+            return `${mesesLabel[fechaObj.getMonth()]} ${fechaObj.getFullYear()}`;
+        }
+
+        function estimarSeccion(texto, compañia) {
+            const txt = (texto + ' ' + (compañia || '')).toLowerCase();
+            if (txt.includes('🎺') || txt.includes('orquesta') || txt.includes('banda') || txt.includes('charanga') || txt.includes('la banda de ayer') || txt.includes('festicultores') || txt.includes('orquestas')) {
+                return 'orquestas';
+            }
+            if (txt.includes('🎤') || txt.includes('🎸') || txt.includes('música') || txt.includes('concierto') || txt.includes('tributo') || txt.includes('fito') || txt.includes('kase') || txt.includes('sho-hai') || txt.includes('underfest') || txt.includes('festival') || txt.includes('conciertos')) {
+                return 'musica';
+            }
+            if (txt.includes('🎉') || txt.includes('festa') || txt.includes('magosto') || txt.includes('sabor') || txt.includes('outubrofest') || txt.includes('mercado') || txt.includes('feria') || txt.includes('gastronómica') || txt.includes('centola') || txt.includes('tapas') || txt.includes('festas') || txt.includes('romerías')) {
+                return 'fiestas';
+            }
+            if (txt.includes('🎭') || txt.includes('teatro') || txt.includes('humor') || txt.includes('monálogo') || txt.includes('compañía') || txt.includes('comedia') || txt.includes('espectáculo') || txt.includes('mago') || txt.includes('maxia') || txt.includes('pallaso') || txt.includes('danza') || txt.includes('espectáculos')) {
+                return 'teatro';
+            }
+            return 'teatro';
+        }
+
+        /* CARGA Y PARSEO DE AGENDA.TXT (con timestamp anti-caché) */
+        async function cargarAgendaTXT() {
+            try {
+                const response = await fetch('agenda.txt?t=' + Date.now());
+                if (!response.ok) throw new Error();
+                const rawText = await response.text();
+                procesarTextoAgenda(rawText);
+            } catch (error) {
+                document.getElementById('lista-eventos').innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-circle-exclamation text-2xl mb-2 text-red-500"></i>
+                        <p class="text-xs font-semibold">No se pudo cargar la agenda desde agenda.txt</p>
+                    </div>
+                `;
+            }
+        }
+
+        function procesarTextoAgenda(txt) {
+            const lineas = txt.split('\n');
+            let diaActual = "";
+            let fechaOrdenActual = null;
+            let eventoActivo = null;
+
+            eventosAgendaCompleta = [];
+
+            for (let i = 0; i < lineas.length; i++) {
+                let linea = sanitizarTexto(lineas[i]);
+                if (!linea) continue;
+
+                const lineaUpper = linea.toUpperCase();
+                const esCabeceraDia = (
+                    lineaUpper.includes('LUNES') || 
+                    lineaUpper.includes('MARTES') || 
+                    lineaUpper.includes('MIÉRCOLES') || 
+                    lineaUpper.includes('JUEVES') || 
+                    lineaUpper.includes('VIERNES') || 
+                    lineaUpper.includes('SÁBADO') || 
+                    lineaUpper.includes('DOMINGO') || 
+                    lineaUpper.includes('DEL ')
+                ) && (
+                    linea.startsWith('📅') || 
+                    linea.startsWith('📆') || 
+                    linea.startsWith('🗓') || 
+                    /^[A-ZÁÉÍÓÚÑ\s\d,]+de\s+[a-záéíóúñ]+/i.test(limpiarPrefijoFecha(linea))
+                );
+
+                if (esCabeceraDia) {
+                    diaActual = limpiarPrefijoFecha(linea);
+                    fechaOrdenActual = intentarParsearFecha(diaActual);
+                    continue;
+                }
+
+                if (
+                    linea.startsWith('✤') || 
+                    linea.startsWith('━') || 
+                    linea.includes('AGENDA RÍAS BAIXAS') || 
+                    linea.includes('Música |') || 
+                    linea.includes('Rías Baixas ·') || 
+                    linea.includes('EXPOSICIONES Y ACTIVIDADES') || 
+                    linea.includes('IMPORTANTE:') || 
+                    linea.includes('UNA SEMANA') || 
+                    linea.includes('📍 Pontevedra ·') || 
+                    linea.includes('Una gran temporada') || 
+                    (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS'))
+                ) {
+                    continue;
+                }
+
+                const esLugar = linea.startsWith('📍');
+                const esHora = linea.startsWith('🕒') || linea.startsWith('🕗');
+                const esPrecio = linea.startsWith('🎟️') || linea.startsWith('🎟');
+                const esCompania = linea.startsWith('🎭 Compañía:');
+                const esCartel = linea.startsWith('🎤 Cartel:');
+                const esRangoFechas = linea.startsWith('📆') || (linea.startsWith('📅') && !esCabeceraDia);
+
+                const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel || esRangoFechas;
+
+                if (!esPropiedad) {
+                    if (eventoActivo && diaActual) {
+                        eventosAgendaCompleta.push(eventoActivo);
+                    }
+
+                    let tituloLimpio = linea.replace(/^[•\s*]+/, '').trim();
+
+                    eventoActivo = {
+                        mes: '',
+                        titulo: tituloLimpio,
+                        lugar: 'Por confirmar',
+                        fecha: diaActual,
+                        hora: 'Por confirmar',
+                        precio: 'Por confirmar',
+                        comp: '',
+                        fechaOrden: fechaOrdenActual
+                    };
+                    continue;
+                }
+
+                if (eventoActivo) {
+                    if (esLugar) {
+                        eventoActivo.lugar = linea.replace('📍', '').trim();
+                    } else if (esHora) {
+                        eventoActivo.hora = linea.replace(/🕒|🕗/g, '').trim();
+                    } else if (esPrecio) {
+                        eventoActivo.precio = linea.replace(/🎟️|🎟/g, '').trim();
+                    } else if (esCompania) {
+                        eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
+                    } else if (esCartel) {
+                        eventoActivo.titulo += " - " + linea.replace('🎤 Cartel:', '').trim();
+                    } else if (esRangoFechas) {
+                        eventoActivo.fecha = limpiarPrefijoFecha(linea);
+                    }
+                }
+            }
+
+            if (eventoActivo && diaActual) {
+                eventosAgendaCompleta.push(eventoActivo);
+            }
+
+            eventosAgendaCompleta.forEach(ev => {
+                ev.seccion = estimarSeccion(ev.titulo + ' ' + ev.lugar, ev.comp);
+                ev.mes = extraerMesAnioLabel(ev.fechaOrden);
+            });
+
+            eventosAgendaCompleta.sort((a, b) => {
+                const diffFecha = a.fechaOrden - b.fechaOrden;
+                if (diffFecha !== 0) return diffFecha;
+                return extraerMinutos(a.hora) - extraerMinutos(b.hora);
+            });
+
+            renderAgenda();
+        }
+
+        function renderAgenda() {
+            const contenedor = document.getElementById('lista-eventos');
+            const textoBuscador = document.getElementById('buscador-eventos').value.toLowerCase().trim();
+            const hoy = obtenerFechaHoy();
+
+            const filtrados = eventosAgendaCompleta.filter(ev => {
+                const coincideSeccion = (seccionFiltro === 'todas' || ev.seccion === seccionFiltro);
+                const coincideMes = (mesFiltro === 'todos' || ev.mes.toLowerCase() === mesFiltro.toLowerCase());
+                const coincideTexto = ev.titulo.toLowerCase().includes(textoBuscador) || 
+                                      ev.lugar.toLowerCase().includes(textoBuscador) || 
+                                      ev.fecha.toLowerCase().includes(textoBuscador) ||
+                                      (ev.comp && ev.comp.toLowerCase().includes(textoBuscador));
+                
+                const esPasado = ev.fechaOrden < hoy;
+                if (ocultarPasados && esPasado) return false;
+                return coincideSeccion && coincideMes && coincideTexto;
+            });
+
+            if (filtrados.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-calendar-xmark text-2xl mb-2 text-slate-500"></i>
+                        <p class="text-xs">No se encontraron eventos para los filtros seleccionados.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            contenedor.innerHTML = filtrados.map(ev => {
+                const idxReal = eventosAgendaCompleta.indexOf(ev);
+
+                let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-800/50';
+                let iconoSec = 'fa-masks-theater';
+                let secTexto = 'Teatro & Espectáculo';
+
+                if (ev.seccion === 'orquestas') {
+                    badgeClass = 'text-yellow-400 bg-yellow-950/60 border-yellow-800/50';
+                    iconoSec = 'fa-music';
+                    secTexto = 'Orquesta';
+                } else if (ev.seccion === 'musica') {
+                    badgeClass = 'text-purple-400 bg-purple-950/60 border-purple-800/50';
+                    iconoSec = 'fa-microphone';
+                    secTexto = 'Música en Vivo';
+                } else if (ev.seccion === 'fiestas') {
+                    badgeClass = 'text-amber-400 bg-amber-950/60 border-amber-800/50';
+                    iconoSec = 'fa-champagne-glasses';
+                    secTexto = 'Fiestas & Ferias';
+                }
+
+                const yaHaPasado = ev.fechaOrden < hoy;
+                let estiloPasadoCard = '';
+                let badgeExpirado = '';
+
+                if (yaHaPasado) {
+                    estiloPasadoCard = 'opacity-40 filter saturate-50 border-dashed';
+                    badgeExpirado = `<span class="bg-red-900/40 text-red-300 font-bold px-2 py-0.5 rounded text-[10px] border border-red-800/40">FINALIZADO</span>`;
+                }
+
+                const esGratis = ev.precio.toUpperCase().includes('GRATIS') || ev.precio.toUpperCase().includes('LIBRE');
+                const badgePrecio = esGratis 
+                    ? `<span class="bg-emerald-500/20 text-wa-green font-bold px-2 py-0.5 rounded text-[10px] border border-wa-green/30">GRATIS</span>`
+                    : `<span class="bg-wa-card text-slate-300 font-medium px-2 py-0.5 rounded text-[10px] border border-wa-border">${ev.precio}</span>`;
+
+                return `
+                    <div onclick="abrirModalEvento(${idxReal})" 
+                         class="bg-wa-panel border border-wa-border hover:border-wa-green/50 p-4 rounded-xl transition cursor-pointer flex flex-col justify-between shadow-sm group ${estiloPasadoCard}">
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between text-[11px] gap-2">
+                                <span class="inline-flex items-center gap-1 font-semibold border px-2.5 py-0.5 rounded-full ${badgeClass} truncate">
+                                    <i class="fa-solid ${iconoSec} text-[10px]"></i> ${secTexto}
+                                </span>
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    ${badgeExpirado}
+                                    ${badgePrecio}
+                                </div>
+                            </div>
+                            <h4 class="font-bold text-white text-sm sm:text-base leading-snug group-hover:text-emerald-300 transition-colors">${ev.titulo}</h4>
+                            ${ev.comp ? `<p class="text-[11px] text-emerald-400 font-medium">🎭 Cía: ${ev.comp}</p>` : ''}
+                            <p class="text-xs text-slate-300 flex items-start gap-1.5 pt-0.5">
+                                <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-xs shrink-0"></i>
+                                <span class="line-clamp-2">${ev.lugar}</span>
+                            </p>
+                        </div>
+
+                        <div class="mt-3 pt-2.5 border-t border-wa-border/70 flex items-center justify-between gap-2 text-[11px] text-slate-400">
+                            <span class="flex items-center gap-1.5 min-w-0 truncate">
+                                <i class="fa-regular fa-calendar text-wa-green shrink-0"></i> 
+                                <span class="truncate">${ev.fecha}</span>
+                            </span>
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                ${ev.hora !== 'Por confirmar' ? `<span class="text-slate-200 font-mono font-semibold bg-wa-card px-2 py-0.5 rounded border border-wa-border text-[10px] whitespace-nowrap">${ev.hora}</span>` : ''}
+                                <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-wa-green transition-transform group-hover:translate-x-0.5"></i>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /* CARGA Y PARSEO DE QUEDADAS.TXT (con timestamp anti-caché) */
+        async function cargarQuedadasTXT() {
+            try {
+                const response = await fetch('quedadas.txt?t=' + Date.now());
+                if (!response.ok) throw new Error();
+                const rawText = await response.text();
+                procesarTextoQuedadas(rawText);
+            } catch (error) {
+                document.getElementById('lista-quedadas').innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-circle-exclamation text-2xl mb-2 text-yellow-500"></i>
+                        <p class="text-xs font-semibold">No se pudo cargar quedadas.txt</p>
+                    </div>
+                `;
+            }
+        }
+
+        function procesarTextoQuedadas(txt) {
+            const bloques = txt.split(/━━━━━━━━━━━━━━━━━━+/);
+            quedadasCompleta = [];
+
+            for (let bloque of bloques) {
+                const lineas = bloque.split('\n').map(l => sanitizarTexto(l)).filter(l => l.length > 0);
+                if (lineas.length === 0) continue;
+
+                const textoCompleto = lineas.join(' ').toUpperCase();
+
+                // Excluir de forma blindada todos los textos e instrucciones administrativas y de ayuda
+                if (
+                    textoCompleto.includes('QUEDADAS Y PLANES') || 
+                    textoCompleto.includes('PRÓXIMAS QUEDADAS') || 
+                    textoCompleto.includes('¿CÓMO APUNTARSE') || 
+                    textoCompleto.includes('CÓMO APUNTARSE') || 
+                    textoCompleto.includes('DESFIJA EL MENSAJE') ||
+                    textoCompleto.includes('COPÍA TODO SU') ||
+                    textoCompleto.includes('PÉGALO DE NUEVO') ||
+                    textoCompleto.includes('MODIFICA LA INFORMACIÓN') ||
+                    textoCompleto.includes('VUELVA A FIJAR EL MENSAJE') ||
+                    textoCompleto.includes('VUELVE A FIJAR') ||
+                    textoCompleto.includes('¡IMPORTANTE!') ||
+                    textoCompleto.includes('SE BORRE O CAMBIE ALGUN') ||
+                    textoCompleto.includes('UNA SOLA LISTA') ||
+                    lineas[0].startsWith('1️⃣') ||
+                    lineas[0].startsWith('1') ||
+                    /^[0-9]\s*️⃣/.test(lineas[0]) ||
+                    lineas[0].toUpperCase().startsWith('📌 ¿CÓMO') ||
+                    lineas[0].toUpperCase().startsWith('📌 CÓMO')
+                ) {
+                    continue;
+                }
+
+                let titulo = lineas[0];
+                let precio = "";
+                let detalles = [];
+                let apuntados = [];
+                let modoApuntados = false;
+
+                for (let i = 1; i < lineas.length; i++) {
+                    const l = lineas[i];
+
+                    if (l.startsWith('💰') || l.toUpperCase().includes('PRECIO:')) {
+                        precio = l.replace(/💰|Precio:/gi, '').trim();
+                    }
+
+                    if (l.includes('👥 Apuntados:')) {
+                        modoApuntados = true;
+                        continue;
+                    }
+
+                    if (modoApuntados) {
+                        let limpio = l.replace(/^[•\-]\s*/, '').trim();
+                        if (limpio) {
+                            let subNombres = limpio.split(/(?<=\w)\.\s+|\s{2,}/).map(n => n.trim()).filter(n => n.length > 0);
+                            apuntados.push(...subNombres);
+                        }
+                    } else {
+                        detalles.push(l);
+                    }
+                }
+
+                quedadasCompleta.push({
+                    titulo: titulo,
+                    precio: precio,
+                    detalles: detalles,
+                    apuntados: apuntados
+                });
+            }
+
+            renderQuedadas();
+        }
+
+        function renderQuedadas() {
+            const contenedor = document.getElementById('lista-quedadas');
+            if (quedadasCompleta.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-mug-hot text-2xl mb-2 text-slate-500"></i>
+                        <p class="text-xs">No hay quedadas activas en este momento.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            contenedor.innerHTML = quedadasCompleta.map((q) => {
+                const badgePrecio = q.precio ? `
+                    <span class="text-wa-green font-bold bg-wa-card px-2.5 py-0.5 rounded border border-wa-border text-xs shrink-0">
+                        ${q.precio}
+                    </span>
+                ` : '';
+
+                const detallesHtml = q.detalles.map(d => {
+                    if (d.startsWith('•')) {
+                        return `<span class="block pl-2 text-[11px] text-slate-400">${d}</span>`;
+                    }
+                    return `<span class="block text-slate-300 font-medium">${d}</span>`;
+                }).join('');
+
+                const apuntadosBadges = q.apuntados.length > 0 
+                    ? q.apuntados.map(nombre => `<span class="inline-block bg-emerald-950/70 border border-emerald-800/60 text-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-semibold">${nombre}</span>`).join(' ')
+                    : '<span class="text-slate-400 italic text-[11px]">¡Sé el primero en apuntarte!</span>';
+
+                return `
+                    <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                        <div class="space-y-2.5">
+                            <div class="flex items-start justify-between gap-2">
+                                <h4 class="font-bold text-base text-white leading-snug">${q.titulo}</h4>
+                                ${badgePrecio}
+                            </div>
+                            <div class="text-xs space-y-1 text-slate-300 border-t border-wa-border/50 pt-2">
+                                ${detallesHtml}
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-wa-border flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div class="text-xs space-y-1">
+                                <span class="font-semibold text-white block text-[11px]">Apuntados:</span> 
+                                <div class="flex flex-wrap gap-1.5 items-center">
+                                    ${apuntadosBadges}
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                                <button onclick="apuntarseWhatsApp('${encodeURIComponent(q.titulo)}')" 
+                                        class="text-xs px-3 py-1.5 rounded-lg bg-wa-green hover:bg-[#20ba59] text-black font-bold transition flex items-center gap-1.5 shadow">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>Me apunto</span>
+                                </button>
+                                <button onclick="abrirModalReglas()" class="text-xs p-1.5 rounded-lg bg-wa-card hover:bg-wa-hover text-slate-400 border border-wa-border" title="¿Cómo funciona?">
+                                    <i class="fa-solid fa-circle-question"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function apuntarseWhatsApp(tituloCodificado) {
+            const titulo = decodeURIComponent(tituloCodificado);
+            const msg = encodeURIComponent(`¡Hola! Me quiero apuntar a la quedada: "${titulo}" 🍻`);
+            window.open(`https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?text=${msg}`, '_blank');
+        }
+
+        function alternarPasados() {
+            ocultarPasados = document.getElementById('ocultar-pasados').checked;
+            renderAgenda();
+        }
+
+        function filtrarSeccion(seccion, boton) {
+            seccionFiltro = seccion;
+            document.querySelectorAll('.sec-btn').forEach(btn => {
+                btn.className = "sec-btn px-3 py-1.5 rounded-full bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border";
+            });
+            boton.className = "sec-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-bold whitespace-nowrap";
+            renderAgenda();
+        }
+
+        function filtrarMes(mes, boton) {
+            mesFiltro = mes;
+            document.querySelectorAll('.mes-btn').forEach(btn => {
+                btn.className = "mes-btn px-2.5 py-1 rounded bg-wa-card text-slate-300 hover:bg-wa-hover whitespace-nowrap border border-wa-border";
+            });
+            boton.className = "mes-btn px-2.5 py-1 rounded bg-slate-700 text-white font-medium whitespace-nowrap";
+            renderAgenda();
+        }
+
+        function filtrarEventos() {
+            renderAgenda();
+        }
+
+        function cambiarPestana(pestana) {
+            const secAgenda = document.getElementById('seccion-agenda');
+            const secQuedadas = document.getElementById('seccion-quedadas');
+            const tabAgenda = document.getElementById('tab-agenda');
+            const tabQuedadas = document.getElementById('tab-quedadas');
+
+            if (pestana === 'agenda') {
+                secAgenda.classList.remove('hidden');
+                secQuedadas.classList.add('hidden');
+                tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow';
+                tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white';
+                renderAgenda();
+            } else {
+                secAgenda.classList.add('hidden');
+                secQuedadas.classList.remove('hidden');
+                tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow';
+                tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white';
+                renderQuedadas();
+            }
+        }
+
+        function abrirModalReglas() {
+            document.getElementById('modalReglas').classList.remove('hidden');
+            document.getElementById('modalReglas').classList.add('flex');
+        }
+
+        function cerrarModalReglas() {
+            document.getElementById('modalReglas').classList.add('hidden');
+            document.getElementById('modalReglas').classList.remove('flex');
+        }
+
+        function abrirModalEvento(indice) {
+            const ev = eventosAgendaCompleta[indice];
+            if (!ev) return;
+            eventoSeleccionadoActual = ev;
+
+            document.getElementById('modalEvTitulo').innerText = ev.titulo;
+            document.getElementById('modalEvFecha').innerText = ev.fecha;
+            document.getElementById('modalEvHora').innerText = ev.hora !== 'Por confirmar' ? ev.hora : 'Pendiente de confirmación';
+            document.getElementById('modalEvLugar').innerText = ev.lugar;
+            document.getElementById('modalEvPrecio').innerText = ev.precio;
+
+            const compEl = document.getElementById('modalEvComp');
+            if (ev.comp) {
+                compEl.innerText = `🎭 Compañía: ${ev.comp}`;
+                compEl.classList.remove('hidden');
+            } else {
+                compEl.classList.add('hidden');
+            }
+
+            const badgeEl = document.getElementById('modalEvBadge');
+            let badgeClass = 'text-emerald-400 bg-emerald-950/60 border-emerald-800/50';
+            let badgeHtml = '<i class="fa-solid fa-masks-theater text-[10px]"></i> Teatro & Espectáculo';
+
+            if (ev.seccion === 'orquestas') {
+                badgeClass = 'text-yellow-400 bg-yellow-950/60 border-yellow-800/50';
+                badgeHtml = '<i class="fa-solid fa-music text-[10px]"></i> Orquesta';
+            } else if (ev.seccion === 'musica') {
+                badgeClass = 'text-purple-400 bg-purple-950/60 border-purple-800/50';
+                badgeHtml = '<i class="fa-solid fa-microphone text-[10px]"></i> Música en Vivo';
+            } else if (ev.seccion === 'fiestas') {
+                badgeClass = 'text-amber-400 bg-amber-950/60 border-amber-800/50';
+                badgeHtml = '<i class="fa-solid fa-champagne-glasses text-[10px]"></i> Fiestas & Ferias';
+            }
+            badgeEl.className = `inline-flex items-center gap-1 text-[11px] font-semibold border px-2.5 py-0.5 rounded-full ${badgeClass}`;
+            badgeEl.innerHTML = badgeHtml;
+
+            const queryMaps = encodeURIComponent(`${ev.titulo} ${ev.lugar} Galicia`);
+            document.getElementById('modalBtnMaps').href = `https://www.google.com/maps/search/?api=1&query=${queryMaps}`;
+
+            document.getElementById('modalBtnCompartirWA').onclick = () => {
+                const txtMsg = encodeURIComponent(`🍻 *Plan Morriña Cero:* ${ev.titulo}\n📅 ${ev.fecha} - 🕒 ${ev.hora}\n📍 ${ev.lugar}\n🎟️ ${ev.precio}\n¿Quién se apunta?`);
+                window.open(`https://api.whatsapp.com/send?text=${txtMsg}`, '_blank');
+            };
+
+            const modal = document.getElementById('modalEvento');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function cerrarModalEvento() {
+            const modal = document.getElementById('modalEvento');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function consultarIAEvento() {
+            if (!eventoSeleccionadoActual) return;
+            const ev = eventoSeleccionadoActual;
+            const prompt = encodeURIComponent(`Dame información detallada, trayectoria, estilo y qué esperar del espectáculo o evento "${ev.titulo}" que se celebra en "${ev.lugar}" Galicia (${ev.fecha}).`);
+            window.open(`https://gemini.google.com/app?q=${prompt}`, '_blank');
+        }
+
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMsg');
+            msg.innerText = mensaje;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3200);
+        }
+
+        function copiarEnlace() {
+            const url = window.location.href;
+            const tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                mostrarToast('Enlace copiado al portapapeles. ¡Pásalo al grupo!');
+            } catch (err) {
+                mostrarToast('Comparte este enlace: ' + url);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                cerrarModalReglas();
+                cerrarModalEvento();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            cargarAgendaTXT();
+            cargarQuedadasTXT();
+        });
+    </script>
 </body>
 </html>
