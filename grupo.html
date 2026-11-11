@@ -48,25 +48,6 @@
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Estilos específicos para las pestañas principales */
-        .tab-main-btn {
-            background: transparent;
-            color: #94a3b8;
-            transition: all 0.25s ease-in-out;
-        }
-        .tab-main-btn .tab-icon {
-            color: #10b981;
-            transition: color 0.25s ease;
-        }
-        .tab-main-btn.active {
-            background-color: #22c55e !important;
-            color: #000000 !important;
-        }
-        .tab-main-btn.active .tab-icon {
-            color: #000000 !important;
-            opacity: 1 !important;
-        }
     </style>
 </head>
 <body class="bg-wa-dark text-slate-100 font-sans antialiased selection:bg-wa-green selection:text-black min-h-screen flex flex-col justify-between">
@@ -199,19 +180,19 @@
             </div>
         </section>
 
-        <!-- SELECTOR DE PESTAÑAS PRINCIPALES ADAPTADO -->
+        <!-- SELECTOR DE PESTAÑAS PRINCIPALES -->
         <div class="flex items-center gap-3 border-b border-wa-border pb-4" id="agenda-seccion" role="tablist">
             <!-- Pestaña Agenda Galicia -->
             <button onclick="cambiarPestana('agenda')" id="tab-agenda" role="tab" aria-selected="true"
-                    class="tab-main-btn active flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug">
-                <i class="fa-solid fa-masks-theater text-lg shrink-0 tab-icon"></i>
+                    class="flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-wa-green text-black shadow-lg">
+                <i id="icon-agenda" class="fa-solid fa-masks-theater text-lg shrink-0 text-black"></i>
                 <span>Agenda Galicia<br class="hidden sm:inline"> 2026–2027</span>
             </button>
 
             <!-- Pestaña Quedadas del Grupo -->
             <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" role="tab" aria-selected="false"
-                    class="tab-main-btn flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug hover:bg-wa-card/50">
-                <i class="fa-solid fa-thumbtack text-lg shrink-0 tab-icon"></i>
+                    class="flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-transparent text-slate-300 hover:text-white hover:bg-wa-card/60 border border-transparent">
+                <i id="icon-quedadas" class="fa-solid fa-thumbtack text-lg shrink-0 text-slate-400"></i>
                 <span>Quedadas del<br class="hidden sm:inline"> Grupo</span>
             </button>
         </div>
@@ -944,27 +925,36 @@
             const secQuedadas = document.getElementById('seccion-quedadas');
             const tabAgenda = document.getElementById('tab-agenda');
             const tabQuedadas = document.getElementById('tab-quedadas');
+            const iconAgenda = document.getElementById('icon-agenda');
+            const iconQuedadas = document.getElementById('icon-quedadas');
+
+            const claseBotonActivo = "flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-wa-green text-black shadow-lg";
+            const claseBotonInactivo = "flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-transparent text-slate-300 hover:text-white hover:bg-wa-card/60 border border-transparent";
 
             if (pestana === 'agenda') {
                 secAgenda.classList.remove('hidden');
                 secQuedadas.classList.add('hidden');
-                
-                tabAgenda.classList.add('active');
-                tabAgenda.setAttribute('aria-selected', 'true');
 
-                tabQuedadas.classList.remove('active');
+                tabAgenda.className = claseBotonActivo;
+                tabAgenda.setAttribute('aria-selected', 'true');
+                iconAgenda.className = "fa-solid fa-masks-theater text-lg shrink-0 text-black";
+
+                tabQuedadas.className = claseBotonInactivo;
                 tabQuedadas.setAttribute('aria-selected', 'false');
+                iconQuedadas.className = "fa-solid fa-thumbtack text-lg shrink-0 text-slate-400";
 
                 renderAgenda();
             } else {
                 secAgenda.classList.add('hidden');
                 secQuedadas.classList.remove('hidden');
 
-                tabQuedadas.classList.add('active');
+                tabQuedadas.className = claseBotonActivo;
                 tabQuedadas.setAttribute('aria-selected', 'true');
+                iconQuedadas.className = "fa-solid fa-thumbtack text-lg shrink-0 text-black";
 
-                tabAgenda.classList.remove('active');
+                tabAgenda.className = claseBotonInactivo;
                 tabAgenda.setAttribute('aria-selected', 'false');
+                iconAgenda.className = "fa-solid fa-masks-theater text-lg shrink-0 text-slate-400";
 
                 renderQuedadas();
             }
