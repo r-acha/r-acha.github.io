@@ -11,7 +11,7 @@
     <!-- Google Font Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -48,6 +48,44 @@
         }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* --- CORRECCIÓN DEFINITIVA DE CONTRASTE --- */
+        /* Estilos base para los botones de pestañas */
+        .tab-btn-custom {
+            background-color: transparent;
+            color: #94a3b8; /* Gris claro por defecto */
+            border: 1px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Color de los iconos por defecto cuando la pestaña está inactiva */
+        .tab-btn-custom .tab-icon {
+            color: #22c55e !important; /* Verde visible pero sutil en fondo oscuro */
+            transition: color 0.2s ease-in-out;
+        }
+
+        /* Hover sobre pestaña inactiva */
+        .tab-btn-custom:hover {
+            background-color: rgba(42, 57, 66, 0.6);
+            color: #ffffff;
+        }
+        .tab-btn-custom:hover .tab-icon {
+            color: #4ade80 !important;
+        }
+
+        /* ESTADO ACTIVO (FORZADO) */
+        /* Cuando la pestaña está activa, obligamos a que todo sea negro profundo */
+        .tab-btn-custom.active {
+            background-color: #22c55e !important; /* Verde vivo */
+            color: #050505 !important;            /* Texto casi negro absoluto */
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.25);
+        }
+
+        /* El selector específico .active .tab-icon destruye cualquier herencia o color del icono */
+        .tab-btn-custom.active .tab-icon {
+            color: #050505 !important;            /* Icono negro garantizado */
+            opacity: 1 !important;
+        }
     </style>
 </head>
 <body class="bg-wa-dark text-slate-100 font-sans antialiased selection:bg-wa-green selection:text-black min-h-screen flex flex-col justify-between">
@@ -182,17 +220,17 @@
 
         <!-- SELECTOR DE PESTAÑAS PRINCIPALES -->
         <div class="flex items-center gap-3 border-b border-wa-border pb-4" id="agenda-seccion" role="tablist">
-            <!-- Pestaña Agenda Galicia -->
+            <!-- Pestaña Agenda Galicia (Activa por defecto) -->
             <button onclick="cambiarPestana('agenda')" id="tab-agenda" role="tab" aria-selected="true"
-                    class="flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-wa-green text-black shadow-lg">
-                <i id="icon-agenda" class="fa-solid fa-masks-theater text-lg shrink-0 text-black"></i>
+                    class="tab-btn-custom active flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug">
+                <i class="fa-solid fa-masks-theater text-lg shrink-0 tab-icon"></i>
                 <span>Agenda Galicia<br class="hidden sm:inline"> 2026–2027</span>
             </button>
 
             <!-- Pestaña Quedadas del Grupo -->
             <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" role="tab" aria-selected="false"
-                    class="flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-transparent text-slate-300 hover:text-white hover:bg-wa-card/60 border border-transparent">
-                <i id="icon-quedadas" class="fa-solid fa-thumbtack text-lg shrink-0 text-slate-400"></i>
+                    class="tab-btn-custom flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug">
+                <i class="fa-solid fa-thumbtack text-lg shrink-0 tab-icon"></i>
                 <span>Quedadas del<br class="hidden sm:inline"> Grupo</span>
             </button>
         </div>
@@ -925,36 +963,27 @@
             const secQuedadas = document.getElementById('seccion-quedadas');
             const tabAgenda = document.getElementById('tab-agenda');
             const tabQuedadas = document.getElementById('tab-quedadas');
-            const iconAgenda = document.getElementById('icon-agenda');
-            const iconQuedadas = document.getElementById('icon-quedadas');
-
-            const claseBotonActivo = "flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-wa-green text-black shadow-lg";
-            const claseBotonInactivo = "flex-1 py-3 px-4 rounded-2xl font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 text-center leading-snug transition bg-transparent text-slate-300 hover:text-white hover:bg-wa-card/60 border border-transparent";
 
             if (pestana === 'agenda') {
                 secAgenda.classList.remove('hidden');
                 secQuedadas.classList.add('hidden');
 
-                tabAgenda.className = claseBotonActivo;
+                tabAgenda.classList.add('active');
                 tabAgenda.setAttribute('aria-selected', 'true');
-                iconAgenda.className = "fa-solid fa-masks-theater text-lg shrink-0 text-black";
 
-                tabQuedadas.className = claseBotonInactivo;
+                tabQuedadas.classList.remove('active');
                 tabQuedadas.setAttribute('aria-selected', 'false');
-                iconQuedadas.className = "fa-solid fa-thumbtack text-lg shrink-0 text-slate-400";
 
                 renderAgenda();
             } else {
                 secAgenda.classList.add('hidden');
                 secQuedadas.classList.remove('hidden');
 
-                tabQuedadas.className = claseBotonActivo;
+                tabQuedadas.classList.add('active');
                 tabQuedadas.setAttribute('aria-selected', 'true');
-                iconQuedadas.className = "fa-solid fa-thumbtack text-lg shrink-0 text-black";
 
-                tabAgenda.className = claseBotonInactivo;
+                tabAgenda.classList.remove('active');
                 tabAgenda.setAttribute('aria-selected', 'false');
-                iconAgenda.className = "fa-solid fa-masks-theater text-lg shrink-0 text-slate-400";
 
                 renderQuedadas();
             }
@@ -1074,3 +1103,4 @@
     </script>
 </body>
 </html>
+
