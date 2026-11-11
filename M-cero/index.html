@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morriña Cero | Grupo de Quedadas Pontevedra & Vigo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        wa: {
+                            green: '#25D366',
+                            emerald: '#128C7E',
+                            teal: '#075E54',
+                            dark: '#0b141a',
+                            panel: '#111b21',
+                            card: '#1f2c34',
+                            hover: '#2a3942',
+                            border: '#2a3942'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos personalizados para el logo estilo sticker */
+        .logo-box {
+            background: linear-gradient(145deg, #18191c 0%, #000000 100%);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+        }
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.25);
+        }
+        .badge-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="bg-wa-dark text-slate-100 font-sans antialiased selection:bg-wa-green selection:text-black min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-wa-panel/90 backdrop-blur-md border-b border-wa-border/80 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- Mini Logo Emblema -->
+                <div class="w-10 h-10 rounded-full bg-black border-2 border-slate-700 flex items-center justify-center overflow-hidden shadow-inner">
+                    <div class="text-center font-black leading-none tracking-tighter text-[9px] text-white">
+                        <span class="block border-b border-white pb-[1px]">MO<span class="text-[6px] text-emerald-400">CERO</span></span>
+                        <span class="block pt-[1px] tracking-widest text-[8px]">RRiña</span>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
+                        Morriña Cero
+                        <span class="inline-block w-2 h-2 rounded-full bg-wa-green"></span>
+                    </h1>
+                    <p class="text-[11px] text-emerald-400 font-medium">Pontevedra & Vigo</p>
+                </div>
+            </div>
+
+            <!-- Botón compartir enlace directo -->
+            <button onclick="copiarEnlace()" class="flex items-center gap-1.5 text-xs bg-wa-card hover:bg-wa-hover text-slate-300 hover:text-white px-3 py-1.5 rounded-full border border-wa-border transition">
+                <i class="fa-solid fa-share-nodes text-wa-green"></i>
+                <span class="hidden sm:inline">Compartir</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6 w-full space-y-10 flex-grow">
+
+        <!-- Hero Section -->
+        <section class="text-center pt-4 pb-2">
+            <!-- Insignia Principal / Logo réplica fiel de la imagen -->
+            <div class="mx-auto w-36 h-36 sm:w-40 sm:h-40 rounded-full logo-box border-4 border-wa-card flex items-center justify-center p-3 relative mb-6 neon-glow">
+                <!-- Fondo estriado sutil como el sticker original -->
+                <div class="w-full h-full rounded-full bg-neutral-900 border border-neutral-700/60 flex flex-col items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px]"></div>
+                    
+                    <div class="relative z-10 border-2 border-white px-3 py-1.5 text-center bg-black/60 backdrop-blur-sm rounded-sm">
+                        <div class="flex items-baseline justify-center border-b border-white pb-0.5">
+                            <span class="font-extrabold text-2xl tracking-tighter text-white">mo</span>
+                            <span class="text-[9px] font-bold tracking-widest text-emerald-400 ml-1">CERO</span>
+                        </div>
+                        <div class="font-black text-xl tracking-wider text-white pt-0.5 uppercase">
+                            RRiña
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live counter badge -->
+                <div class="absolute -bottom-2 bg-wa-emerald text-white text-[11px] font-bold px-3 py-1 rounded-full border-2 border-wa-dark flex items-center gap-1.5 shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-wa-green animate-ping"></span>
+                    <span>42+ miembros</span>
+                </div>
+            </div>
+
+            <div class="space-y-3 max-w-xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wa-card text-xs text-slate-300 border border-wa-border">
+                    <i class="fa-solid fa-location-dot text-red-400"></i>
+                    <span>Rías Baixas · Pontevedra · Vigo y alrededores</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                    ¡Menos morriña y más <span class="text-wa-green">buen rollo</span>! 🤫🍻
+                </h2>
+
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                    Grupo para gente con ganas de conocer nuevas amistades, echar unas buenas risas, compartir planes improvisados y desconectar.
+                    <span class="block mt-1 font-medium text-slate-200">¡Sin malos rollos ni dramas! 😎</span>
+                </p>
+
+                <!-- Action CTA -->
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a href="https://chat.whatsapp.com/invite" target="_blank" rel="noopener noreferrer" 
+                       class="w-full sm:w-auto px-7 py-3.5 bg-wa-green hover:bg-[#20ba59] text-black font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-wa-green/20 transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Unirme al Grupo de WhatsApp</span>
+                    </a>
+                    <a href="#planes" class="w-full sm:w-auto px-6 py-3.5 bg-wa-card hover:bg-wa-hover text-slate-200 font-semibold text-sm rounded-full border border-wa-border transition flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-calendar-check text-wa-green"></i>
+                        <span>Ver Próximos Planes</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reglas / Filosofía de la Comunidad -->
+        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5 sm:p-6 shadow-md">
+            <div class="flex items-center justify-between pb-4 border-b border-wa-border/70 mb-5">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-wa-green flex items-center justify-center">
+                        <i class="fa-solid fa-handshake-simple"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Normas y Esencia del Grupo</h3>
+                </div>
+                <span class="text-xs bg-wa-card text-emerald-400 px-2.5 py-1 rounded-full font-mono">100% Buen Rollo</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">📍</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Zona Geográfica</h4>
+                        <p class="text-xs text-slate-400">Pontevedra, Vigo y alrededores. Gente local o recién llegada con ganas de vida social.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">👥</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Ambiente Sano</h4>
+                        <p class="text-xs text-slate-400">Cero postureo, sin malos rollos ni dramas. Respeto mutuo entre todos los miembros.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">🍻</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Quedadas y Planes</h4>
+                        <p class="text-xs text-slate-400">Cañas, tapeo, cenas, copas, conciertos, rutas o un café improvisado a media tarde.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">🤫</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Pacto de Confianza</h4>
+                        <p class="text-xs text-slate-400">Lo que pasa en el grupo... se queda en el grupo. Privacidad y discreción siempre.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cita del grupo -->
+            <div class="mt-4 p-3 bg-black/30 rounded-xl text-center border border-dashed border-wa-border">
+                <p class="text-xs sm:text-sm italic text-slate-300">
+                    "Entra, saluda y que empiece la historia... 😂🎉"
+                </p>
+            </div>
+        </section>
+
+        <!-- Tablón de Planes y Quedadas -->
+        <section id="planes" class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <h3 class="font-bold text-xl text-white flex items-center gap-2">
+                        <i class="fa-solid fa-beer-mug-empty text-amber-400"></i>
+                        Quedadas y Próximos Planes
+                    </h3>
+                    <p class="text-xs text-slate-400">Propuestas abiertas de la comunidad</p>
+                </div>
+                <button onclick="abrirModalPlan()" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs px-3.5 py-2 rounded-xl transition shadow">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Proponer nuevo plan</span>
+                </button>
+            </div>
+
+            <!-- Filtros de categoría -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs no-scrollbar" id="filtrosContainer">
+                <button onclick="filtrarPlanes('todos', this)" class="filtro-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-semibold whitespace-nowrap transition">
+                    Todos
+                </button>
+                <button onclick="filtrarPlanes('tapeo', this)" class="filtro-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border transition">
+                    🍢 Tapeo & Cañas
+                </button>
+                <button onclick="filtrarPlanes('noche', this)" class="filtro-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border transition">
+                    🍸 Noche & Copas
+                </button>
+                <button onclick="filtrarPlanes('tardeo', this)" class="filtro-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border transition">
+                    ☕ Café & Tardeo
+                </button>
+                <button onclick="filtrarPlanes('airelibre', this)" class="filtro-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border transition">
+                    🌲 Rutas & Relax
+                </button>
+            </div>
+
+            <!-- Lista de eventos interactivos -->
+            <div id="listaPlanes" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <!-- Se inyectan con JavaScript -->
+            </div>
+        </section>
+
+        <!-- Mini FAQ / Cómo funciona -->
+        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                <i class="fa-regular fa-circle-question text-wa-green"></i>
+                ¿Cómo funciona Morriña Cero?
+            </h4>
+            <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+                <div class="border-b border-wa-border/50 pb-2.5">
+                    <p class="font-semibold text-white">1. ¿Tengo que pagar algo o hay compromisos?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">Para nada. Es un grupo de amigos y gente local sin cuotas ni compromisos. Cada uno paga lo que consume en cada quedada.</p>
+                </div>
+                <div class="border-b border-wa-border/50 pb-2.5">
+                    <p class="font-semibold text-white">2. ¿Qué pasa si no conozco a nadie al llegar?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">El 90% hemos entrado sin conocer a nadie. Los administradores y compañeros te integran al momento desde que llegas.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-white">3. ¿Quién organiza los planes?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">Cualquiera puede proponer: desde unas cervezas improvisadas hoy hasta una cena el fin de semana.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-wa-panel border-t border-wa-border py-6 px-4 text-center mt-12 text-xs text-slate-400">
+        <div class="max-w-4xl mx-auto space-y-2">
+            <p class="font-medium text-slate-300">Morriña Cero · Grupo Social Pontevedra & Vigo</p>
+            <p class="text-[11px] text-slate-400">Comunidad libre gestionada por miembros para compartir buenos ratos en Galicia.</p>
+            <div class="pt-2 flex justify-center gap-4 text-base text-slate-400">
+                <button onclick="copiarEnlace()" title="Copiar invitación" class="hover:text-wa-green transition"><i class="fa-solid fa-link"></i></button>
+                <a href="https://chat.whatsapp.com/invite" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="hover:text-wa-green transition"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-wa-card border border-wa-green/60 text-white px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs">
+        <i class="fa-solid fa-circle-check text-wa-green text-sm"></i>
+        <span id="toastMsg">Mensaje copiado con éxito</span>
+    </div>
+
+    <!-- Modal para proponer plan -->
+    <div id="modalPlan" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-wa-panel border border-wa-border w-full max-w-md rounded-2xl p-5 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-wa-border">
+                <h3 class="font-bold text-white text-base flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-plus text-wa-green"></i>
+                    Proponer un Plan
+                </h3>
+                <button onclick="cerrarModalPlan()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="nuevoPlanForm" onsubmit="agregarPlan(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-slate-300 font-medium mb-1">Título del plan</label>
+                    <input type="text" id="planTitulo" required placeholder="Ej: Cañas por la Zona Vella" class="w-full bg-wa-card border border-wa-border rounded-lg px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-wa-green">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-slate-300 font-medium mb-1">Ciudad / Zona</label>
+                        <select id="planCiudad" class="w-full bg-wa-card border border-wa-border rounded-lg px-3 py-2 text-white focus:outline-none focus:border-wa-green">
+                            <option value="Pontevedra">Pontevedra</option>
+                            <option value="Vigo">Vigo</option>
+                            <option value="Alrededores">Alrededores / Rías</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-medium mb-1">Categoría</label>
+                        <select id="planCategoria" class="w-full bg-wa-card border border-wa-border rounded-lg px-3 py-2 text-white focus:outline-none focus:border-wa-green">
+                            <option value="tapeo">Tapeo & Cañas</option>
+                            <option value="noche">Noche & Copas</option>
+                            <option value="tardeo">Café & Tardeo</option>
+                            <option value="airelibre">Rutas & Aire Libre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-slate-300 font-medium mb-1">Fecha</label>
+                        <input type="date" id="planFecha" required class="w-full bg-wa-card border border-wa-border rounded-lg px-3 py-2 text-white focus:outline-none focus:border-wa-green">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-medium mb-1">Hora aproximada</label>
+                        <input type="time" id="planHora" required class="w-full bg-wa-card border border-wa-border rounded-lg px-3 py-2 text-white focus:outline-none focus:border-wa-green">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-medium mb-1">Detalles / Punto de encuentro</label>
+                    <textarea id="planDesc" rows="2" placeholder="Punto de encuentro, si hay reserva previa, etc." class="w-full bg-wa-card border border-wa-border rounded-lg px-3 py-2 text-white placeholder-slate-400 focus:outline-none focus:border-wa-green"></textarea>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="cerrarModalPlan()" class="px-3.5 py-2 rounded-lg bg-wa-card hover:bg-wa-hover text-slate-300 transition">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-wa-green hover:bg-emerald-500 text-black font-bold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Publicar propuesta</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script de Interactividad -->
+    <script>
+        // Datos iniciales de quedadas basadas en Pontevedra y Vigo
+        const planesIniciales = [
+            {
+                id: 1,
+                titulo: "Tapeo por la Zona Vella y Praza da Leña",
+                ciudad: "Pontevedra",
+                categoria: "tapeo",
+                fechaTexto: "Viernes, 20:30 h",
+                icono: "fa-beer-mug-empty",
+                apuntados: 11,
+                desc: "Ronda clásica de vinos, cañas y tapas variadas para charlar y empezar con buen rollo el fin de semana."
+            },
+            {
+                id: 2,
+                titulo: "Tardeo y Copas por el Casco Vello",
+                ciudad: "Vigo",
+                categoria: "noche",
+                fechaTexto: "Sábado, 23:00 h",
+                icono: "fa-martini-glass-citrus",
+                apuntados: 16,
+                desc: "Quedada en Praza da Constitución para tomar unas copas y disfrutar del ambientazo nocturno."
+            },
+            {
+                id: 3,
+                titulo: "Café de sobremesa & Charla distendida",
+                ciudad: "Pontevedra",
+                categoria: "tardeo",
+                fechaTexto: "Domingo, 17:00 h",
+                icono: "fa-mug-hot",
+                apuntados: 7,
+                desc: "Plan relajado de domingo para merendar, contarnos la semana y desconectar sin prisas."
+            },
+            {
+                id: 4,
+                titulo: "Paseo por Samil o Ruta dos Muíños",
+                ciudad: "Alrededores",
+                categoria: "airelibre",
+                fechaTexto: "Sábado, 11:30 h",
+                icono: "fa-person-hiking",
+                apuntados: 9,
+                desc: "Ruta suave al aire libre con parada obligatoria para vermú y empanada al terminar."
+            }
+        ];
+
+        let planes = [...planesIniciales];
+        let filtroActual = 'todos';
+
+        // Renderizar los planes
+        function renderPlanes() {
+            const container = document.getElementById('listaPlanes');
+            container.innerHTML = '';
+
+            const planesFiltrados = filtroActual === 'todos' 
+                ? planes 
+                : planes.filter(p => p.categoria === filtroActual);
+
+            if (planesFiltrados.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-calendar-xmark text-2xl mb-2 text-slate-400"></i>
+                        <p class="text-xs">No hay planes en esta categoría todavía. ¡Sé el primero en proponer uno!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            planesFiltrados.forEach(plan => {
+                const card = document.createElement('div');
+                card.className = "bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm relative group";
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="inline-flex items-center gap-1 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full">
+                                <i class="fa-solid fa-location-dot text-[10px]"></i> ${plan.ciudad}
+                            </span>
+                            <span class="text-slate-400 flex items-center gap-1">
+                                <i class="fa-regular fa-clock text-[10px]"></i> ${plan.fechaTexto}
+                            </span>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base text-white group-hover:text-wa-green transition">
+                            ${plan.titulo}
+                        </h4>
+                        <p class="text-xs text-slate-400 line-clamp-2">
+                            ${plan.desc}
+                        </p>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-wa-border/60 flex items-center justify-between">
+                        <div class="flex items-center gap-1.5 text-xs text-slate-300">
+                            <span class="w-2 h-2 rounded-full bg-wa-green"></span>
+                            <span class="font-semibold" id="count-${plan.id}">${plan.apuntados}</span> apuntados
+                        </div>
+                        <button onclick="unirseAPlan(${plan.id}, this)" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition flex items-center gap-1.5 font-medium">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            <span>Me apunto</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Filtro
+        function filtrarPlanes(categoria, btn) {
+            filtroActual = categoria;
+            document.querySelectorAll('.filtro-btn').forEach(b => {
+                b.className = "filtro-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border transition";
+            });
+            btn.className = "filtro-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-semibold whitespace-nowrap transition";
+            renderPlanes();
+        }
+
+        // Unirse a un plan localmente
+        function unirseAPlan(id, boton) {
+            const plan = planes.find(p => p.id === id);
+            if (plan) {
+                if (!boton.dataset.joined) {
+                    plan.apuntados += 1;
+                    boton.dataset.joined = "true";
+                    boton.innerHTML = `<i class="fa-solid fa-check text-wa-green"></i> <span>¡Apuntado!</span>`;
+                    boton.classList.add('border-wa-green', 'text-wa-green');
+                    mostrarToast(`¡Genial! Recuerda confirmarlo en el chat de WhatsApp.`);
+                } else {
+                    plan.apuntados -= 1;
+                    delete boton.dataset.joined;
+                    boton.innerHTML = `<i class="fa-regular fa-thumbs-up"></i> <span>Me apunto</span>`;
+                    boton.classList.remove('border-wa-green', 'text-wa-green');
+                    mostrarToast(`Te has desapuntado de la quedada.`);
+                }
+                const countElem = document.getElementById(`count-${id}`);
+                if (countElem) countElem.innerText = plan.apuntados;
+            }
+        }
+
+        // Modal de Nuevo Plan
+        function abrirModalPlan() {
+            document.getElementById('modalPlan').classList.remove('hidden');
+            document.getElementById('modalPlan').classList.add('flex');
+        }
+
+        function cerrarModalPlan() {
+            document.getElementById('modalPlan').classList.add('hidden');
+            document.getElementById('modalPlan').classList.remove('flex');
+            document.getElementById('nuevoPlanForm').reset();
+        }
+
+        function agregarPlan(e) {
+            e.preventDefault();
+            const titulo = document.getElementById('planTitulo').value;
+            const ciudad = document.getElementById('planCiudad').value;
+            const categoria = document.getElementById('planCategoria').value;
+            const fecha = document.getElementById('planFecha').value;
+            const hora = document.getElementById('planHora').value;
+            const desc = document.getElementById('planDesc').value || "Plan propuesto por un miembro del grupo.";
+
+            const fechaFormat = fecha ? `${fecha} a las ${hora || '19:00'}` : 'Próximamente';
+
+            const nuevo = {
+                id: Date.now(),
+                titulo,
+                ciudad,
+                categoria,
+                fechaTexto: fechaFormat,
+                icono: 'fa-calendar-star',
+                apuntados: 1,
+                desc
+            };
+
+            planes.unshift(nuevo);
+            renderPlanes();
+            cerrarModalPlan();
+            mostrarToast("¡Plan propuesto! Compártelo por el grupo para avisar a la gente.");
+        }
+
+        // Toast de notificaciones
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMsg');
+            msg.innerText = mensaje;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3200);
+        }
+
+        // Copiar enlace web al portapapeles
+        function copiarEnlace() {
+            const url = window.location.href;
+            const tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                mostrarToast('Enlace copiado al portapapeles. ¡Pásalo al grupo!');
+            } catch (err) {
+                mostrarToast('Comparte este enlace con tus amigos: ' + url);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPlanes();
+            // Pre-asignar fecha por defecto mañana en el modal
+            const manana = new Date();
+            manana.setDate(manana.getDate() + 1);
+            const inputFecha = document.getElementById('planFecha');
+            if (inputFecha) {
+                inputFecha.value = manana.toISOString().split('T')[0];
+                document.getElementById('planHora').value = "20:00";
+            }
+        });
+    </script>
+</body>
+  </html>
