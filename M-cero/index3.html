@@ -206,17 +206,27 @@
             <!-- Barra de control y filtros -->
             <div class="bg-wa-panel p-4 rounded-xl border border-wa-border space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
+                    <div class="flex flex-col">
                         <h3 class="font-bold text-base text-white flex items-center gap-2">
                             <i class="fa-solid fa-calendar-days text-wa-green"></i>
                             Agenda Oficial 2026–2027
                         </h3>
                         <p class="text-xs text-slate-400">Pontevedra, Vigo, Vilagarcía, Moaña, Valga, O Rosal y toda Galicia</p>
                     </div>
-                    <div class="relative sm:w-64">
-                        <input type="text" id="buscador-eventos" oninput="filtrarEventos()" placeholder="Buscar artista, concello, sala..."
-                               class="w-full bg-wa-card text-xs text-white rounded-lg pl-8 pr-3 py-2 border border-wa-border focus:border-wa-green focus:outline-none placeholder-slate-500">
-                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                        <!-- Interruptor Ocultar Pasados -->
+                        <label class="inline-flex items-center cursor-pointer text-xs text-slate-300">
+                            <input type="checkbox" id="ocultar-pasados" onchange="alternarPasados()" checked class="sr-only peer">
+                            <div class="relative w-9 h-5 bg-wa-card peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-slate-400 after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-wa-green peer-checked:after:bg-black peer-checked:after:border-black"></div>
+                            <span class="ms-2 font-medium">Ocultar eventos pasados</span>
+                        </label>
+
+                        <div class="relative w-full sm:w-64">
+                            <input type="text" id="buscador-eventos" oninput="filtrarEventos()" placeholder="Buscar artista, concello, sala..."
+                                   class="w-full bg-wa-card text-xs text-white rounded-lg pl-8 pr-3 py-2 border border-wa-border focus:border-wa-green focus:outline-none placeholder-slate-500">
+                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -344,7 +354,7 @@
                 <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
                     <div class="space-y-2">
                         <div class="flex items-center justify-between text-[11px]">
-                            <span class="inline-flex items-center gap-1 font-semibold text-emerald-400 bg-emerald-950/60 border-emerald-800/50 px-2.5 py-0.5 rounded-full">
+                            <span class="inline-flex items-center gap-1 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full">
                                 🚶‍♂️🌿 O Salnés
                             </span>
                             <span class="text-slate-400">Fecha por determinar</span>
@@ -640,14 +650,23 @@
 
         let seccionFiltro = 'todas';
         let mesFiltro = 'todos';
+        let ocultarPasados = true;
 
         // Ordenar la base de datos de manera cronológica inicial por la fechaOrden
         eventosAgendaCompleta.sort((a, b) => new Date(a.fechaOrden) - new Date(b.fechaOrden));
+
+        // Obtener la fecha actual con la hora puesta a las 00:00:00 para comparar sólo los días
+        function obtenerFechaHoy() {
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+            return hoy;
+        }
 
         // Renderizar los eventos con los filtros aplicados (manteniendo siempre el orden por fechaOrden)
         function renderAgenda() {
             const contenedor = document.getElementById('lista-eventos');
             const textoBuscador = document.getElementById('buscador-eventos').value.toLowerCase().trim();
+            const hoy = obtenerFechaHoy();
 
             const filtrados = eventosAgendaCompleta.filter(ev => {
                 const coincideSeccion = (seccionFiltro === 'todas' || ev.seccion === seccionFiltro);
@@ -656,6 +675,16 @@
                                       ev.lugar.toLowerCase().includes(textoBuscador) || 
                                       ev.fecha.toLowerCase().includes(textoBuscador) ||
                                       (ev.comp && ev.comp.toLowerCase().includes(textoBuscador));
+                
+                // Comprobación de eventos expirados
+                const fechaEv = new Date(ev.fechaOrden);
+                fechaEv.setHours(0, 0, 0, 0);
+                const esPasado = fechaEv < hoy;
+
+                if (ocultarPasados && esPasado) {
+                    return false; // Se oculta por completo
+                }
+
                 return coincideSeccion && coincideMes && coincideTexto;
             });
 
@@ -688,19 +717,35 @@
                     secTexto = 'Fiestas & Ferias';
                 }
 
+                // Detectar si el evento ya pasó en relación a hoy
+                const fechaEv = new Date(ev.fechaOrden);
+                fechaEv.setHours(0, 0, 0, 0);
+                const yaHaPasado = fechaEv < hoy;
+
+                let estiloPasadoCard = '';
+                let badgeExpirado = '';
+
+                if (yaHaPasado) {
+                    estiloPasadoCard = 'opacity-40 filter saturate-50 border-dashed';
+                    badgeExpirado = `<span class="bg-red-900/40 text-red-300 font-bold px-2 py-0.5 rounded text-[10px] border border-red-800/40">FINALIZADO</span>`;
+                }
+
                 const esGratis = ev.precio.toUpperCase().includes('GRATIS') || ev.precio.toUpperCase().includes('LIBRE');
                 const badgePrecio = esGratis 
                     ? `<span class="bg-emerald-500/20 text-wa-green font-bold px-2 py-0.5 rounded text-[10px] border border-wa-green/30">GRATIS</span>`
                     : `<span class="bg-wa-card text-slate-300 font-medium px-2 py-0.5 rounded text-[10px] border border-wa-border">${ev.precio}</span>`;
 
                 return `
-                    <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 p-4 rounded-xl transition flex flex-col justify-between shadow-sm">
+                    <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 p-4 rounded-xl transition flex flex-col justify-between shadow-sm ${estiloPasadoCard}">
                         <div class="space-y-2">
                             <div class="flex items-center justify-between text-[11px]">
                                 <span class="inline-flex items-center gap-1 font-semibold border px-2 py-0.5 rounded-full ${badgeClass}">
                                     <i class="fa-solid ${iconoSec} text-[10px]"></i> ${secTexto}
                                 </span>
-                                ${badgePrecio}
+                                <div class="flex items-center gap-1.5">
+                                    ${badgeExpirado}
+                                    ${badgePrecio}
+                                </div>
                             </div>
                             <h4 class="font-bold text-white text-sm sm:text-base leading-snug">${ev.titulo}</h4>
                             ${ev.comp ? `<p class="text-[11px] text-emerald-400 font-medium">🎭 Cía: ${ev.comp}</p>` : ''}
@@ -718,6 +763,12 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        // Filtro pasados
+        function alternarPasados() {
+            ocultarPasados = document.getElementById('ocultar-pasados').checked;
+            renderAgenda();
         }
 
         // Filtro por sección
