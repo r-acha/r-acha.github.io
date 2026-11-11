@@ -481,9 +481,9 @@
         </div>
     </div>
 
-    <!-- Modal Detalle del Evento (Overlay IA y Gestión) -->
+    <!-- Modal Detalle del Evento (Overlay con Asistente IA) -->
     <div id="modalEvento" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4">
-        <div class="bg-wa-panel border border-wa-border w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-4 relative">
+        <div class="bg-wa-panel border border-wa-border w-full max-w-lg rounded-2xl p-6 shadow-2xl space-y-4 relative max-h-[90vh] overflow-y-auto no-scrollbar">
             <button onclick="cerrarModalEvento()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 text-lg">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -568,7 +568,7 @@
 
         // Extrae minutos para comparar horas (ej. "20:30 h", "21:00", "8:00 h")
         function extraerMinutos(horaStr) {
-            if (!horaStr || horaStr === 'Por confirmar') return 9999;
+            if (!horaStr || horaStr === 'Por confirmar' || horaStr.toLowerCase().includes('varios')) return 9999;
             const match = horaStr.match(/(\d{1,2})[:.](\d{2})/);
             if (match) {
                 return parseInt(match[1], 10) * 60 + parseInt(match[2], 10);
@@ -670,8 +670,21 @@
                     continue;
                 }
 
-                // Omitir cabeceras o texto decorativo
-                if (linea.startsWith('✤') || linea.startsWith('━') || linea.includes('AGENDA RÍAS BAIXAS') || linea.includes('Música |') || linea.includes('Rías Baixas ·') || linea.includes('EXPOSICIONES Y ACTIVIDADES') || linea.includes('IMPORTANTE:') || linea.includes('UNA SEMANA') || linea.includes('📍 Pontevedra ·') || linea.includes('Una gran temporada') || (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS'))) {
+                // Omitir cabeceras, líneas decorativas y fechas sueltas/agrupadas
+                if (
+                    linea.startsWith('✤') || 
+                    linea.startsWith('━') || 
+                    linea.includes('AGENDA RÍAS BAIXAS') || 
+                    linea.includes('Música |') || 
+                    linea.includes('Rías Baixas ·') || 
+                    linea.includes('EXPOSICIONES Y ACTIVIDADES') || 
+                    linea.includes('IMPORTANTE:') || 
+                    linea.includes('UNA SEMANA') || 
+                    linea.includes('📍 Pontevedra ·') || 
+                    linea.includes('Una gran temporada') || 
+                    (linea.startsWith('📌') && !linea.includes('AGENDA DE EVENTOS')) ||
+                    /^[📅📆]?\s*\d{1,2}(?:,\s*\d{1,2})*\s+y\s+\d{1,2}\s+de\s+[a-z]+/i.test(linea)
+                ) {
                     continue;
                 }
 
@@ -727,7 +740,7 @@
                 ev.mes = extraerMesAnioLabel(ev.fechaOrden);
             });
 
-            // ORDENACIÓN CRONOLÓGICA REAL: Fecha (día) y desempate por Minutos (hora)
+            // Ordenación cronológica exacta: fecha (día) y desempate por hora
             eventosAgendaCompleta.sort((a, b) => {
                 const diffFecha = a.fechaOrden - b.fechaOrden;
                 if (diffFecha !== 0) return diffFecha;
@@ -808,11 +821,11 @@
                     <div onclick="abrirModalEvento(${idxReal})" 
                          class="bg-wa-panel border border-wa-border hover:border-wa-green/50 p-4 rounded-xl transition cursor-pointer flex flex-col justify-between shadow-sm group ${estiloPasadoCard}">
                         <div class="space-y-2">
-                            <div class="flex items-center justify-between text-[11px]">
-                                <span class="inline-flex items-center gap-1 font-semibold border px-2 py-0.5 rounded-full ${badgeClass}">
+                            <div class="flex items-center justify-between text-[11px] gap-2">
+                                <span class="inline-flex items-center gap-1 font-semibold border px-2.5 py-0.5 rounded-full ${badgeClass} truncate">
                                     <i class="fa-solid ${iconoSec} text-[10px]"></i> ${secTexto}
                                 </span>
-                                <div class="flex items-center gap-1.5">
+                                <div class="flex items-center gap-1.5 shrink-0">
                                     ${badgeExpirado}
                                     ${badgePrecio}
                                 </div>
@@ -820,16 +833,19 @@
                             <h4 class="font-bold text-white text-sm sm:text-base leading-snug group-hover:text-emerald-300 transition-colors">${ev.titulo}</h4>
                             ${ev.comp ? `<p class="text-[11px] text-emerald-400 font-medium">🎭 Cía: ${ev.comp}</p>` : ''}
                             <p class="text-xs text-slate-300 flex items-start gap-1.5 pt-0.5">
-                                <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-xs"></i>
-                                <span>${ev.lugar}</span>
+                                <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-xs shrink-0"></i>
+                                <span class="line-clamp-2">${ev.lugar}</span>
                             </p>
                         </div>
-                        <div class="mt-3 pt-2.5 border-t border-wa-border/70 flex items-center justify-between text-[11px] text-slate-400">
-                            <span class="flex items-center gap-1">
-                                <i class="fa-regular fa-calendar text-wa-green"></i> ${ev.fecha}
+
+                        <!-- Pie de tarjeta blindado para móviles -->
+                        <div class="mt-3 pt-2.5 border-t border-wa-border/70 flex items-center justify-between gap-2 text-[11px] text-slate-400">
+                            <span class="flex items-center gap-1.5 min-w-0 truncate">
+                                <i class="fa-regular fa-calendar text-wa-green shrink-0"></i> 
+                                <span class="truncate">${ev.fecha}</span>
                             </span>
-                            <div class="flex items-center gap-2">
-                                ${ev.hora !== 'Por confirmar' ? `<span class="text-slate-200 font-mono font-semibold bg-wa-card px-1.5 py-0.5 rounded border border-wa-border">${ev.hora}</span>` : ''}
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                ${ev.hora !== 'Por confirmar' ? `<span class="text-slate-200 font-mono font-semibold bg-wa-card px-2 py-0.5 rounded border border-wa-border text-[10px] whitespace-nowrap">${ev.hora}</span>` : ''}
                                 <i class="fa-solid fa-chevron-right text-[10px] text-slate-500 group-hover:text-wa-green transition-transform group-hover:translate-x-0.5"></i>
                             </div>
                         </div>
