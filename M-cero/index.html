@@ -1,388 +1,662 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Morriña Cero | Pontevedra, Vigo e Arredores</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            wa: {
-              dark: '#111b21',
-              card: '#202c33',
-              hover: '#222e35',
-              green: '#25D366',
-              teal: '#00a884',
-              text: '#e9edef',
-              subtext: '#8696a0'
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morriña Cero | Grupo de Quedadas Pontevedra & Vigo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        wa: {
+                            green: '#25D366',
+                            emerald: '#128C7E',
+                            teal: '#075E54',
+                            dark: '#0b141a',
+                            panel: '#111b21',
+                            card: '#1f2c34',
+                            hover: '#2a3942',
+                            border: '#2a3942'
+                        }
+                    }
+                }
             }
-          }
         }
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+    </script>
+
+    <style>
+        .logo-box {
+            background: linear-gradient(145deg, #18191c 0%, #000000 100%);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+        }
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.25);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body class="bg-[#0b141a] text-wa-text min-h-screen font-sans antialiased pb-24">
+<body class="bg-wa-dark text-slate-100 font-sans antialiased selection:bg-wa-green selection:text-black min-h-screen flex flex-col justify-between">
 
-  <!-- ENCABEZADO -->
-  <header class="sticky top-0 z-40 bg-wa-card/95 backdrop-blur border-b border-white/10 px-4 py-3 shadow-md">
-    <div class="max-w-4xl mx-auto flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <!-- Logo basado en la imagen del grupo -->
-        <div class="w-12 h-12 rounded-full border-2 border-wa-green bg-white flex flex-col items-center justify-center p-1 text-black font-extrabold shadow-sm select-none leading-none">
-          <span class="text-[13px] tracking-tighter flex items-center">mo<span class="text-[9px] font-normal tracking-tight ml-0.5">CERO</span></span>
-          <span class="text-[12px] tracking-tighter -mt-0.5">RRiña</span>
-        </div>
-        <div>
-          <h1 class="text-lg font-bold text-white flex items-center gap-1.5 leading-snug">
-            Morriña Cero <span class="text-base">🤫</span>
-          </h1>
-          <p class="text-xs text-wa-subtext">Pontevedra · Vigo · Rías Baixas</p>
-        </div>
-      </div>
-      <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
-         class="inline-flex items-center gap-2 bg-wa-green hover:bg-[#20ba59] text-[#111b21] font-semibold text-xs sm:text-sm px-3.5 py-2 rounded-full shadow transition-all duration-200">
-        <i class="fa-brands fa-whatsapp text-lg"></i>
-        <span>Entrar al chat</span>
-      </a>
-    </div>
-  </header>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="max-w-4xl mx-auto px-4 pt-4">
-
-    <!-- DESCRIPCIÓN & REGLAS -->
-    <section class="bg-wa-card border border-white/5 rounded-2xl p-4 sm:p-5 mb-5 shadow-lg">
-      <p class="text-sm text-gray-300 leading-relaxed mb-3">
-        Grupo para gente de aprox juventud años de <strong>Pontevedra y Vigo</strong>. Aquí venimos a conocer gente, echar unas risas, hacer planes y disfrutar 🍻🎉.
-      </p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-wa-subtext border-t border-white/10 pt-3">
-        <div class="flex items-center gap-2">
-          <span>🕶️</span>
-          <span><strong>Sin malos rollos,</strong> sin dramas.</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span>🤫</span>
-          <span>Lo que pasa en el grupo... se queda en el grupo.</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span>👥</span>
-          <span>Buen ambiente y gente de buen rollo.</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span>🍻</span>
-          <span>Quedadas · cenas · copas · planes improvisados.</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- SELECTOR DE PESTAÑAS -->
-    <div class="flex space-x-2 border-b border-white/10 mb-4 pb-2">
-      <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" 
-              class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-wa-green text-[#111b21]">
-        <i class="fa-solid fa-calendar-check"></i>
-        <span>Quedadas del Grupo</span>
-      </button>
-      <button onclick="cambiarPestana('agenda')" id="tab-agenda" 
-              class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-wa-subtext hover:bg-wa-hover">
-        <i class="fa-solid fa-masks-theater"></i>
-        <span>Agenda Rías Baixas (9–16 Nov)</span>
-      </button>
-    </div>
-
-    <!-- SECCIÓN: QUEDADAS ACTIVAS -->
-    <section id="seccion-quedadas" class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-wa-card to-wa-hover p-4 rounded-xl border border-white/10">
-        <div>
-          <h2 class="text-base font-bold text-white flex items-center gap-2">
-            <span>📌</span> Próximas Quedadas Oficiales
-          </h2>
-          <p class="text-xs text-wa-subtext mt-0.5">Planes organizados por y para los miembros del grupo.</p>
-        </div>
-        <button onclick="mostrarModalReglas()" class="text-xs bg-[#2a3942] hover:bg-[#32434e] text-wa-green border border-wa-green/30 px-3 py-1.5 rounded-lg flex items-center gap-1.5 w-fit">
-          <i class="fa-solid fa-circle-info"></i> ¿Cómo apuntarse?
-        </button>
-      </div>
-
-      <!-- Tarjeta 1: Oporto -->
-      <article class="bg-wa-card rounded-xl p-4 border border-white/10 hover:border-wa-green/40 transition">
-        <div class="flex justify-between items-start gap-2">
-          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-red-950 text-red-300 border border-red-800">
-            🍷🚌 14 y 15 Nov | Oporto y Vinhos Verdes 🇵🇹
-          </span>
-          <span class="text-xs font-bold text-wa-green bg-wa-green/10 px-2 py-0.5 rounded">225 €</span>
-        </div>
-        <p class="text-xs text-wa-subtext mt-2">Salida y regreso desde Cambados · Incluye visitas, bodegas, alojamiento y comidas estipuladas.</p>
-        <div class="mt-3 bg-black/30 p-2.5 rounded-lg text-xs">
-          <strong class="text-white block mb-1">👥 Apuntados:</strong>
-          <span class="inline-block bg-[#111b21] px-2 py-1 rounded text-wa-text border border-white/5">Roberto +1</span>
-        </div>
-      </article>
-
-      <!-- Tarjeta 2: Uxía -->
-      <article class="bg-wa-card rounded-xl p-4 border border-white/10 hover:border-wa-green/40 transition">
-        <div class="flex justify-between items-start gap-2">
-          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-purple-950 text-purple-300 border border-purple-800">
-            🎤 Viernes 13 Nov | Uxía – Será por Flores
-          </span>
-          <span class="text-xs text-wa-subtext">20:00 h</span>
-        </div>
-        <p class="text-xs text-wa-subtext mt-2">Auditorio Municipal de Vilagarcía de Arousa.</p>
-        <div class="mt-3 bg-black/30 p-2.5 rounded-lg text-xs">
-          <strong class="text-white block mb-1">👥 Apuntados:</strong>
-          <span class="inline-block bg-[#111b21] px-2 py-1 rounded text-wa-text border border-white/5">Cris</span>
-        </div>
-      </article>
-
-      <!-- Tarjeta 3: Valença do Minho -->
-      <article class="bg-wa-card rounded-xl p-4 border border-white/10 hover:border-wa-green/40 transition">
-        <div class="flex justify-between items-start gap-2">
-          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-amber-950 text-amber-300 border border-amber-800">
-            🍫🏰 28 Nov | Fortaleza de Chocolate (Valença) 🇵🇹
-          </span>
-          <span class="text-xs text-amber-400">Navidad</span>
-        </div>
-        <p class="text-xs text-wa-subtext mt-2">Feria de chocolates, bombones artesanales y ambiente navideño en la Fortaleza.</p>
-        <div class="mt-3 bg-black/30 p-2.5 rounded-lg text-xs">
-          <strong class="text-white block mb-1">👥 Apuntados:</strong>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="bg-[#111b21] px-2 py-1 rounded text-wa-text border border-white/5">Cris</span>
-            <span class="bg-[#111b21] px-2 py-1 rounded text-wa-text border border-white/5">¿Roberto +1?</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Tarjeta 4: Vía Verde -->
-      <article class="bg-wa-card rounded-xl p-4 border border-white/10 hover:border-wa-green/40 transition">
-        <div class="flex justify-between items-start gap-2">
-          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800">
-            🚶‍♂️🌿 Ruta Vía Verde do Salnés
-          </span>
-          <span class="text-xs text-wa-subtext">Fecha por determinar</span>
-        </div>
-        <p class="text-xs text-wa-subtext mt-2">Ruta de senderismo al aire libre por el Salnés.</p>
-        <div class="mt-3 bg-black/30 p-2.5 rounded-lg text-xs">
-          <strong class="text-white block mb-1">👥 Apuntados:</strong>
-          <div class="flex flex-wrap gap-1.5">
-            <span class="bg-[#111b21] px-2 py-1 rounded text-wa-text border border-white/5">Roberto +2</span>
-            <span class="bg-[#111b21] px-2 py-1 rounded text-wa-text border border-white/5">Dora</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Tarjeta 5: Termas -->
-      <article class="bg-wa-card rounded-xl p-4 border border-white/10 hover:border-wa-green/40 transition">
-        <div class="flex justify-between items-start gap-2">
-          <span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">
-            ♨️💦 Termas de Caldas de Reis
-          </span>
-          <span class="text-xs font-bold text-wa-green bg-wa-green/10 px-2 py-0.5 rounded">13 €</span>
-        </div>
-        <p class="text-xs text-wa-subtext mt-2">Día de relax termal en Caldas de Reis. Fecha por determinar.</p>
-        <div class="mt-3 bg-black/30 p-2.5 rounded-lg text-xs">
-          <strong class="text-white block mb-1">👥 Apuntados:</strong>
-          <span class="inline-block bg-[#111b21] px-2 py-1 rounded text-wa-text border border-white/5">Roberto +3</span>
-        </div>
-      </article>
-    </section>
-
-    <!-- SECCIÓN: AGENDA RÍAS BAIXAS -->
-    <section id="seccion-agenda" class="hidden space-y-4">
-      <!-- Buscador y selector de día -->
-      <div class="bg-wa-card p-3 rounded-xl border border-white/10 space-y-3">
-        <div class="relative">
-          <input type="text" id="buscador-eventos" oninput="filtrarEventos()" placeholder="Buscar por municipio (Pontevedra, Vigo, O Grove, Bueu...)"
-                 class="w-full bg-[#111b21] text-sm text-wa-text rounded-lg pl-9 pr-3 py-2 border border-white/10 focus:border-wa-green focus:outline-none">
-          <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-wa-subtext text-xs"></i>
-        </div>
-
-        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs" id="contenedor-dias">
-          <button onclick="seleccionarDia('todos')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-green text-[#111b21] font-bold whitespace-nowrap">Todos</button>
-          <button onclick="seleccionarDia('Lunes 9')" class="dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap">Lun 9</button>
-          <button onclick="seleccionarDia('Martes 10')" class="dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap">Mar 10</button>
-          <button onclick="seleccionarDia('Miércoles 11')" class="dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap">Mié 11</button>
-          <button onclick="seleccionarDia('Jueves 12')" class="dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap">Jue 12</button>
-          <button onclick="seleccionarDia('Viernes 13')" class="dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap">Vie 13</button>
-          <button onclick="seleccionarDia('Sábado 14')" class="dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap">Sáb 14</button>
-          <button onclick="seleccionarDia('Domingo 15')" class="dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap">Dom 15</button>
-        </div>
-      </div>
-
-      <!-- Contenedor dinámico de eventos -->
-      <div id="lista-eventos" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
-    </section>
-
-  </main>
-
-  <!-- MODAL: CÓMO APUNTARSE -->
-  <div id="modal-reglas" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-wa-card border border-white/10 rounded-2xl max-w-md w-full p-5 space-y-4">
-      <div class="flex justify-between items-center border-b border-white/10 pb-3">
-        <h3 class="font-bold text-white text-base">📌 Dinámica de las Quedadas</h3>
-        <button onclick="cerrarModalReglas()" class="text-wa-subtext hover:text-white text-lg">&times;</button>
-      </div>
-      <div class="space-y-2 text-xs text-gray-300">
-        <p>1️⃣ Busca el <strong>mensaje fijado 📌</strong> en el chat.</p>
-        <p>2️⃣ Desfija el mensaje.</p>
-        <p>3️⃣ Copia todo su contenido.</p>
-        <p>4️⃣ Pégalo de nuevo en la conversación.</p>
-        <p>5️⃣ Añade tu nombre o modifica tus datos.</p>
-        <p>6️⃣ <strong>¡Vuelve a fijar el mensaje actualizado!</strong></p>
-      </div>
-      <div class="bg-black/30 p-3 rounded-lg text-[11px] text-wa-subtext border-l-2 border-wa-green">
-        ⚠️ Cada vez que alguien se apunte, se borre o cambie algo, actualiza y vuelve a fijar la lista. ¡Una sola lista, siempre al día!
-      </div>
-      <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank"
-         class="w-full py-2.5 bg-wa-green hover:bg-[#20ba59] text-[#111b21] font-bold text-xs rounded-xl flex items-center justify-center gap-2">
-        <i class="fa-brands fa-whatsapp text-base"></i> Abrir WhatsApp para apuntarme
-      </a>
-    </div>
-  </div>
-
-  <script>
-    // BASE DE DATOS DE LA AGENDA RÍAS BAIXAS
-    const eventosAgenda = [
-      // Lunes 9
-      { dia: 'Lunes 9', titulo: 'Xornadas Gastronómicas da Centola', lugar: 'O Grove', detalle: 'Del 9 nov al 8 dic · Según establecimiento', categoria: 'Gastronomía', icono: '🍷' },
-      { dia: 'Lunes 9', titulo: 'Proxección: Creatura', lugar: 'Facultad de Comunicación, Pontevedra', detalle: '19:00 h · Cine', categoria: 'Cine', icono: '🎬' },
-      { dia: 'Lunes 9', titulo: 'Encontro «Naturaleza y Salud»', lugar: 'Casa das Campás, Pontevedra', detalle: 'Horario por confirmar', categoria: 'Divulgación', icono: '🔬' },
-      { dia: 'Lunes 9', titulo: 'Festas de San Martiño', lugar: 'Bueu (Carpa Centro Social do Mar)', detalle: 'Música tradicional y ambiente festivo', categoria: 'Fiestas', icono: '🎉' },
-      // Martes 10
-      { dia: 'Martes 10', titulo: 'Festas de San Martiño & Magosto', lugar: 'O Grove', detalle: '17:00 h Magosto con X-Quatro · 20:00 h Orquestas Miramar y La Fórmula', categoria: 'Fiestas', icono: '🎺' },
-      { dia: 'Martes 10', titulo: 'Festas de San Martiño', lugar: 'Bueu', detalle: 'Actividades culturales y gastronómicas', categoria: 'Fiestas', icono: '🎉' },
-      { dia: 'Martes 10', titulo: 'Preestreno de Narcodiario', lugar: 'Liceo Casino, Pontevedra', detalle: 'Horario por confirmar', categoria: 'Cine', icono: '🎬' },
-      // Miércoles 11
-      { dia: 'Miércoles 11', titulo: 'San Martiño – Día Grande', lugar: 'O Grove', detalle: 'Banda do Grove · Orquestas Trébol y Kubo · Todo el día', categoria: 'Fiestas', icono: '🎉' },
-      { dia: 'Miércoles 11', titulo: 'San Martiño de Moaña', lugar: 'O Cruceiro, Moaña', detalle: '11:00 h Bandas · 12:00 h Misa · Verbena Galicia y Los Players · Furanchos', categoria: 'Fiestas', icono: '🍷' },
-      { dia: 'Miércoles 11', titulo: 'Festa de San Martiño', lugar: 'Campo do Couto, O Rosal', detalle: 'Celebración religiosa y popular', categoria: 'Fiestas', icono: '🌰' },
-      { dia: 'Miércoles 11', titulo: 'Obra teatral: Gigante', lugar: 'Teatro Afundación, Vigo', detalle: '20:30 h · Entradas 25,27 €', categoria: 'Teatro', icono: '🎭' },
-      // Jueves 12
-      { dia: 'Jueves 12', titulo: 'San Martiño de Moaña', lugar: 'O Cruceiro, Moaña', detalle: '21:00 h · Orquesta Marbella y Trío Tic Tac · Furanchos', categoria: 'Fiestas', icono: '🎺' },
-      { dia: 'Jueves 12', titulo: 'Dúo Abril – Música para Recrear', lugar: 'Pazo da Cultura, Pontevedra', detalle: '20:30 h · Entrada GRATIS', categoria: 'Música', icono: '🎻' },
-      { dia: 'Jueves 12', titulo: 'As tolas que non o eran', lugar: 'CS Abanqueiro, Boiro', detalle: '16:30 h · Presentación Carmen V. Valiña', categoria: 'Cultura', icono: '📚' },
-      // Viernes 13
-      { dia: 'Viernes 13', titulo: 'Festival Underfest Xacobeo', lugar: 'Salas de Vigo', detalle: 'Cloud Nothings, Electric Six, Opus Kink y más (13 y 14 Nov)', categoria: 'Música', icono: '🎸' },
-      { dia: 'Viernes 13', titulo: 'Magosto de San Martiño', lugar: 'O Cruceiro, Moaña', detalle: '18:30 h Castañas · Verbena con Magos y La Conexión', categoria: 'Magostos', icono: '🌰' },
-      { dia: 'Viernes 13', titulo: 'Uxía – Será por Flores', lugar: 'Auditorio Municipal, Vilagarcía', detalle: '20:00 h · Concierto', categoria: 'Música', icono: '🎤' },
-      { dia: 'Viernes 13', titulo: 'María José Llergo', lugar: 'Teatro Afundación, Vigo', detalle: '21:00 h · Entradas 13,60 €', categoria: 'Música', icono: '🎤' },
-      { dia: 'Viernes 13', titulo: 'Sho-Hai en concierto', lugar: 'Sala Rouge, Vigo', detalle: '21:00 h · Entradas 22 €', categoria: 'Música', icono: '🎤' },
-      { dia: 'Viernes 13', titulo: 'Enredada – Leti da Taberna', lugar: 'Multiúsos de Arcade, Soutomaior', detalle: '20:30 h · Entrada GRATIS', categoria: 'Teatro', icono: '🎭' },
-      { dia: 'Viernes 13', titulo: 'Misery', lugar: 'Afundación, Pontevedra', detalle: '20:30 h · Entradas desde 27,50 €', categoria: 'Teatro', icono: '🎭' },
-      { dia: 'Viernes 13', titulo: 'Berto Romero – Lo Nunca Visto', lugar: 'Auditorio Mar de Vigo', detalle: 'Del 13 al 15 de noviembre', categoria: 'Teatro', icono: '🎭' },
-      { dia: 'Viernes 13', titulo: 'XII Barbanza Arousa + Q Tapas', lugar: 'Boiro', detalle: 'Del 13 al 15 nov · Ruta gastronómica', categoria: 'Gastronomía', icono: '🍴' },
-      // Sábado 14
-      { dia: 'Sábado 14', titulo: 'Festa do Magosto de Beade', lugar: 'CSCR Beade, Vigo', detalle: '19:00 h · Castañas asadas, Arume y A Volta do Demo', categoria: 'Magostos', icono: '🌰' },
-      { dia: 'Sábado 14', titulo: 'San Martiño de Moaña (Cierre)', lugar: 'O Cruceiro, Moaña', detalle: 'Orquesta Trébol y La Banda de Ayer', categoria: 'Fiestas', icono: '🎺' },
-      { dia: 'Sábado 14', titulo: 'Quique González & Toni Brunet', lugar: 'Vigo', detalle: '21:30 h · Concierto acústico', categoria: 'Música', icono: '🎤' },
-      { dia: 'Sábado 14', titulo: 'Construíndo Pontes…', lugar: 'Pazo da Cultura, Pontevedra', detalle: '20:00 h · Banda sinfónica', categoria: 'Música', icono: '🎼' },
-      { dia: 'Sábado 14', titulo: 'XXXIX Festival Santa Icía', lugar: 'Padrón', detalle: '19:00 h · Corales de La Salle, Luou y Padronesa', categoria: 'Música', icono: '🎼' },
-      { dia: 'Sábado 14', titulo: 'Os Dous de Sempre – Mofa & Befa', lugar: 'Casa da Cultura, Porto do Son', detalle: '21:00 h · Teatro', categoria: 'Teatro', icono: '🎭' },
-      // Domingo 15
-      { dia: 'Domingo 15', titulo: 'St. Paul & The Broken Bones', lugar: 'Teatro Afundación, Vigo', detalle: '20:30 h · Clausura Underfest', categoria: 'Música', icono: '🎸' },
-      { dia: 'Domingo 15', titulo: 'ABBA The New Experience', lugar: 'Afundación, Pontevedra', detalle: 'Entradas desde 39,60 €', categoria: 'Música', icono: '🎤' },
-      { dia: 'Domingo 15', titulo: 'O Monstro de Cores', lugar: 'Pazo da Cultura, Pontevedra', detalle: '18:30 h · Teatro infantil / familiar', categoria: 'Familiar', icono: '👨‍👩‍👧' },
-      { dia: 'Domingo 15', titulo: 'Mercadillo de Antigüedades', lugar: 'Rúa Serra, Pontevedra', detalle: '09:00 a 14:30 h', categoria: 'Cultura', icono: '🛍️' },
-      { dia: 'Domingo 15', titulo: 'Ruta por los Humedales', lugar: 'Desembocadura del Lérez y Combarro', detalle: 'Ruta ecológica reivindicativa', categoria: 'Naturaleza', icono: '🌿' }
-    ];
-
-    let diaSeleccionado = 'todos';
-
-    function renderEventos() {
-      const contenedor = document.getElementById('lista-eventos');
-      const filtro = document.getElementById('buscador-eventos').value.toLowerCase().trim();
-
-      const filtrados = eventosAgenda.filter(ev => {
-        const coincideDia = (diaSeleccionado === 'todos' || ev.dia === diaSeleccionado);
-        const coincideTexto = ev.titulo.toLowerCase().includes(filtro) || 
-                              ev.lugar.toLowerCase().includes(filtro) || 
-                              ev.detalle.toLowerCase().includes(filtro);
-        return coincideDia && coincideTexto;
-      });
-
-      if (filtrados.length === 0) {
-        contenedor.innerHTML = `
-          <div class="col-span-full text-center py-8 text-wa-subtext text-xs">
-            No se han encontrado eventos para este criterio de búsqueda.
-          </div>
-        `;
-        return;
-      }
-
-      contenedor.innerHTML = filtrados.map(ev => `
-        <article class="bg-wa-card border border-white/5 hover:border-wa-green/30 p-3.5 rounded-xl transition flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between text-[11px] mb-1.5">
-              <span class="text-wa-green font-bold flex items-center gap-1">${ev.icono} ${ev.categoria}</span>
-              <span class="bg-[#111b21] px-2 py-0.5 rounded text-wa-subtext">${ev.dia}</span>
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-wa-panel/90 backdrop-blur-md border-b border-wa-border/80 px-4 py-3">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <!-- Mini Logo Emblema -->
+                <div class="w-10 h-10 rounded-full bg-black border-2 border-slate-700 flex items-center justify-center overflow-hidden shadow-inner select-none">
+                    <div class="text-center font-black leading-none tracking-tighter text-[9px] text-white">
+                        <span class="block border-b border-white pb-[1px]">MO<span class="text-[6px] text-emerald-400">CERO</span></span>
+                        <span class="block pt-[1px] tracking-widest text-[8px]">RRiña</span>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm tracking-wide text-white flex items-center gap-1.5">
+                        Morriña Cero
+                        <span class="inline-block w-2 h-2 rounded-full bg-wa-green"></span>
+                    </h1>
+                    <p class="text-[11px] text-emerald-400 font-medium">Pontevedra & Vigo</p>
+                </div>
             </div>
-            <h4 class="font-bold text-white text-sm leading-snug">${ev.titulo}</h4>
-            <p class="text-xs text-gray-300 mt-1 flex items-start gap-1">
-              <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-[10px]"></i>
-              <span>${ev.lugar}</span>
-            </p>
-          </div>
-          <p class="text-[11px] text-wa-subtext border-t border-white/5 pt-2 mt-2">${ev.detalle}</p>
-        </article>
-      `).join('');
-    }
 
-    function seleccionarDia(dia) {
-      diaSeleccionado = dia;
-      document.querySelectorAll('.dia-btn').forEach(btn => {
-        const esActivo = (dia === 'todos' && btn.textContent.trim() === 'Todos') || 
-                         (dia !== 'todos' && btn.onclick.toString().includes(`'${dia}'`));
-        if (esActivo) {
-          btn.className = 'dia-btn px-3 py-1.5 rounded-full bg-wa-green text-[#111b21] font-bold whitespace-nowrap';
-        } else {
-          btn.className = 'dia-btn px-3 py-1.5 rounded-full bg-[#111b21] text-wa-subtext whitespace-nowrap';
+            <div class="flex items-center gap-2">
+                <button onclick="copiarEnlace()" class="flex items-center gap-1.5 text-xs bg-wa-card hover:bg-wa-hover text-slate-300 hover:text-white px-3 py-1.5 rounded-full border border-wa-border transition">
+                    <i class="fa-solid fa-share-nodes text-wa-green"></i>
+                    <span class="hidden sm:inline">Compartir</span>
+                </button>
+                <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-center gap-1.5 text-xs bg-wa-green hover:bg-[#20ba59] text-black font-bold px-3 py-1.5 rounded-full shadow transition">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Abrir Chat</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-6 w-full space-y-10 flex-grow">
+
+        <!-- Hero Section -->
+        <section class="text-center pt-4 pb-2">
+            <!-- Insignia Principal -->
+            <div class="mx-auto w-36 h-36 sm:w-40 sm:h-40 rounded-full logo-box border-4 border-wa-card flex items-center justify-center p-3 relative mb-6 neon-glow select-none">
+                <div class="w-full h-full rounded-full bg-neutral-900 border border-neutral-700/60 flex flex-col items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:8px_8px]"></div>
+                    
+                    <div class="relative z-10 border-2 border-white px-3 py-1.5 text-center bg-black/60 backdrop-blur-sm rounded-sm">
+                        <div class="flex items-baseline justify-center border-b border-white pb-0.5">
+                            <span class="font-extrabold text-2xl tracking-tighter text-white">mo</span>
+                            <span class="text-[9px] font-bold tracking-widest text-emerald-400 ml-1">CERO</span>
+                        </div>
+                        <div class="font-black text-xl tracking-wider text-white pt-0.5 uppercase">
+                            RRiña
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute -bottom-2 bg-wa-emerald text-white text-[11px] font-bold px-3 py-1 rounded-full border-2 border-wa-dark flex items-center gap-1.5 shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-wa-green animate-ping"></span>
+                    <span>42 miembros</span>
+                </div>
+            </div>
+
+            <div class="space-y-3 max-w-xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-wa-card text-xs text-slate-300 border border-wa-border">
+                    <i class="fa-solid fa-location-dot text-red-400"></i>
+                    <span>Pontevedra · Vigo · Rías Baixas</span>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                    ¡Menos morriña y más <span class="text-wa-green">buen rollo</span>! 🤫🍻
+                </h2>
+
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                    Grupo para gente de aprox juventud años de Pontevedra y Vigo. Aquí venimos a conocer gente, echar unas risas, hacer planes y disfrutar.
+                    <span class="block mt-1 font-semibold text-slate-200">Sin malos rollos, sin dramas. 😎</span>
+                </p>
+
+                <!-- Action CTA -->
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
+                       class="w-full sm:w-auto px-7 py-3.5 bg-wa-green hover:bg-[#20ba59] text-black font-extrabold text-sm sm:text-base rounded-full shadow-lg hover:shadow-wa-green/20 transition transform active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Unirme al Grupo de WhatsApp</span>
+                    </a>
+                    <a href="#quedadas-oficiales" class="w-full sm:w-auto px-6 py-3.5 bg-wa-card hover:bg-wa-hover text-slate-200 font-semibold text-sm rounded-full border border-wa-border transition flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-calendar-check text-wa-green"></i>
+                        <span>Ver Quedadas Oficiales</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reglas / Filosofía de la Comunidad -->
+        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5 sm:p-6 shadow-md">
+            <div class="flex items-center justify-between pb-4 border-b border-wa-border/70 mb-5">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-wa-green flex items-center justify-center">
+                        <i class="fa-solid fa-handshake-simple"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">Normas y Esencia del Grupo</h3>
+                </div>
+                <span class="text-xs bg-wa-card text-emerald-400 px-2.5 py-1 rounded-full font-mono">100% Buen Rollo</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">📍</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Pontevedra · Vigo · alrededores</h4>
+                        <p class="text-xs text-slate-400">Gente local o comarca con ganas de sociabilizar y hacer planes activos.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">👥</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Buen ambiente y gente de buen rollo</h4>
+                        <p class="text-xs text-slate-400">Sin malos rollos, sin dramas. Entra con ganas de sumar y pasarlo bien.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">🍻</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Quedadas · cenas · copas</h4>
+                        <p class="text-xs text-slate-400">Planes improvisados, escapadas de fin de semana, senderismo y tardeo.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-3 rounded-xl bg-wa-card/60 border border-wa-border/50">
+                    <span class="text-xl">🤫</span>
+                    <div>
+                        <h4 class="font-semibold text-sm text-slate-200">Pacto de Confianza</h4>
+                        <p class="text-xs text-slate-400">Lo que pasa en el grupo... se queda en el grupo. Confidencialidad y respeto.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 p-3 bg-black/30 rounded-xl text-center border border-dashed border-wa-border">
+                <p class="text-xs sm:text-sm italic text-slate-300">
+                    "Entra, saluda y que empiece la historia... 😂🎉"
+                </p>
+            </div>
+        </section>
+
+        <!-- NAVEGACIÓN ENTRE QUEDADAS Y AGENDA RÍAS BAIXAS -->
+        <div class="flex space-x-2 border-b border-wa-border pb-2" id="quedadas-oficiales">
+            <button onclick="cambiarPestana('quedadas')" id="tab-quedadas" 
+                    class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow">
+                <i class="fa-solid fa-thumbtack"></i>
+                <span>Quedadas del Grupo</span>
+            </button>
+            <button onclick="cambiarPestana('agenda')" id="tab-agenda" 
+                    class="flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white">
+                <i class="fa-solid fa-masks-theater text-emerald-400"></i>
+                <span>Agenda Cultural (9–16 Nov)</span>
+            </button>
+        </div>
+
+        <!-- SECCIÓN 1: QUEDADAS OFICIALES DEL GRUPO -->
+        <section id="seccion-quedadas" class="space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-wa-panel p-4 rounded-xl border border-wa-border">
+                <div>
+                    <h3 class="font-bold text-lg text-white flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-wa-green"></i>
+                        Quedadas en Marcha
+                    </h3>
+                    <p class="text-xs text-slate-400">Planes con lista de asistentes activa</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="abrirModalReglas()" class="text-xs bg-wa-card hover:bg-wa-hover text-emerald-400 border border-wa-border px-3 py-2 rounded-xl transition flex items-center gap-1.5 font-medium">
+                        <i class="fa-solid fa-circle-question"></i> ¿Cómo apuntarse?
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid de Quedadas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- Quedada 1: Oporto -->
+                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="inline-flex items-center gap-1 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full">
+                                🍷🚌 Portugal
+                            </span>
+                            <span class="text-wa-green font-bold bg-wa-card px-2 py-0.5 rounded border border-wa-border">225 €</span>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Vinhos Verdes y Oporto 🇵🇹</h4>
+                        <p class="text-xs text-slate-400">
+                            <strong>Fecha:</strong> Sábado 14 y domingo 15 de noviembre<br>
+                            <strong>Salida/Regreso:</strong> Cambados<br>
+                            Palacio da Brejoeira, bodega Ponte da Barca, viñedos Quinta da Aveleda, cena, noche en Oporto y visita a Gaia. Comidas y visitas incluidas.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
+                        <div class="text-xs text-slate-300">
+                            <span class="font-semibold text-white">Apuntados:</span> Roberto +1
+                        </div>
+                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
+                            Me apunto
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quedada 2: Uxía -->
+                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="inline-flex items-center gap-1 font-semibold text-purple-400 bg-purple-950/60 border border-purple-800/50 px-2.5 py-0.5 rounded-full">
+                                🎤 Vilagarcía
+                            </span>
+                            <span class="text-slate-400">20:00 h</span>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Uxía – Será por Flores</h4>
+                        <p class="text-xs text-slate-400">
+                            <strong>Fecha:</strong> Viernes 13 de noviembre<br>
+                            <strong>Lugar:</strong> Auditorio Municipal, Vilagarcía de Arousa.<br>
+                            Concierto y encuentro musical.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
+                        <div class="text-xs text-slate-300">
+                            <span class="font-semibold text-white">Apuntados:</span> Cris
+                        </div>
+                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
+                            Me apunto
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quedada 3: Fortaleza de Chocolate -->
+                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="inline-flex items-center gap-1 font-semibold text-amber-400 bg-amber-950/60 border border-amber-800/50 px-2.5 py-0.5 rounded-full">
+                                🍫🏰 Valença do Minho 🇵🇹
+                            </span>
+                            <span class="text-slate-400">28 de Noviembre</span>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Fortaleza de Chocolate</h4>
+                        <p class="text-xs text-slate-400">
+                            <strong>Lugar:</strong> Fortaleza de Valença, Portugal.<br>
+                            Feria de chocolates, bombones, dulces artesanales y ambientazo navideño.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
+                        <div class="text-xs text-slate-300">
+                            <span class="font-semibold text-white">Apuntados:</span> Cris, ¿Roberto +1?
+                        </div>
+                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
+                            Me apunto
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quedada 4: Vía Verde -->
+                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="inline-flex items-center gap-1 font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-0.5 rounded-full">
+                                🚶‍♂️🌿 O Salnés
+                            </span>
+                            <span class="text-slate-400">Fecha por determinar</span>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Ruta Vía Verde do Salnés</h4>
+                        <p class="text-xs text-slate-400">
+                            Paseo suave y naturaleza al aire libre con parada final para tomar algo en buena compañía.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
+                        <div class="text-xs text-slate-300">
+                            <span class="font-semibold text-white">Apuntados:</span> Roberto +2, Dora
+                        </div>
+                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
+                            Me apunto
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quedada 5: Termas Caldas -->
+                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/40 transition rounded-xl p-4 flex flex-col justify-between shadow-sm md:col-span-2">
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-[11px]">
+                            <span class="inline-flex items-center gap-1 font-semibold text-cyan-400 bg-cyan-950/60 border border-cyan-800/50 px-2.5 py-0.5 rounded-full">
+                                ♨️💦 Caldas de Reis
+                            </span>
+                            <span class="text-wa-green font-bold bg-wa-card px-2 py-0.5 rounded border border-wa-border">13 €</span>
+                        </div>
+                        <h4 class="font-bold text-base text-white">Termas de Caldas de Reis</h4>
+                        <p class="text-xs text-slate-400">
+                            <strong>Fecha:</strong> Por determinar.<br>
+                            Jornada relajante en aguas termales y desconexión grupal.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-wa-border flex items-center justify-between">
+                        <div class="text-xs text-slate-300">
+                            <span class="font-semibold text-white">Apuntados:</span> Roberto +3
+                        </div>
+                        <button onclick="abrirModalReglas()" class="text-xs px-3 py-1.5 rounded-lg bg-wa-card hover:bg-wa-green hover:text-black text-slate-200 border border-wa-border transition font-medium">
+                            Me apunto
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: AGENDA CULTURAL RÍAS BAIXAS (9 - 16 NOV) -->
+        <section id="seccion-agenda" class="hidden space-y-4">
+            <div class="bg-wa-panel p-4 rounded-xl border border-wa-border space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <h3 class="font-bold text-base text-white flex items-center gap-2">
+                            <i class="fa-solid fa-map-location-dot text-wa-green"></i>
+                            Agenda Rías Baixas · 9 al 16 de Noviembre
+                        </h3>
+                        <p class="text-xs text-slate-400">Pontevedra, Vigo, O Grove, Moaña, Bueu, Boiro y alrededores</p>
+                    </div>
+                    <div class="relative sm:w-64">
+                        <input type="text" id="buscador-eventos" oninput="filtrarEventos()" placeholder="Filtrar por concello o texto..."
+                               class="w-full bg-wa-card text-xs text-white rounded-lg pl-8 pr-3 py-2 border border-wa-border focus:border-wa-green focus:outline-none placeholder-slate-500">
+                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Días filtrables -->
+                <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1 text-xs">
+                    <button onclick="seleccionarDia('todos')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-bold whitespace-nowrap">Todos</button>
+                    <button onclick="seleccionarDia('Lunes 9')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Lun 9</button>
+                    <button onclick="seleccionarDia('Martes 10')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Mar 10</button>
+                    <button onclick="seleccionarDia('Miércoles 11')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Mié 11</button>
+                    <button onclick="seleccionarDia('Jueves 12')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Jue 12</button>
+                    <button onclick="seleccionarDia('Viernes 13')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Vie 13</button>
+                    <button onclick="seleccionarDia('Sábado 14')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Sáb 14</button>
+                    <button onclick="seleccionarDia('Domingo 15')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Dom 15</button>
+                    <button onclick="seleccionarDia('Lunes 16')" class="dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border">Lun 16</button>
+                </div>
+            </div>
+
+            <!-- Listado inyectado por JS -->
+            <div id="lista-eventos" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+        </section>
+
+        <!-- Mini FAQ / Cómo funciona -->
+        <section class="bg-wa-panel rounded-2xl border border-wa-border p-5">
+            <h4 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                <i class="fa-regular fa-circle-question text-wa-green"></i>
+                ¿Cómo funciona Morriña Cero?
+            </h4>
+            <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+                <div class="border-b border-wa-border/50 pb-2.5">
+                    <p class="font-semibold text-white">1. ¿Tengo que pagar alguna cuota por pertenecer?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">Ninguna. Es una comunidad libre de personas de Pontevedra, Vigo y alrededores. En las quedadas cada quien paga lo que consume.</p>
+                </div>
+                <div class="border-b border-wa-border/50 pb-2.5">
+                    <p class="font-semibold text-white">2. ¿Cómo me apunto a las quedadas?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">En el chat de WhatsApp mantenemos una lista en el mensaje fijado. Lo copias, añades tu nombre y vuelves a fijarlo para que nadie se pierda.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-white">3. ¿Puedo proponer mis propios planes?</p>
+                    <p class="text-slate-400 text-xs mt-0.5">¡Por supuesto! Desde tomar unas cervezas improvisadas hoy mismo hasta rutas de senderismo o conciertos del fin de semana.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-wa-panel border-t border-wa-border py-6 px-4 text-center mt-12 text-xs text-slate-400">
+        <div class="max-w-4xl mx-auto space-y-2">
+            <p class="font-medium text-slate-300">Morriña Cero · Grupo Social Pontevedra & Vigo</p>
+            <p class="text-[11px] text-slate-400">Comunidad libre gestionada por miembros para compartir buenos ratos en Galicia.</p>
+            <div class="pt-2 flex justify-center gap-4 text-base text-slate-400">
+                <button onclick="copiarEnlace()" title="Copiar invitación" class="hover:text-wa-green transition"><i class="fa-solid fa-link"></i></button>
+                <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" title="WhatsApp" class="hover:text-wa-green transition"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-wa-card border border-wa-green/60 text-white px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs">
+        <i class="fa-solid fa-circle-check text-wa-green text-sm"></i>
+        <span id="toastMsg">Mensaje copiado con éxito</span>
+    </div>
+
+    <!-- Modal Instrucciones para apuntarse -->
+    <div id="modalReglas" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-wa-panel border border-wa-border w-full max-w-md rounded-2xl p-5 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-wa-border">
+                <h3 class="font-bold text-white text-base flex items-center gap-2">
+                    <i class="fa-solid fa-thumbtack text-wa-green"></i>
+                    ¿Cómo apuntarse a una quedada?
+                </h3>
+                <button onclick="cerrarModalReglas()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-2.5 text-xs text-slate-300">
+                <p>1️⃣ Busca el <strong>mensaje fijado 📌</strong> en el chat de WhatsApp.</p>
+                <p>2️⃣ Desfija el mensaje.</p>
+                <p>3️⃣ Copia todo su contenido.</p>
+                <p>4️⃣ Pégalo de nuevo en la conversación.</p>
+                <p>5️⃣ Añade tu nombre o modifica la información.</p>
+                <p>6️⃣ <strong>¡Vuelve a fijar el mensaje actualizado!</strong></p>
+            </div>
+
+            <div class="p-3 bg-black/40 rounded-xl border-l-2 border-wa-green text-[11px] text-slate-400">
+                ⚠️ <strong>¡Importante!</strong> Cada vez que alguien se apunte, se borre o cambie algún dato, hay que actualizar y volver a fijar la lista. ¡Una sola lista, siempre al día y sin líos! 🍻
+            </div>
+
+            <div class="pt-2 flex justify-end gap-2">
+                <button onclick="cerrarModalReglas()" class="px-3.5 py-2 rounded-lg bg-wa-card hover:bg-wa-hover text-slate-300 text-xs transition">Cerrar</button>
+                <a href="https://chat.whatsapp.com/EZTUXgbeTtEDyrQSPSFP5s?s=sh&p=a&iam=2" target="_blank" rel="noopener noreferrer" 
+                   class="px-4 py-2 rounded-lg bg-wa-green hover:bg-[#20ba59] text-black font-bold text-xs transition flex items-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span>Ir a WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Interactividad -->
+    <script>
+        // BASE DE DATOS DE EVENTOS DE LA SEMANA
+        const eventosAgenda = [
+            // Lunes 9
+            { dia: 'Lunes 9', titulo: 'Xornadas Gastronómicas da Centola', lugar: 'O Grove', detalle: 'Del 9 nov al 8 dic · Según establecimiento', categoria: 'Gastronomía', icono: '🍷' },
+            { dia: 'Lunes 9', titulo: 'Proxección de Cine: Creatura', lugar: 'Facultad de Comunicación, Pontevedra', detalle: '19:00 h · Entrada libre', categoria: 'Cine', icono: '🎬' },
+            { dia: 'Lunes 9', titulo: 'Encontro «Naturaleza y Salud»', lugar: 'Casa das Campás, Pontevedra', detalle: 'Horario por confirmar', categoria: 'Charla', icono: '🔬' },
+            { dia: 'Lunes 9', titulo: 'Curso de Lingua e Cultura Galegas', lugar: 'Auditorio de Rianxo', detalle: 'Del 9 al 20 nov · 16:00 a 18:00 h', categoria: 'Cultura', icono: '📚' },
+            { dia: 'Lunes 9', titulo: 'Festas de San Martiño', lugar: 'Bueu (Carpa Centro Social do Mar)', detalle: 'Hasta el 12 nov · Música tradicional y fiesta', categoria: 'Fiestas', icono: '🎉' },
+            
+            // Martes 10
+            { dia: 'Martes 10', titulo: 'Festas de San Martiño & Magosto', lugar: 'O Grove', detalle: '17:00 h Magosto con X-Quatro · 20:00 h Miramar y La Fórmula', categoria: 'Fiestas', icono: '🎺' },
+            { dia: 'Martes 10', titulo: 'Festas de San Martiño', lugar: 'Bueu', detalle: 'Actividades culturales y gastronómicas', categoria: 'Fiestas', icono: '🎉' },
+            { dia: 'Martes 10', titulo: 'Preestreno de Narcodiario', lugar: 'Liceo Casino, Pontevedra', detalle: 'Horario por confirmar', categoria: 'Cine', icono: '🎬' },
+
+            // Miércoles 11
+            { dia: 'Miércoles 11', titulo: 'San Martiño – Día Grande', lugar: 'O Grove', detalle: 'Banda do Grove · Orquestas Trébol y Kubo · Todo el día', categoria: 'Fiestas', icono: '🎺' },
+            { dia: 'Miércoles 11', titulo: 'San Martiño de Moaña', lugar: 'O Cruceiro, Moaña', detalle: '11:00 h Bandas · 12:00 h Misa · Verbena Galicia y Los Players · Furanchos', categoria: 'Fiestas', icono: '🍷' },
+            { dia: 'Miércoles 11', titulo: 'Festa de San Martiño', lugar: 'Campo do Couto, O Rosal', detalle: 'Celebración religiosa y popular con magosto', categoria: 'Fiestas', icono: '🌰' },
+            { dia: 'Miércoles 11', titulo: 'Festas de San Martiño', lugar: 'Bueu', detalle: 'Pasacalles, verbenas y gastronomía', categoria: 'Fiestas', icono: '🎉' },
+            { dia: 'Miércoles 11', titulo: 'Teatro: Gigante', lugar: 'Teatro Afundación, Vigo', detalle: '20:30 h · Entradas 25,27 €', categoria: 'Teatro', icono: '🎭' },
+
+            // Jueves 12
+            { dia: 'Jueves 12', titulo: 'San Martiño de Moaña', lugar: 'O Cruceiro, Moaña', detalle: '21:00 h · Orquesta Marbella y Trío Tic Tac · Furanchos', categoria: 'Fiestas', icono: '🎺' },
+            { dia: 'Jueves 12', titulo: 'San Martiño – Fin de Fiesta', lugar: 'Centro Social do Mar, Bueu', detalle: 'Cierre de celebraciones populares', categoria: 'Fiestas', icono: '🎶' },
+            { dia: 'Jueves 12', titulo: 'Dúo Abril – Música para Recrear', lugar: 'Pazo da Cultura, Pontevedra', detalle: '20:30 h · Entrada GRATIS', categoria: 'Música', icono: '🎻' },
+            { dia: 'Jueves 12', titulo: 'As tolas que non o eran', lugar: 'CS Abanqueiro, Boiro', detalle: '16:30 h · Presentación y coloquio con Carmen V. Valiña', categoria: 'Literatura', icono: '📚' },
+
+            // Viernes 13
+            { dia: 'Viernes 13', titulo: 'Festival Underfest Xacobeo', lugar: 'Salas de Vigo', detalle: '13 y 14 nov · Cloud Nothings, Electric Six, Opus Kink y más', categoria: 'Música', icono: '🎸' },
+            { dia: 'Viernes 13', titulo: 'Magosto de San Martiño', lugar: 'O Cruceiro, Moaña', detalle: '18:30 h Castañas · Verbena con Magos y La Conexión', categoria: 'Magostos', icono: '🌰' },
+            { dia: 'Viernes 13', titulo: 'Uxía – Será por Flores', lugar: 'Auditorio Municipal, Vilagarcía', detalle: '20:00 h · Concierto oficial', categoria: 'Música', icono: '🎤' },
+            { dia: 'Viernes 13', titulo: 'María José Llergo', lugar: 'Teatro Afundación, Vigo', detalle: '21:00 h · Entradas 13,60 €', categoria: 'Música', icono: '🎤' },
+            { dia: 'Viernes 13', titulo: 'Sho-Hai en concierto', lugar: 'Sala Rouge, Vigo', detalle: '21:00 h · Entradas 22 €', categoria: 'Música', icono: '🎤' },
+            { dia: 'Viernes 13', titulo: 'Enredada – Leti da Taberna', lugar: 'Multiúsos de Arcade, Soutomaior', detalle: '20:30 h · Entrada GRATIS', categoria: 'Teatro', icono: '🎭' },
+            { dia: 'Viernes 13', titulo: 'Misery', lugar: 'Afundación, Pontevedra', detalle: '20:30 h · Entradas desde 27,50 €', categoria: 'Teatro', icono: '🎭' },
+            { dia: 'Viernes 13', titulo: 'Berto Romero – Lo Nunca Visto', lugar: 'Auditorio Mar de Vigo', detalle: 'Del 13 al 15 de noviembre', categoria: 'Comedia', icono: '🎭' },
+            { dia: 'Viernes 13', titulo: 'XII Barbanza Arousa + Q Tapas', lugar: 'Boiro', detalle: 'Del 13 al 15 nov · Ruta gastronómica', categoria: 'Gastronomía', icono: '🍷' },
+            { dia: 'Viernes 13', titulo: 'O Miradoiro – Alomais Teatro', lugar: 'Auditorio de Rianxo', detalle: '21:00 h · Entrada GRATIS hasta completar aforo', categoria: 'Teatro', icono: '🎭' },
+
+            // Sábado 14
+            { dia: 'Sábado 14', titulo: 'Underfest Xacobeo (Día 2)', lugar: 'Salas de conciertos, Vigo', detalle: 'Música independiente y alternativa', categoria: 'Música', icono: '🎸' },
+            { dia: 'Sábado 14', titulo: 'Festa do Magosto de Beade', lugar: 'CSCR Beade, Vigo', detalle: '19:00 h · Castañas asadas, Arume y A Volta do Demo', categoria: 'Magostos', icono: '🌰' },
+            { dia: 'Sábado 14', titulo: 'San Martiño de Moaña (Cierre)', lugar: 'O Cruceiro, Moaña', detalle: 'Orquesta Trébol y La Banda de Ayer · Tabernas', categoria: 'Fiestas', icono: '🎺' },
+            { dia: 'Sábado 14', titulo: 'Quique González & Toni Brunet', lugar: 'Vigo', detalle: '21:30 h · Directo acústico', categoria: 'Música', icono: '🎤' },
+            { dia: 'Sábado 14', titulo: 'Construíndo Pontes…', lugar: 'Pazo da Cultura, Pontevedra', detalle: '20:00 h · Grandes clásicos para banda', categoria: 'Música', icono: '🎼' },
+            { dia: 'Sábado 14', titulo: 'XXXIX Festival Santa Icía', lugar: 'Padrón', detalle: '19:00 h · Coral La Salle, Luou y Padronesa', categoria: 'Música', icono: '🎼' },
+            { dia: 'Sábado 14', titulo: 'Os Dous de Sempre – Mofa & Befa', lugar: 'Casa da Cultura, Porto do Son', detalle: '21:00 h · Teatro de humor', categoria: 'Teatro', icono: '🎭' },
+            { dia: 'Sábado 14', titulo: 'A verdadeira historia dos tres porquiños', lugar: 'Auditorio Emilia Pardo Bazán, Sanxenxo', detalle: '18:00 h · 5 € · Teatro infantil', categoria: 'Familiar', icono: '👨‍👩‍👧' },
+
+            // Domingo 15
+            { dia: 'Domingo 15', titulo: 'St. Paul & The Broken Bones', lugar: 'Teatro Afundación, Vigo', detalle: '20:30 h · Clausura del Underfest', categoria: 'Música', icono: '🎸' },
+            { dia: 'Domingo 15', titulo: 'ABBA The New Experience', lugar: 'Afundación, Pontevedra', detalle: 'Tributo oficial · Desde 39,60 €', categoria: 'Música', icono: '🎤' },
+            { dia: 'Domingo 15', titulo: 'O Monstro de Cores', lugar: 'Pazo da Cultura, Pontevedra', detalle: '18:30 h · Espectáculo familiar · Desde 4,50 €', categoria: 'Familiar', icono: '👨‍👩‍👧' },
+            { dia: 'Domingo 15', titulo: 'Mercadillo de Antigüedades', lugar: 'Rúa Serra, Pontevedra', detalle: '09:00 a 14:30 h', categoria: 'Cultura', icono: '🛍️' },
+            { dia: 'Domingo 15', titulo: 'Ruta Ecolóxica polos Humedais', lugar: 'Desembocadura Lérez y Combarro', detalle: 'Ruta senderismo reivindicativa', categoria: 'Naturaleza', icono: '🌿' },
+            { dia: 'Domingo 15', titulo: 'Barbanza Arousa + Q Tapas', lugar: 'Boiro', detalle: 'Última jornada de la ruta culinaria', categoria: 'Gastronomía', icono: '🍷' },
+
+            // Lunes 16
+            { dia: 'Lunes 16', titulo: 'Conversando sobre Deseño de Vestiario', lugar: 'Pontevedra', detalle: 'Con Clara Bilbao · Horario por confirmar', categoria: 'Charla', icono: '🎨' }
+        ];
+
+        let diaSeleccionado = 'todos';
+
+        function renderEventos() {
+            const contenedor = document.getElementById('lista-eventos');
+            const filtro = document.getElementById('buscador-eventos').value.toLowerCase().trim();
+
+            const filtrados = eventosAgenda.filter(ev => {
+                const coincideDia = (diaSeleccionado === 'todos' || ev.dia === diaSeleccionado);
+                const coincideTexto = ev.titulo.toLowerCase().includes(filtro) || 
+                                      ev.lugar.toLowerCase().includes(filtro) || 
+                                      ev.detalle.toLowerCase().includes(filtro);
+                return coincideDia && coincideTexto;
+            });
+
+            if (filtrados.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="col-span-full py-8 text-center text-slate-400 bg-wa-card/30 rounded-xl border border-dashed border-wa-border">
+                        <i class="fa-solid fa-magnifying-glass text-2xl mb-2 text-slate-500"></i>
+                        <p class="text-xs">No se encontraron eventos para ese filtro.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            contenedor.innerHTML = filtrados.map(ev => `
+                <div class="bg-wa-panel border border-wa-border hover:border-wa-green/30 p-3.5 rounded-xl transition flex flex-col justify-between shadow-sm">
+                    <div>
+                        <div class="flex items-center justify-between text-[11px] mb-1.5">
+                            <span class="text-emerald-400 font-semibold flex items-center gap-1">${ev.icono} ${ev.categoria}</span>
+                            <span class="bg-wa-card border border-wa-border px-2 py-0.5 rounded text-slate-400 font-mono text-[10px]">${ev.dia}</span>
+                        </div>
+                        <h4 class="font-bold text-white text-sm leading-snug">${ev.titulo}</h4>
+                        <p class="text-xs text-slate-300 mt-1 flex items-start gap-1">
+                            <i class="fa-solid fa-location-dot text-red-400 mt-0.5 text-[10px]"></i>
+                            <span>${ev.lugar}</span>
+                        </p>
+                    </div>
+                    <p class="text-[11px] text-slate-400 border-t border-wa-border/60 pt-2 mt-2">${ev.detalle}</p>
+                </div>
+            `).join('');
         }
-      });
-      renderEventos();
-    }
 
-    function filtrarEventos() {
-      renderEventos();
-    }
+        function seleccionarDia(dia) {
+            diaSeleccionado = dia;
+            document.querySelectorAll('.dia-btn').forEach(btn => {
+                const esActivo = (dia === 'todos' && btn.textContent.trim() === 'Todos') || 
+                                 (dia !== 'todos' && btn.onclick.toString().includes(`'${dia}'`));
+                if (esActivo) {
+                    btn.className = 'dia-btn px-3 py-1.5 rounded-full bg-wa-green text-black font-bold whitespace-nowrap';
+                } else {
+                    btn.className = 'dia-btn px-3 py-1.5 rounded-full bg-wa-card hover:bg-wa-hover text-slate-300 whitespace-nowrap border border-wa-border';
+                }
+            });
+            renderEventos();
+        }
 
-    function cambiarPestana(pestana) {
-      const secQuedadas = document.getElementById('seccion-quedadas');
-      const secAgenda = document.getElementById('seccion-agenda');
-      const tabQuedadas = document.getElementById('tab-quedadas');
-      const tabAgenda = document.getElementById('tab-agenda');
+        function filtrarEventos() {
+            renderEventos();
+        }
 
-      if (pestana === 'quedadas') {
-        secQuedadas.classList.remove('hidden');
-        secAgenda.classList.add('hidden');
-        tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-wa-green text-[#111b21]';
-        tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-wa-subtext hover:bg-wa-hover';
-      } else {
-        secQuedadas.classList.add('hidden');
-        secAgenda.classList.remove('hidden');
-        tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all bg-wa-green text-[#111b21]';
-        tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all text-wa-subtext hover:bg-wa-hover';
-        renderEventos();
-      }
-    }
+        function cambiarPestana(pestana) {
+            const secQuedadas = document.getElementById('seccion-quedadas');
+            const secAgenda = document.getElementById('seccion-agenda');
+            const tabQuedadas = document.getElementById('tab-quedadas');
+            const tabAgenda = document.getElementById('tab-agenda');
 
-    function mostrarModalReglas() {
-      document.getElementById('modal-reglas').classList.remove('hidden');
-    }
+            if (pestana === 'quedadas') {
+                secQuedadas.classList.remove('hidden');
+                secAgenda.classList.add('hidden');
+                tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow';
+                tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white';
+            } else {
+                secQuedadas.classList.add('hidden');
+                secAgenda.classList.remove('hidden');
+                tabAgenda.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition bg-wa-green text-black shadow';
+                tabQuedadas.className = 'flex-1 py-2.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition text-slate-400 hover:bg-wa-card hover:text-white';
+                renderEventos();
+            }
+        }
 
-    function cerrarModalReglas() {
-      document.getElementById('modal-reglas').classList.add('hidden');
-    }
+        function abrirModalReglas() {
+            document.getElementById('modalReglas').classList.remove('hidden');
+            document.getElementById('modalReglas').classList.add('flex');
+        }
 
-    // Inicializar eventos al cargar
-    renderEventos();
-  </script>
+        function cerrarModalReglas() {
+            document.getElementById('modalReglas').classList.add('hidden');
+            document.getElementById('modalReglas').classList.remove('flex');
+        }
+
+        function mostrarToast(mensaje) {
+            const toast = document.getElementById('toast');
+            const msg = document.getElementById('toastMsg');
+            msg.innerText = mensaje;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3200);
+        }
+
+        function copiarEnlace() {
+            const url = window.location.href;
+            const tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                mostrarToast('Enlace copiado al portapapeles. ¡Pásalo al grupo!');
+            } catch (err) {
+                mostrarToast('Comparte este enlace: ' + url);
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderEventos();
+        });
+    </script>
 </body>
 </html>
