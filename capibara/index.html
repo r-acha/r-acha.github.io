@@ -1,0 +1,914 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sin Historias | Capibara Jefa Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b141a;
+            color: #e9edef;
+            overflow-x: hidden;
+        }
+
+        /* Patrón sutil estilo fondo de WhatsApp oscuro */
+        .wa-bg-pattern {
+            background-color: #0b141a;
+            background-image: radial-gradient(#202c33 1px, transparent 1px), radial-gradient(#182229 1px, #0b141a 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        /* Cola de los bocadillos de WhatsApp */
+        .bubble-in {
+            position: relative;
+            background-color: #202c33;
+            border-radius: 0 12px 12px 12px;
+        }
+        .bubble-in::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid #202c33;
+            border-left: 10px solid transparent;
+        }
+
+        .bubble-out {
+            position: relative;
+            background-color: #005c4b;
+            border-radius: 12px 0 12px 12px;
+        }
+        .bubble-out::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid #005c4b;
+            border-right: 10px solid transparent;
+        }
+
+        /* Animaciones */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(1deg); }
+        }
+        .animate-capy {
+            animation: floatSlow 3.5s ease-in-out infinite;
+        }
+
+        @keyframes shakeHard {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px) rotate(-1deg); }
+            40% { transform: translateX(6px) rotate(1deg); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+        .shake-angry {
+            animation: shakeHard 0.4s ease-in-out;
+        }
+
+        /* Scrollbar personalizada estilo dark mode */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b141a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a3942;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00a884;
+        }
+    </style>
+</head>
+<body class="wa-bg-pattern min-h-screen flex flex-col selection:bg-[#00a884] selection:text-white">
+
+    <!-- Notificación Toast (Cero alerts) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 bg-[#202c33] border-l-4 border-[#25d366] text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 max-w-sm">
+        <span id="toast-icon" class="text-xl">🔥</span>
+        <div>
+            <p id="toast-title" class="font-bold text-sm text-[#25d366]">Copiado, hostia</p>
+            <p id="toast-msg" class="text-xs text-[#8696a0]">Pégalo en el grupo antes de que alguien mande otro audio.</p>
+        </div>
+    </div>
+
+    <!-- Modal de Expulsión (Cuando la paciencia llega a 0%) -->
+    <div id="kick-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-[#202c33] border-2 border-red-500/70 rounded-2xl max-w-md w-full p-6 text-center shadow-2xl transform scale-95 transition-transform">
+            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-red-500/20 flex items-center justify-center text-4xl border border-red-500">
+                🥾
+            </div>
+            <span class="inline-block px-3 py-1 bg-red-500/20 text-red-400 text-xs font-extrabold uppercase tracking-wider rounded-full mb-2">
+                Capibara Jefa te ha eliminado
+            </span>
+            <h2 class="text-2xl font-black text-white mb-2">¡A LA PUTA CALLE!</h2>
+            <p class="text-[#d1d7db] text-sm mb-5 leading-relaxed">
+                "Te dije que <strong class="text-white">SIN HISTORIAS</strong>, coño. Me has agotado la paciencia con tanta tontería. Vete a dar la chapa a otro grupo o cómprate un diario."
+            </p>
+            <div class="bg-[#111b21] p-3 rounded-xl text-xs text-[#8696a0] italic mb-6 border border-[#2a3942]">
+                Ya no puedes enviar mensajes a este grupo porque ya no eres participante.
+            </div>
+            <button onclick="resetPatience()" class="w-full py-3 px-4 bg-[#00a884] hover:bg-[#029072] text-[#111b21] font-extrabold rounded-xl transition cursor-pointer shadow-lg">
+                Pedir perdón de rodillas y volver a entrar
+            </button>
+        </div>
+    </div>
+
+    <!-- Barra Superior Estilo Cabecera de Chat de WhatsApp -->
+    <header class="sticky top-0 z-40 bg-[#202c33]/95 backdrop-blur-md border-b border-[#2a3942] shadow-lg">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <!-- Icono del Grupo estilo Patán (Muttley) riéndose por lo bajo -->
+                <div class="relative flex-shrink-0">
+                    <div class="w-12 h-12 rounded-full bg-[#f57c00] border-2 border-[#25d366] flex items-center justify-center overflow-hidden shadow-md" title="Icono oficial: Sin Historias">
+                        <!-- Ilustración SVG inspirada en la risita pícara del perro del grupo -->
+                        <svg viewBox="0 0 100 100" class="w-11 h-11">
+                            <circle cx="50" cy="50" r="48" fill="#f97316"/>
+                            <!-- Orejas negras caídas -->
+                            <path d="M22 30 Q10 15 28 14 Q38 14 35 28 Z" fill="#18181b"/>
+                            <path d="M78 30 Q90 15 72 14 Q62 14 65 28 Z" fill="#18181b"/>
+                            <!-- Cabeza amarilla/crema -->
+                            <ellipse cx="50" cy="52" rx="28" ry="30" fill="#fde047" stroke="#18181b" stroke-width="2.5"/>
+                            <!-- Cejas fruncidas picaronas -->
+                            <path d="M32 34 L46 40" stroke="#18181b" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M68 34 L54 40" stroke="#18181b" stroke-width="4" stroke-linecap="round"/>
+                            <!-- Ojos cerrados riéndose -->
+                            <path d="M34 43 Q40 39 45 43" fill="none" stroke="#18181b" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M55 43 Q60 39 66 43" fill="none" stroke="#18181b" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- Hocico y nariz negra -->
+                            <ellipse cx="44" cy="55" rx="14" ry="10" fill="#fef08a" stroke="#18181b" stroke-width="2"/>
+                            <ellipse cx="38" cy="52" rx="6" ry="4.5" fill="#18181b"/>
+                            <!-- Sonrisa de dientes apretados "shhh-jijiji" -->
+                            <path d="M35 66 Q52 72 67 60 Q64 74 48 75 Q36 74 35 66 Z" fill="#ffffff" stroke="#18181b" stroke-width="2"/>
+                            <line x1="44" y1="67" x2="44" y2="74" stroke="#18181b" stroke-width="1.5"/>
+                            <line x1="52" y1="67" x2="52" y2="74" stroke="#18181b" stroke-width="1.5"/>
+                            <line x1="60" y1="64" x2="60" y2="71" stroke="#18181b" stroke-width="1.5"/>
+                            <!-- Pata tapándose la risita -->
+                            <path d="M36 78 Q42 66 50 74 Q54 82 42 86 Z" fill="#fde047" stroke="#18181b" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-[#25d366] border-2 border-[#202c33] rounded-full"></span>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-extrabold text-base sm:text-lg text-white tracking-tight">Sin Historias</h1>
+                        <span class="px-2 py-0.5 text-[10px] font-bold uppercase bg-[#005c4b] text-[#25d366] rounded-md border border-[#25d366]/30">
+                            Grupo Oficial
+                        </span>
+                    </div>
+                    <p id="header-status" class="text-xs text-[#25d366] font-medium truncate max-w-[210px] sm:max-w-md">
+                        Capibara Jefa está vigilando quién manda audios largos...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Control de sonido y acceso directo -->
+            <div class="flex items-center gap-2">
+                <button id="sound-toggle" onclick="toggleSound()" class="p-2.5 rounded-xl bg-[#2a3942] hover:bg-[#374852] text-[#e9edef] transition cursor-pointer flex items-center gap-1.5 text-xs font-semibold" title="Activar/Desactivar sonidos">
+                    <span id="sound-icon">🔊</span>
+                    <span class="hidden sm:inline" id="sound-label">Sonido ON</span>
+                </button>
+                <a href="#consultorio" class="px-3.5 py-2.5 rounded-xl bg-[#00a884] hover:bg-[#029072] text-[#111b21] font-extrabold text-xs sm:text-sm transition shadow-md">
+                    Hablar al grupo
+                </a>
+            </div>
+        </div>
+
+        <!-- Barra de Paciencia de la Capibara Jefa -->
+        <div class="bg-[#111b21] border-t border-[#2a3942]/80 px-4 py-2">
+            <div class="max-w-5xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div class="flex items-center gap-2 text-xs font-bold">
+                    <span>🤬 Paciencia de la Jefa:</span>
+                    <span id="patience-text" class="text-[#25d366]">100% (De milagro, no la cagues)</span>
+                </div>
+                <div class="w-full sm:w-64 h-2.5 bg-[#202c33] rounded-full overflow-hidden border border-[#2a3942]">
+                    <div id="patience-bar" class="h-full bg-gradient-to-r from-[#25d366] to-[#00a884] transition-all duration-500" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-5xl mx-auto w-full px-4 py-6 sm:py-10 space-y-10 flex-grow">
+
+        <!-- SECCIÓN 1: HERO DE LA CAPIBARA JEFA (CON SU CHALECO BLANCO, MOCHILA DE OSITOS Y 4 TIMBERLAND) -->
+        <section class="bg-[#111b21]/90 border border-[#2a3942] rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+            <!-- Etiqueta superior estilo mensaje fijado de WhatsApp -->
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#202c33] border border-[#2a3942] text-xs text-[#8696a0] mb-6">
+                <span>📌</span>
+                <span>Mensaje fijado por <strong class="text-[#25d366]">~ Capibara Jefa 👑</strong></span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Ilustración SVG personalizada de la Capibara Jefa con el outfit exacto -->
+                <div class="lg:col-span-5 flex flex-col items-center">
+                    <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-3xl bg-gradient-to-b from-[#2a3942] to-[#182229] border-2 border-[#374852] p-3 shadow-inner flex items-center justify-center animate-capy">
+                        <!-- Badge de Admin -->
+                        <span class="absolute top-3 right-3 bg-[#005c4b] text-[#25d366] border border-[#25d366]/40 text-[11px] font-extrabold px-2.5 py-1 rounded-lg shadow">
+                            Admin del grupo
+                        </span>
+
+                        <!-- SVG Detallado: Capibara con Chaleco Blanco con Capucha, Mochila de Ositos y 4 Botas Timberland -->
+                        <svg viewBox="0 0 320 320" class="w-full h-full drop-shadow-xl">
+                            <!-- Sombra en el suelo -->
+                            <ellipse cx="160" cy="292" rx="95" ry="12" fill="rgba(0,0,0,0.45)"/>
+
+                            <!-- Patas traseras (izquierda y fondo) -->
+                            <rect x="82" y="210" width="24" height="58" rx="10" fill="#7c4a27"/>
+                            <rect x="122" y="205" width="22" height="52" rx="10" fill="#63391c"/>
+
+                            <!-- Bota Timberland trasera fondo -->
+                            <g transform="translate(115, 245)">
+                                <path d="M4 6 L28 6 L32 22 L2 22 Z" fill="#b45309" stroke="#451a03" stroke-width="2"/>
+                                <rect x="4" y="2" width="24" height="5" rx="2" fill="#3f2305"/>
+                                <rect x="1" y="21" width="33" height="6" rx="2" fill="#78350f"/>
+                            </g>
+
+                            <!-- Bota Timberland trasera izquierda -->
+                            <g transform="translate(76, 256)">
+                                <path d="M4 6 L28 6 L33 24 L2 24 Z" fill="#c26314" stroke="#451a03" stroke-width="2"/>
+                                <rect x="4" y="2" width="24" height="5" rx="2" fill="#3f2305"/>
+                                <line x1="16" y1="8" x2="22" y2="8" stroke="#451a03" stroke-width="1.5"/>
+                                <line x1="16" y1="12" x2="22" y2="12" stroke="#451a03" stroke-width="1.5"/>
+                                <rect x="1" y="23" width="34" height="6" rx="2" fill="#78350f"/>
+                            </g>
+
+                            <!-- Cuerpo peludo marrón de la capibara -->
+                            <ellipse cx="145" cy="175" rx="75" ry="52" fill="#8d5524"/>
+
+                            <!-- Mochila infantil de ositos en la espalda -->
+                            <g transform="translate(76, 82) rotate(-14)">
+                                <rect x="0" y="0" width="66" height="48" rx="14" fill="#99d5c9" stroke="#475569" stroke-width="2"/>
+                                <!-- Detalle naranja cremallera -->
+                                <path d="M12 4 L12 44" stroke="#ea580c" stroke-width="4" stroke-linecap="round"/>
+                                <!-- Carita de osito estampada -->
+                                <circle cx="38" cy="22" r="9" fill="#b45309"/>
+                                <circle cx="31" cy="15" r="3.5" fill="#b45309"/>
+                                <circle cx="45" cy="15" r="3.5" fill="#b45309"/>
+                                <circle cx="38" cy="24" r="4" fill="#fde68a"/>
+                                <circle cx="38" cy="23" r="1.5" fill="#1c1917"/>
+                                <!-- Etiqueta colgante -->
+                                <rect x="14" y="42" width="14" height="20" rx="3" fill="#fed7aa" stroke="#9a3412" stroke-width="1.5"/>
+                            </g>
+
+                            <!-- Chaleco acolchado blanco con capucha -->
+                            <path d="M72 155 C72 115, 115 105, 175 112 L195 168 C175 215, 95 220, 72 180 Z" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2.5"/>
+                            <!-- Líneas de acolchado del chaleco -->
+                            <path d="M76 142 Q125 148 182 136" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+                            <path d="M73 166 Q125 174 188 160" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+                            <path d="M84 190 Q130 198 182 184" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+
+                            <!-- Correa de la mochila cruzando el chaleco -->
+                            <path d="M105 122 L116 196" stroke="#78350f" stroke-width="7" stroke-linecap="round"/>
+
+                            <!-- Capucha blanca subida alrededor de la cabeza -->
+                            <path d="M150 96 C145 55, 205 52, 222 86 C232 112, 218 165, 185 172 C158 175, 148 135, 150 96 Z" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="3"/>
+                            <path d="M158 95 Q172 72 198 76" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+
+                            <!-- Cabeza de la Capibara con cara de pocos amigos -->
+                            <path d="M168 92 C185 75, 238 82, 256 112 C266 130, 260 156, 238 162 C210 168, 175 162, 165 138 C160 120, 162 102, 168 92 Z" fill="#9c602c" stroke="#5c3514" stroke-width="2"/>
+                            <!-- Orejita asomando de la capucha -->
+                            <ellipse cx="176" cy="87" rx="7" ry="9" transform="rotate(-20 176 87)" fill="#63391c"/>
+                            <!-- Ojo entrecerrado juzgándote -->
+                            <ellipse cx="204" cy="108" rx="6" ry="4" fill="#1c1917"/>
+                            <line x1="196" y1="103" x2="213" y2="107" stroke="#451a03" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Hocico y nariz -->
+                            <ellipse cx="248" cy="126" rx="10" ry="14" fill="#63391c"/>
+                            <circle cx="249" cy="121" r="2.5" fill="#1c1917"/>
+                            <!-- Boca seria / desprecio -->
+                            <path d="M225 148 Q242 145 253 149" fill="none" stroke="#3f2305" stroke-width="2.5" stroke-linecap="round"/>
+
+                            <!-- Patas delanteras -->
+                            <rect x="138" y="198" width="25" height="68" rx="11" fill="#8d5524"/>
+                            <rect x="176" y="192" width="24" height="62" rx="11" fill="#7c4a27"/>
+
+                            <!-- Bota Timberland delantera derecha -->
+                            <g transform="translate(173, 245)">
+                                <path d="M4 6 L30 6 L38 25 L2 25 Z" fill="#c26314" stroke="#451a03" stroke-width="2"/>
+                                <rect x="4" y="2" width="26" height="5" rx="2" fill="#3f2305"/>
+                                <line x1="18" y1="9" x2="25" y2="9" stroke="#451a03" stroke-width="1.5"/>
+                                <line x1="19" y1="13" x2="26" y2="13" stroke="#451a03" stroke-width="1.5"/>
+                                <rect x="1" y="24" width="39" height="6" rx="2" fill="#78350f"/>
+                            </g>
+
+                            <!-- Bota Timberland delantera izquierda (protagonista) -->
+                            <g transform="translate(133, 258)">
+                                <path d="M4 6 L31 6 L40 26 L2 26 Z" fill="#d97706" stroke="#451a03" stroke-width="2"/>
+                                <rect x="4" y="2" width="27" height="5" rx="2" fill="#3f2305"/>
+                                <line x1="18" y1="9" x2="26" y2="9" stroke="#451a03" stroke-width="1.5"/>
+                                <line x1="19" y1="13" x2="27" y2="13" stroke="#451a03" stroke-width="1.5"/>
+                                <rect x="1" y="25" width="41" height="6" rx="2" fill="#78350f"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <p class="mt-3 text-xs text-[#8696a0] font-medium text-center">
+                        Chaleco blanco, mochila de ositos y las 4 Timberland listas para patear culos.
+                    </p>
+                </div>
+
+                <!-- Discurso de bienvenida de la Capibara Jefa -->
+                <div class="lg:col-span-7 space-y-5">
+                    <div>
+                        <span class="text-[#25d366] font-extrabold text-xs uppercase tracking-widest">
+                            Administradora Suprema · Cero Tonterías
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-white mt-1 leading-tight">
+                            Bienvenidos a <span class="text-[#25d366]">"Sin Historias"</span>, panda de pesados.
+                        </h2>
+                    </div>
+
+                    <!-- Bocadillo de mensaje entrante estilo WhatsApp -->
+                    <div class="bubble-in p-4 sm:p-5 shadow-lg border border-[#2a3942]/60">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <span class="text-xs font-extrabold text-[#f97316]">~ Capibara Jefa</span>
+                            <span class="text-[11px] text-[#8696a0]">+34 666 NO ME RAYES</span>
+                        </div>
+                        <p class="text-sm sm:text-base text-[#e9edef] leading-relaxed">
+                            "A ver si nos enteramos de una puta vez: este grupo se llama <strong>SIN HISTORIAS</strong> por algo. Aquí se viene a decir hora, sitio y quién paga la primera ronda. Al próximo gilipollas que me mande un audio de 4 minutos contando su vida o un <em>'Buenos días, feliz martes'</em> con piolines, le meto una patada con las Timberland que aparece en otro grupo. ¿Queda claro, coño?"
+                        </p>
+                        <div class="flex justify-end items-center gap-1 mt-2 text-[11px] text-[#8696a0]">
+                            <span>16:53</span>
+                            <span class="text-[#53bdeb] font-bold">✓✓</span>
+                        </div>
+                    </div>
+
+                    <!-- Botones rápidos del Hero -->
+                    <div class="flex flex-wrap gap-3 pt-1">
+                        <button onclick="generateQuote()" class="px-5 py-3 bg-[#25d366] hover:bg-[#1fa851] text-[#0b141a] font-black rounded-xl transition cursor-pointer shadow-lg flex items-center gap-2 text-sm">
+                            <span>🤬</span>
+                            <span>Escuchar burrada de la Jefa</span>
+                        </button>
+                        <button onclick="copyInviteText()" class="px-4 py-3 bg-[#202c33] hover:bg-[#2a3942] text-white font-bold rounded-xl border border-[#374852] transition cursor-pointer flex items-center gap-2 text-sm">
+                            <span>📋</span>
+                            <span>Copiar aviso pal grupo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: GENERADOR DE FRASES DE LA CAPIBARA JEFA -->
+        <section class="bg-[#202c33] border border-[#2a3942] rounded-3xl p-6 sm:p-8 shadow-xl">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+                        <span>🎙️</span> ¿Qué dice la Jefa hoy?
+                    </h3>
+                    <p class="text-xs sm:text-sm text-[#8696a0]">
+                        Frases listas para copiar y callar bocas en tu grupo de WhatsApp.
+                    </p>
+                </div>
+                <span class="px-3 py-1 bg-[#111b21] text-[#f97316] border border-[#f97316]/30 rounded-full text-xs font-bold self-start sm:self-auto">
+                    Nivel de filtro: 0%
+                </span>
+            </div>
+
+            <!-- Caja de la frase generada -->
+            <div id="quote-box" class="bg-[#0b141a] border border-[#2a3942] rounded-2xl p-5 sm:p-6 mb-5 transition-all">
+                <div class="bubble-out p-4 max-w-2xl ml-auto shadow-md">
+                    <p id="quote-text" class="text-sm sm:text-base text-white font-medium leading-relaxed">
+                        "¿Pero qué coño es ese audio de 3 minutos y medio? ¿Te crees que tengo todo el puto día para escuchar tu podcast de mierda? Resúmelo en dos líneas o vete a tomar por culo."
+                    </p>
+                    <div class="flex items-center justify-between mt-3 pt-2 border-t border-white/10 text-[11px] text-white/75">
+                        <span id="quote-category" class="font-bold uppercase tracking-wider text-[#25d366]">#CeroAudiosLargos</span>
+                        <div class="flex items-center gap-1">
+                            <span>Ahora</span>
+                            <span class="text-[#53bdeb] font-bold">✓✓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button onclick="generateQuote()" class="flex-1 py-3.5 px-5 bg-[#00a884] hover:bg-[#029072] text-[#0b141a] font-black rounded-xl transition cursor-pointer shadow-md flex items-center justify-center gap-2">
+                    <span>🎲</span>
+                    <span>Soltar otra hostia verbal</span>
+                </button>
+                <button onclick="copyCurrentQuote()" class="py-3.5 px-5 bg-[#2a3942] hover:bg-[#374852] text-white font-bold rounded-xl transition cursor-pointer flex items-center justify-center gap-2">
+                    <span>📄</span>
+                    <span>Copiar frase</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: SIMULADOR DE CHAT / DETECTOR DE CHAPA ("CONSULTORIO SIN HISTORIAS") -->
+        <section id="consultorio" class="bg-[#111b21] border border-[#2a3942] rounded-3xl overflow-hidden shadow-2xl">
+            <!-- Cabecera del Mini-Chat -->
+            <div class="bg-[#202c33] px-6 py-4 border-b border-[#2a3942] flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-[#005c4b] flex items-center justify-center text-xl border border-[#25d366]">
+                        🦫
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-white text-base">Detector de Chapa en Vivo</h3>
+                        <p class="text-xs text-[#8696a0]">Escribe algo en el grupo y mira si sobrevives a la Admin</p>
+                    </div>
+                </div>
+                <button onclick="clearChat()" class="text-xs text-[#8696a0] hover:text-white bg-[#2a3942] px-3 py-1.5 rounded-lg transition cursor-pointer">
+                    Vaciar chat
+                </button>
+            </div>
+
+            <!-- Historial del Chat -->
+            <div id="chat-messages" class="p-4 sm:p-6 space-y-4 max-h-96 overflow-y-auto wa-bg-pattern">
+                <!-- Mensaje inicial del sistema -->
+                <div class="text-center">
+                    <span class="inline-block bg-[#182229] text-[#8696a0] text-[11px] px-3 py-1 rounded-lg border border-[#2a3942]">
+                        🔒 Los mensajes están vigilados por la Capibara Jefa. No digas gilipolleces.
+                    </span>
+                </div>
+
+                <!-- Mensaje inicial de la Jefa -->
+                <div class="bubble-in p-3.5 max-w-[85%] sm:max-w-[75%]">
+                    <p class="text-xs font-bold text-[#f97316] mb-1">~ Capibara Jefa</p>
+                    <p class="text-sm text-[#e9edef]">
+                        Venga, habla rápido. ¿Qué quieres? Y como me vengas con un drama o una excusa barata te crujo.
+                    </p>
+                    <span class="block text-right text-[10px] text-[#8696a0] mt-1">16:54</span>
+                </div>
+            </div>
+
+            <!-- Botones rápidos de prueba -->
+            <div class="bg-[#182229] px-4 py-3 border-t border-[#2a3942]">
+                <p class="text-[11px] font-bold text-[#8696a0] uppercase tracking-wider mb-2">
+                    Pruebas rápidas (Toca para mandar al grupo):
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="sendQuickMessage('Chicos, os tengo que contar un drama que me ha pasado hoy con mi ex...')" class="text-xs bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] px-3 py-1.5 rounded-full border border-[#374852] transition cursor-pointer">
+                        😭 "Os cuento un drama..."
+                    </button>
+                    <button onclick="sendQuickMessage('🎤 Nota de voz (04:12)')" class="text-xs bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] px-3 py-1.5 rounded-full border border-[#374852] transition cursor-pointer">
+                        🎤 Audio de 04:12
+                    </button>
+                    <button onclick="sendQuickMessage('A las 21:00 en el bar de siempre. Yo pido las primeras cañas.')" class="text-xs bg-[#005c4b]/50 hover:bg-[#005c4b] text-[#25d366] px-3 py-1.5 rounded-full border border-[#25d366]/40 transition cursor-pointer">
+                        🍺 "21:00 en el bar, pido cañas"
+                    </button>
+                    <button onclick="sendQuickMessage('¡Buenos días grupo! Que Dios os bendiga este hermoso martes ☀️🌸')" class="text-xs bg-[#202c33] hover:bg-[#2a3942] text-[#e9edef] px-3 py-1.5 rounded-full border border-[#374852] transition cursor-pointer">
+                        🌸 Cadena de buenos días
+                    </button>
+                </div>
+            </div>
+
+            <!-- Input estilo WhatsApp -->
+            <form onsubmit="handleChatSubmit(event)" class="bg-[#202c33] p-3 sm:p-4 flex items-center gap-2 border-t border-[#2a3942]">
+                <input
+                    id="chat-input"
+                    type="text"
+                    placeholder="Escribe un mensaje directo (sin dar la chapa)..."
+                    class="flex-1 bg-[#2a3942] text-white placeholder-[#8696a0] text-sm px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00a884]"
+                    autocomplete="off"
+                >
+                <button type="submit" class="p-3 bg-[#00a884] hover:bg-[#029072] text-[#0b141a] rounded-xl font-black transition cursor-pointer flex items-center justify-center shadow" title="Enviar mensaje">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </form>
+        </section>
+
+        <!-- SECCIÓN 4: LOS 5 MANDAMIENTOS DE "SIN HISTORIAS" -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-black text-white">📜 Los 5 Mandamientos de "Sin Historias"</h3>
+                    <p class="text-xs sm:text-sm text-[#8696a0]">Te los aprendes o te vas a tomar viento fresco. No hay más.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Mandamiento 1 -->
+                <div class="bg-[#202c33] border border-[#2a3942] hover:border-[#25d366]/60 rounded-2xl p-5 transition shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-[#005c4b] text-[#25d366] font-black flex items-center justify-center text-sm">1</span>
+                            <span class="text-xl">🎙️🚫</span>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base mb-2">Prohibidos los putos podcasts</h4>
+                        <p class="text-xs sm:text-sm text-[#d1d7db] leading-relaxed">
+                            Si el audio pasa de <strong>15 segundos</strong>, no lo escucha ni su puta madre. Aprende a escribir o cómprate una paloma mensajera, coño.
+                        </p>
+                    </div>
+                    <span class="mt-4 inline-block text-[11px] font-bold text-[#f97316]">Castigo: Ignorado + Vacile público</span>
+                </div>
+
+                <!-- Mandamiento 2 -->
+                <div class="bg-[#202c33] border border-[#2a3942] hover:border-[#25d366]/60 rounded-2xl p-5 transition shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-[#005c4b] text-[#25d366] font-black flex items-center justify-center text-sm">2</span>
+                            <span class="text-xl">🎯🍺</span>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base mb-2">Al grano, hostia ya</h4>
+                        <p class="text-xs sm:text-sm text-[#d1d7db] leading-relaxed">
+                            Nada de <em>"¿Qué hacéis?"</em> para luego no proponer nada. Se dice: <strong>"Hoy a las 8 en tal sitio, ¿quién viene?"</strong>. Sin rodeos ni gilipolleces.
+                        </p>
+                    </div>
+                    <span class="mt-4 inline-block text-[11px] font-bold text-[#25d366]">Premio: Una ronda pagada (quizás)</span>
+                </div>
+
+                <!-- Mandamiento 3 -->
+                <div class="bg-[#202c33] border border-[#2a3942] hover:border-[#25d366]/60 rounded-2xl p-5 transition shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-[#005c4b] text-[#25d366] font-black flex items-center justify-center text-sm">3</span>
+                            <span class="text-xl">👀🔪</span>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base mb-2">Cero "vistos" de cobarde</h4>
+                        <p class="text-xs sm:text-sm text-[#d1d7db] leading-relaxed">
+                            Si lees el mensaje y no contestas si vienes o no, me suda los cojones tu excusa: vas fuera. Di <strong>"SÍ"</strong> o <strong>"NO"</strong>, no cuesta tanto.
+                        </p>
+                    </div>
+                    <span class="mt-4 inline-block text-[11px] font-bold text-[#f97316]">Castigo: Patada con las Timberland</span>
+                </div>
+
+                <!-- Mandamiento 4 -->
+                <div class="bg-[#202c33] border border-[#2a3942] hover:border-[#25d366]/60 rounded-2xl p-5 transition shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-[#005c4b] text-[#25d366] font-black flex items-center justify-center text-sm">4</span>
+                            <span class="text-xl">😭🗑️</span>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base mb-2">Los dramas, a terapia</h4>
+                        <p class="text-xs sm:text-sm text-[#d1d7db] leading-relaxed">
+                            Aquí no queremos telenovelas de tu ex, ni lloros porque llueve, ni chapas existenciales. Si vienes a amargar la existencia, aire.
+                        </p>
+                    </div>
+                    <span class="mt-4 inline-block text-[11px] font-bold text-[#f97316]">Castigo: Expulsión fulminante</span>
+                </div>
+
+                <!-- Mandamiento 5 -->
+                <div class="bg-[#202c33] border border-[#2a3942] hover:border-[#25d366]/60 rounded-2xl p-5 transition shadow-lg flex flex-col justify-between md:col-span-2 lg:col-span-2">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-[#f97316] text-[#0b141a] font-black flex items-center justify-center text-sm">5</span>
+                            <span class="text-xl">👑🥾</span>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base mb-2">La Capibara Jefa siempre tiene la razón</h4>
+                        <p class="text-xs sm:text-sm text-[#d1d7db] leading-relaxed">
+                            Llevo un chaleco acolchado blanco impoluto, una mochila de ositos que vale más que tu dignidad y cuatro botas Timberland listas para patearte el culo si te pones tonto. Si no te gusta cómo administro este cotarro, ahí tienes el botón de <strong>Salir del grupo</strong>, campeonísimo.
+                        </p>
+                    </div>
+                    <span class="mt-4 inline-block text-[11px] font-bold text-[#25d366]">Ley Suprema de Sin Historias</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#111b21] border-t border-[#2a3942] py-6 px-4 text-center text-xs text-[#8696a0]">
+        <p class="font-bold text-[#e9edef] mb-1">Grupo Oficial "Sin Historias" · Administrado con mano dura por la Capibara Jefa 🦫</p>
+        <p>Hecho con cero paciencia, cuatro botas Timberland y mucho humor español. Ni se te ocurra mandar un audio largo.</p>
+    </footer>
+
+    <script>
+        // Estado global de la aplicación
+        let soundEnabled = true;
+        let patience = 100;
+        let audioCtx = null;
+
+        // Banco de frases mal habladas y graciosas de la Capibara Jefa
+        const bossQuotes = [
+            {
+                text: "\"¿Pero qué coño es ese audio de 3 minutos y medio? ¿Te crees que tengo todo el puto día para escuchar tu podcast de mierda? Resúmelo en dos líneas o vete a tomar por culo.\"",
+                tag: "#CeroAudiosLargos"
+            },
+            {
+                text: "\"Me suda los cojones si te duele un pie o si ha llovido en Pekín. ¿Vienes a tomar algo a las 8 o te echo del grupo ahora mismo?\"",
+                tag: "#SinHistorias"
+            },
+            {
+                text: "\"Al próximo gilipollas que mande una imagen de 'Feliz martes, bendiciones' le meto una patada con las cuatro Timberland que lo mando a Telegram.\"",
+                tag: "#StopPiolines"
+            },
+            {
+                text: "\"¿Sabéis leer o tenéis el cerebro de adorno? El grupo se llama SIN HISTORIAS. Menos bla bla bla y más decir dónde coño quedamos.\"",
+                tag: "#AlGranoHostia"
+            },
+            {
+                text: "\"Veo muchos 'vistos' y pocas respuestas. Qué panda de quedabienes, ni de coña os vuelvo a organizar nada si seguís así.\"",
+                tag: "#CeroVistos"
+            },
+            {
+                text: "\"No me toques las narices hoy que llevo el chaleco blanco recién lavado y la mochila de ositos hasta arriba. O vas directo al grano o vas a la puta calle.\"",
+                tag: "#FlowCapibara"
+            },
+            {
+                text: "\"¿Que 'ya veremos si puedo'? Aquí no hay 'ya veremos', coño. O vienes o te quedas en tu casa mirando el techo, pero decídete ya.\"",
+                tag: "#DecídeteCoño"
+            },
+            {
+                text: "\"Para contar tus dramas amorosos te abres un blog o llamas a tu madre. Aquí se viene a reírse y a beber, hostia ya.\"",
+                tag: "#CeroDramas"
+            }
+        ];
+
+        // Inicializar Web Audio API (sintetizador sin URLs externas)
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'pop') {
+                    // Sonido tipo notificación suave de WhatsApp
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(580, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.09);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                    osc.start(now);
+                    osc.stop(now + 0.12);
+                } else if (type === 'angry') {
+                    // Gruñido grave de capibara enfadada
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(160, now);
+                    osc.frequency.linearRampToValueAtTime(95, now + 0.25);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+                    osc.start(now);
+                    osc.stop(now + 0.28);
+                } else if (type === 'approve') {
+                    // Doble tono positivo
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                }
+            } catch (e) {
+                console.warn("Audio no disponible:", e);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-icon').textContent = soundEnabled ? '🔊' : '🔇';
+            document.getElementById('sound-label').textContent = soundEnabled ? 'Sonido ON' : 'Sonido OFF';
+            if (soundEnabled) playSound('pop');
+        }
+
+        // Mostrar notificación Toast elegante
+        function showToast(title, msg, icon = '🔥') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-msg').textContent = msg;
+            document.getElementById('toast-icon').textContent = icon;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        // Copiar al portapapeles compatible con iframes
+        function copyTextFallback(text, successTitle, successMsg) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                playSound('pop');
+                showToast(successTitle, successMsg, '📋');
+            } catch (err) {
+                showToast('Error al copiar', 'Selecciónalo a mano, coño.', '⚠️');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Generar nueva frase de la Jefa
+        let lastQuoteIndex = 0;
+        function generateQuote() {
+            let idx;
+            do {
+                idx = Math.floor(Math.random() * bossQuotes.length);
+            } while (idx === lastQuoteIndex && bossQuotes.length > 1);
+            lastQuoteIndex = idx;
+
+            const quoteBox = document.getElementById('quote-box');
+            const quoteText = document.getElementById('quote-text');
+            const quoteCat = document.getElementById('quote-category');
+
+            quoteBox.classList.remove('shake-angry');
+            void quoteBox.offsetWidth; // Reiniciar animación
+            quoteBox.classList.add('shake-angry');
+
+            quoteText.textContent = bossQuotes[idx].text;
+            quoteCat.textContent = bossQuotes[idx].tag;
+            playSound('angry');
+        }
+
+        function copyCurrentQuote() {
+            const text = document.getElementById('quote-text').textContent.replace(/^"|"$/g, '');
+            copyTextFallback(text, 'Frase copiada, hostia', 'Pégala ya en el grupo de WhatsApp.');
+        }
+
+        function copyInviteText() {
+            const invite = "⚠️ AVISO DE LA CAPIBARA JEFA ⚠️\nEste grupo se llama SIN HISTORIAS.\n- Cero audios de más de 15 segundos.\n- Cero dramas y cero buenos días.\n- Hora, sitio y quién viene. Al que dé la chapa: A LA PUTA CALLE 🦫🥾";
+            copyTextFallback(invite, 'Aviso copiado', 'Mándalo al grupo para poner orden.');
+        }
+
+        // Actualizar medidor de paciencia
+        function updatePatience(delta) {
+            patience = Math.max(0, Math.min(100, patience + delta));
+            const bar = document.getElementById('patience-bar');
+            const text = document.getElementById('patience-text');
+
+            bar.style.width = patience + '%';
+
+            if (patience > 65) {
+                bar.className = 'h-full bg-gradient-to-r from-[#25d366] to-[#00a884] transition-all duration-500';
+                text.className = 'text-[#25d366]';
+                text.textContent = `${patience}% (Aguantando el tipo)`;
+            } else if (patience > 30) {
+                bar.className = 'h-full bg-gradient-to-r from-yellow-500 to-orange-500 transition-all duration-500';
+                text.className = 'text-orange-400';
+                text.textContent = `${patience}% (Se le está hinchando la vena...)`;
+            } else if (patience > 0) {
+                bar.className = 'h-full bg-gradient-to-r from-red-600 to-red-500 transition-all duration-500';
+                text.className = 'text-red-400';
+                text.textContent = `${patience}% (¡A PUNTO DE ECHARTE, COÑO!)`;
+            } else {
+                text.className = 'text-red-500 font-black';
+                text.textContent = `0% (EXPULSADO)`;
+                setTimeout(() => {
+                    const modal = document.getElementById('kick-modal');
+                    modal.classList.remove('hidden');
+                    modal.classList.add('flex');
+                }, 700);
+            }
+        }
+
+        function resetPatience() {
+            patience = 100;
+            updatePatience(0);
+            const modal = document.getElementById('kick-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            playSound('pop');
+            appendBossMessage("Te dejo volver a entrar porque hoy llevo la mochila de ositos y estoy de buenas. Pero a la próxima tontería te vas a tomar por culo.");
+        }
+
+        // Lógica del Simulador de Chat / Detector de Chapa
+        function getCurrentTime() {
+            const now = new Date();
+            return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        }
+
+        function evaluateMessage(msg) {
+            const lower = msg.toLowerCase();
+
+            // Detectar audios largos o notas de voz
+            if (lower.includes('audio') || lower.includes('nota de voz') || lower.includes('04:') || lower.includes('03:') || lower.includes('02:')) {
+                updatePatience(-40);
+                return {
+                    verdict: 'Mucha chapa (Baneado en potencia)',
+                    reply: "¿Un audio de varios minutos? ¡Me cago en la leche! ¿Te crees que estoy en el paro para escuchar tu biblia? Escríbelo en una frase o te bloqueo.",
+                    angry: true
+                };
+            }
+
+            // Detectar dramas / excusas / mensajes muy largos
+            if (lower.includes('drama') || lower.includes('ex') || lower.includes('llor') || lower.includes('triste') || lower.includes('buenos días') || lower.includes('bendiga') || lower.includes('excusa') || lower.includes('no sé si') || msg.length > 95) {
+                updatePatience(-35);
+                return {
+                    verdict: 'Demasiada historia (Casi fuera)',
+                    reply: "¡PERO QUÉ ME ESTÁS CONTANDO, GILIPOLLAS! ¿No sabes leer el puto título del grupo? SIN HISTORIAS. Me importa una mierda toda esa chapa, ve al grano.",
+                    angry: true
+                };
+            }
+
+            // Detectar mensajes directos / planes / cervezas
+            if (lower.includes('bar') || lower.includes('caña') || lower.includes('cerveza') || lower.includes('21:') || lower.includes('20:') || lower.includes('voy') || lower.includes('sitio') || lower.includes('hora') || lower.includes('hola')) {
+                updatePatience(15);
+                return {
+                    verdict: 'Sin historias (APROBADO 👑)',
+                    reply: "Así me gusta, hostia. Corto, directo y sin marear la perdiz. Allí nos vemos, y como llegues tarde te piso con las Timberland.",
+                    angry: false
+                };
+            }
+
+            // Respuesta por defecto si es corto pero ambiguo
+            updatePatience(-20);
+            return {
+                verdict: 'Sospechoso de chapa',
+                reply: "Mira, no me líes. ¿Eso es para quedar o me vas a soltar un rollo patatero? Aclárate rápido que me estás agotando la paciencia.",
+                angry: true
+            };
+        }
+
+        function appendUserMessage(text) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = 'bubble-out p-3.5 max-w-[85%] sm:max-w-[75%] ml-auto shadow';
+            div.innerHTML = `
+                <p class="text-sm text-white break-words">${escapeHTML(text)}</p>
+                <div class="flex justify-end items-center gap-1 mt-1 text-[10px] text-white/75">
+                    <span>${getCurrentTime()}</span>
+                    <span class="text-[#53bdeb] font-bold">✓✓</span>
+                </div>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function appendBossMessage(text, badge = null, isAngry = true) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = 'bubble-in p-3.5 max-w-[85%] sm:max-w-[75%] shadow border border-[#2a3942]/60';
+            const badgeHTML = badge
+                ? `<span class="inline-block mb-1.5 px-2 py-0.5 rounded text-[10px] font-extrabold uppercase ${isAngry ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-[#005c4b] text-[#25d366] border border-[#25d366]/30'}">${badge}</span>`
+                : '';
+
+            div.innerHTML = `
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs font-extrabold text-[#f97316]">~ Capibara Jefa</span>
+                </div>
+                ${badgeHTML}
+                <p class="text-sm text-[#e9edef] leading-relaxed">${text}</p>
+                <span class="block text-right text-[10px] text-[#8696a0] mt-1">${getCurrentTime()}</span>
+            `;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function processIncomingUserText(text) {
+            if (!text.trim()) return;
+            appendUserMessage(text);
+            playSound('pop');
+
+            const statusEl = document.getElementById('header-status');
+            statusEl.textContent = "Capibara Jefa está escribiendo una burrada...";
+
+            setTimeout(() => {
+                const evaluation = evaluateMessage(text);
+                appendBossMessage(evaluation.reply, evaluation.verdict, evaluation.angry);
+                playSound(evaluation.angry ? 'angry' : 'approve');
+                statusEl.textContent = "Capibara Jefa está vigilando quién manda audios largos...";
+            }, 650);
+        }
+
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById('chat-input');
+            const val = input.value.trim();
+            if (!val) return;
+            input.value = '';
+            processIncomingUserText(val);
+        }
+
+        function sendQuickMessage(text) {
+            processIncomingUserText(text);
+        }
+
+        function clearChat() {
+            const container = document.getElementById('chat-messages');
+            container.innerHTML = `
+                <div class="text-center">
+                    <span class="inline-block bg-[#182229] text-[#8696a0] text-[11px] px-3 py-1 rounded-lg border border-[#2a3942]">
+                        🧹 La Capibara Jefa ha vaciado el chat porque había demasiada morralla.
+                    </span>
+                </div>
+            `;
+            playSound('pop');
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag]));
+        }
+    </script>
+</body>
+</html>
