@@ -1,3 +1,4 @@
+Aquí tienes el agenda.txt completo manteniendo exactamente ese formato visual (cabecera, separadores ━━━, ℹ️ NOTAS ÚTILES, sección final de 🖼️ EXPOSICIONES y pie) pero con el contenido nuevo ya adaptado y limpio:
 ✤ ━━━━━━━━━━━━━━━━━━━━━━━━━━━ ✤
 🎭 AGENDA CULTURAL · RÍAS BAIXAS Y ALREDEDORES
 📅 Del 20 de noviembre de 2026 al 28 de marzo de 2027
@@ -1032,3 +1033,4 @@
 📌 AGENDA CULTURAL · RÍAS BAIXAS Y ALREDEDORES
 ⚠️ Comprueba posibles cambios de última hora, reservas, precios y aforos antes de asistir.
 ✤ ── • · AGENDA RÍAS BAIXAS · • ── ✤
+
