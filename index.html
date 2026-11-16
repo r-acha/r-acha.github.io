@@ -134,7 +134,7 @@
 
                 <div class="absolute -bottom-2 bg-wa-emerald text-white text-[11px] font-bold px-3 py-1 rounded-full border-2 border-wa-dark flex items-center gap-1.5 shadow-lg">
                     <span class="w-2 h-2 rounded-full bg-wa-green animate-ping"></span>
-                    <span>41 miembros</span>
+                    <span>40 miembros</span>
                 </div>
             </div>
 
@@ -573,12 +573,7 @@
 
             for (let i = 0; i < lineas.length; i++) {
                 let linea = sanitizarTexto(lineas[i]);
-
-                // Una línea en blanco cierra el evento actual
-                if (!linea) {
-                    cerrarEvento();
-                    continue;
-                }
+                if (!linea) continue;
 
                 const lineaUpper = linea.toUpperCase();
                 const esCabeceraDia = (
@@ -623,8 +618,24 @@
                     continue;
                 }
 
-                // Primera línea del bloque = título del evento
-                if (!eventoActivo) {
+                const esLugar = linea.startsWith('📍');
+                const esHora = linea.startsWith('🕒') || linea.startsWith('🕗');
+                const esPrecio = linea.startsWith('🎟️') || linea.startsWith('🎟');
+                const esCompania = linea.startsWith('🎭 Compañía:');
+                const esCartel = linea.startsWith('🎤 Cartel:');
+                const esRangoFechas = linea.startsWith('📆') || (linea.startsWith('📅') && !esCabeceraDia);
+                const esLink = linea.startsWith('🔗');
+                const esDetalleExtra = eventoActivo && (
+                    linea.startsWith('🎨') || 
+                    linea.startsWith('🎶') || 
+                    linea.startsWith('🛍️') || 
+                    (linea.startsWith('🍷') && eventoActivo.lugar !== 'Por confirmar')
+                );
+
+                const esPropiedad = esLugar || esHora || esPrecio || esCompania || esCartel || esRangoFechas || esLink || esDetalleExtra;
+
+                if (!esPropiedad) {
+                    cerrarEvento();
                     let tituloLimpio = linea.replace(/^[•\s*]+/, '').trim();
                     eventoActivo = {
                         mes: '',
@@ -641,24 +652,25 @@
                     continue;
                 }
 
-                // Resto de líneas del bloque = propiedades del evento activo
-                if (linea.startsWith('📍')) {
-                    eventoActivo.lugar = linea.replace('📍', '').trim();
-                } else if (linea.startsWith('🕒') || linea.startsWith('🕗')) {
-                    eventoActivo.hora = linea.replace(/🕒|🕗/gu, '').trim();
-                } else if (linea.startsWith('🎟️') || linea.startsWith('🎟')) {
-                    eventoActivo.precio = linea.replace(/🎟️|🎟/gu, '').trim();
-                } else if (linea.startsWith('🎭 Compañía:')) {
-                    eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
-                } else if (linea.startsWith('🎤 Cartel:')) {
-                    eventoActivo.titulo += " - " + linea.replace('🎤 Cartel:', '').trim();
-                } else if (linea.startsWith('📆') || linea.startsWith('📅')) {
-                    eventoActivo.fecha = limpiarPrefijoFecha(linea);
-                } else if (linea.startsWith('🔗')) {
-                    eventoActivo.url = linea.replace('🔗', '').trim();
-                } else {
-                    const limpio = linea.replace(/^[\p{Extended_Pictographic}\uFE0F\s]+/gu, '').trim();
-                    eventoActivo.desc = eventoActivo.desc ? `${eventoActivo.desc} · ${limpio}` : limpio;
+                if (eventoActivo) {
+                    if (esLugar) {
+                        eventoActivo.lugar = linea.replace('📍', '').trim();
+                    } else if (esHora) {
+                        eventoActivo.hora = linea.replace(/🕒|🕗/gu, '').trim();
+                    } else if (esPrecio) {
+                        eventoActivo.precio = linea.replace(/🎟️|🎟/gu, '').trim();
+                    } else if (esCompania) {
+                        eventoActivo.comp = linea.replace('🎭 Compañía:', '').trim();
+                    } else if (esCartel) {
+                        eventoActivo.titulo += " - " + linea.replace('🎤 Cartel:', '').trim();
+                    } else if (esRangoFechas) {
+                        eventoActivo.fecha = limpiarPrefijoFecha(linea);
+                    } else if (esLink) {
+                        eventoActivo.url = linea.replace('🔗', '').trim();
+                    } else if (esDetalleExtra) {
+                        const limpio = linea.replace(/^[\p{Extended_Pictographic}\uFE0F\s]+/gu, '').trim();
+                        eventoActivo.desc = eventoActivo.desc ? `${eventoActivo.desc} · ${limpio}` : limpio;
+                    }
                 }
             }
 
